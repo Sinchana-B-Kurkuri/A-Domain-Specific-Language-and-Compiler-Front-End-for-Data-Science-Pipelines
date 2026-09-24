@@ -39,3 +39,20 @@ def test_semantic_invalid():
     ast = Parser(tokens).parse_pipeline()
     with pytest.raises(SemanticError):
         analyze(ast)
+
+INVALID_SPLIT_PROGRAM = '''
+pipeline student_prediction {
+    load "students.csv";
+    clean missing_values;
+    select cgpa, attendance, study_hours;
+    split train = 150%;
+    train model = decision_tree;
+    evaluate model;
+}
+'''
+
+def test_semantic_invalid_split():
+    tokens = tokenize(INVALID_SPLIT_PROGRAM)
+    ast = Parser(tokens).parse_pipeline()
+    with pytest.raises(SemanticError):
+        analyze(ast)

@@ -43,6 +43,10 @@ def analyze(pipeline: PipelineNode) -> SymbolTable:
                     f"Semantic Error at line {stmt.line}: 'split' used before "
                     f"any 'load' statement."
                 )
+            if not (0 < stmt.percent < 100):
+                raise SemanticError(
+                    f"Semantic Error at line {stmt.line}: split percentage must be strictly between 0 and 100."
+                )
             table.splits[stmt.name] = stmt.percent
 
         elif isinstance(stmt, TrainStmt):
