@@ -41,3 +41,28 @@ def test_invalid_lexical_error():
 def test_invalid_syntax_error():
     with pytest.raises(SyntaxError_):
         run_pipeline(get_example_path('invalid_syntax_error.pipe'))
+
+def test_invalid_duplicate_load():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_duplicate_load.pipe'))
+    assert "'load' used more than once" in str(exc_info.value)
+
+def test_invalid_duplicate_split():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_duplicate_split.pipe'))
+    assert "split 'train' is already defined" in str(exc_info.value)
+
+def test_invalid_duplicate_model():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_duplicate_model.pipe'))
+    assert "model 'model' is already defined" in str(exc_info.value)
+
+def test_invalid_split_total_over_100():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_split_total_over_100.pipe'))
+    assert "cumulative split total would be 110%, which exceeds 100%." in str(exc_info.value)
+
+def test_invalid_clean_after_train():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_clean_after_train.pipe'))
+    assert "'clean' used after model 'model' was trained" in str(exc_info.value)

@@ -7,18 +7,19 @@ KEYWORDS = {
 }
 
 TOKEN_SPEC = [
-    ("STRING",    r'"[^"]*"'),
-    ("PERCENT",   r'\d+(\.\d+)?%'),
-    ("NUMBER",    r'\d+(\.\d+)?'),
-    ("LBRACE",    r'\{'),
-    ("RBRACE",    r'\}'),
-    ("EQUALS",    r'='),
-    ("SEMI",      r';'),
-    ("COMMA",     r','),
-    ("IDENT",     r'[A-Za-z_][A-Za-z0-9_]*'),
-    ("SKIP",      r'[ \t\n]+'),
-    ("COMMENT",   r'//[^\n]*'),
-    ("MISMATCH",  r'.'),
+    ("STRING",     r'"[^"\n]*"'),
+    ("BAD_STRING", r'"[^"\n]*'),
+    ("PERCENT",    r'\d+(\.\d+)?%'),
+    ("NUMBER",     r'\d+(\.\d+)?'),
+    ("LBRACE",     r'\{'),
+    ("RBRACE",     r'\}'),
+    ("EQUALS",     r'='),
+    ("SEMI",       r';'),
+    ("COMMA",      r','),
+    ("IDENT",      r'[A-Za-z_][A-Za-z0-9_]*'),
+    ("SKIP",       r'[ \t\r\n]+'),
+    ("COMMENT",    r'//[^\n]*'),
+    ("MISMATCH",   r'.'),
 ]
 
 MASTER_PATTERN = re.compile(
@@ -49,6 +50,10 @@ def tokenize(source: str) -> List[Token]:
             if "\n" in value:
                 line_start = match.end() - len(value.split("\n")[-1])
             continue
+        if kind == "BAD_STRING":
+            raise LexicalError(
+                f"Lexical Error at line {line_num}, col {col}: unterminated string literal"
+            )
         if kind == "MISMATCH":
             raise LexicalError(
                 f"Lexical Error at line {line_num}, col {col}: "

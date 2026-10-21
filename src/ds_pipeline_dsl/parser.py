@@ -36,8 +36,24 @@ class Parser:
         self.expect("LBRACE")
         stmts = []
         while self.peek().type != "RBRACE":
+            if self.peek().type == "EOF":
+                tok = self.peek()
+                raise SyntaxError_(
+                    f"Syntax Error at line {tok.line}: unexpected end of file; expected '}}' to close pipeline '{name_tok.value}'"
+                )
             stmts.append(self.parse_statement())
         self.expect("RBRACE")
+
+        tok = self.peek()
+        if tok.type == "PIPELINE":
+            raise SyntaxError_(
+                f"Syntax Error at line {tok.line}: only one pipeline per file is supported"
+            )
+        if tok.type != "EOF":
+            raise SyntaxError_(
+                f"Syntax Error at line {tok.line}: unexpected token {tok.type} ({tok.value!r}) after end of pipeline"
+            )
+
         return PipelineNode(name=name_tok.value, statements=stmts, line=name_tok.line)
 
     def parse_statement(self):
