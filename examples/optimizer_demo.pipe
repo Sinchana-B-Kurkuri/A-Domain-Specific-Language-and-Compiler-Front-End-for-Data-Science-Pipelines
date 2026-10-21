@@ -1,0 +1,13 @@
+pipeline student_prediction {
+    load "students.csv";
+    clean missing_values;
+    clean missing_values;
+    drop student_id;
+    drop name;
+    select cgpa, attendance, study_hours;
+    split train = 80%;
+    train model1 = decision_tree;
+    train dead_model = logistic_regression;
+    evaluate model1;
+    train trailing_model = svm;
+}

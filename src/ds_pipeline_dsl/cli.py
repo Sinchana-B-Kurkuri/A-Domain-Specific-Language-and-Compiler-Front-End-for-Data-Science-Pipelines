@@ -53,11 +53,19 @@ def main():
             for i in ir:
                 print(i)
                 
-        opt_ir = optimize(ir)
+        notes = []
+        opt_ir = optimize(ir, notes)
         if args.optimized_ir:
             print("=== OPTIMIZED IR ===")
             for i in opt_ir:
                 print(i)
+            print("=== OPTIMIZATION NOTES ===")
+            if notes:
+                for note in notes:
+                    print(note)
+            else:
+                print("(no optimizations applied)")
+            print(f"IR instructions: {len(ir)} -> {len(opt_ir)}")
                 
         trace = execute(opt_ir)
         if args.trace:
