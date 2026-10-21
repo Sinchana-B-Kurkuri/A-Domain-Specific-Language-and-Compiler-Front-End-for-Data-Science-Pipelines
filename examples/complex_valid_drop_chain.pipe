@@ -1,0 +1,9 @@
+pipeline complex_valid_drop_chain {
+    load "students.csv";
+    select c1, c2, c3, c4, c5;
+    drop c1;
+    split train = 80%;
+    drop c2;
+    train model = decision_tree;
+    evaluate model;
+}

@@ -375,3 +375,65 @@ def test_semantic_drop_after_split_before_train_valid():
     table = analyze(ast)
     assert "c1" in table.dropped_columns
     assert "m" in table.models
+
+def test_semantic_clean_before_load_error():
+    code = '''pipeline p {
+    clean missing;
+    load "d.csv";
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 2" in err
+    assert "'clean' used before any 'load' statement. No dataset is available." in err
+
+def test_semantic_select_before_load_error():
+    code = '''pipeline p {
+    select c1;
+    load "d.csv";
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 2" in err
+    assert "'select' used before any 'load' statement." in err
+
+def test_semantic_split_before_load_error():
+    code = '''pipeline p {
+    split train = 80%;
+    load "d.csv";
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 2" in err
+    assert "'split' used before any 'load' statement." in err
+
+def test_semantic_evaluate_before_train_error():
+    code = '''pipeline p {
+    load "d.csv";
+    split train = 80%;
+    evaluate m;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 4" in err
+    assert "model 'm' is evaluated before it has been trained." in err
+
+def test_semantic_train_before_split_explicit_error():
+    code = '''pipeline p {
+    load "d.csv";
+    train m = dt;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 3" in err
+    assert "training data has not been defined. A 'split train = <percent>%;' statement must appear before 'train m = dt;'." in err
+

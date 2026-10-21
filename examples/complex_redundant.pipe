@@ -1,0 +1,14 @@
+pipeline complex_redundant {
+    load "students.csv";
+    clean missing_values;
+    clean missing_values;
+    select cgpa, attendance, study_hours, col_a, col_b;
+    select cgpa, attendance, study_hours, col_a, col_b;
+    drop col_a;
+    drop col_b;
+    split train = 80%;
+    train dead_model = logistic_regression;
+    train live_model = decision_tree;
+    evaluate live_model;
+    train trailing_model = random_forest;
+}

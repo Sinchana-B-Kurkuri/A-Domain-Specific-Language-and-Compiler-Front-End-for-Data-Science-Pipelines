@@ -1,0 +1,12 @@
+pipeline complex_multi_model {
+    load "students.csv";
+    drop id, notes;
+    select cgpa, attendance, study_hours, exam_score;
+    split train = 70%;
+    split test = 30%;
+    train m_dead = logistic_regression;
+    train m1 = decision_tree;
+    evaluate m1;
+    train m2 = random_forest;
+    evaluate m2;
+}

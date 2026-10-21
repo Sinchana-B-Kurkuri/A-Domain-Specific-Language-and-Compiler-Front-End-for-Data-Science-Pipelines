@@ -110,3 +110,60 @@ def test_invalid_drop_twice():
     with pytest.raises(SemanticError) as exc_info:
         run_pipeline(get_example_path('invalid_drop_twice.pipe'))
     assert "column 'student_id' was already dropped at line 4." in str(exc_info.value)
+
+
+# ==============================================================================
+# COMPREHENSIVE EXAMPLES TABLE & GUARD TEST
+# ==============================================================================
+
+EXAMPLES_TABLE = [
+    ("valid_basic.pipe", "ok", "Evaluated model 'model'"),
+    ("valid_drop.pipe", "ok", "Dropped columns: student_id, name"),
+    ("valid_select_then_drop.pipe", "ok", "Dropped columns: extra_col"),
+    ("optimizer_demo.pipe", "ok", "Evaluated model 'model1'"),
+    ("complex_multi_model.pipe", "ok", "Evaluated model 'm2'"),
+    ("complex_redundant.pipe", "ok", "Evaluated model 'live_model'"),
+    ("complex_valid_drop_chain.pipe", "ok", "Dropped columns: c2"),
+    ("invalid_clean_after_train.pipe", "semantic", "'clean' used after model 'model' was trained"),
+    ("invalid_drop_after_train.pipe", "semantic", "'drop' used after model 'model' was trained"),
+    ("invalid_drop_all_selected.pipe", "semantic", "'drop' would remove every selected column"),
+    ("invalid_drop_before_load.pipe", "semantic", "'drop' used before any 'load' statement"),
+    ("invalid_drop_twice.pipe", "semantic", "was already dropped at line"),
+    ("invalid_duplicate_load.pipe", "semantic", "'load' used more than once"),
+    ("invalid_duplicate_model.pipe", "semantic", "is already defined at line"),
+    ("invalid_duplicate_split.pipe", "semantic", "is already defined at line"),
+    ("invalid_lexical_error.pipe", "lexical", "unexpected character"),
+    ("invalid_select_dropped_column.pipe", "semantic", "was dropped at line 4 and cannot be selected"),
+    ("invalid_split_total_over_100.pipe", "semantic", "cumulative split total would be 110%, which exceeds 100%"),
+    ("invalid_syntax_error.pipe", "syntax", "Syntax Error"),
+    ("invalid_train_before_split.pipe", "semantic", "training data has not been defined"),
+]
+
+def test_all_examples_covered_by_table():
+    examples_dir = os.path.join(os.path.dirname(__file__), '..', 'examples')
+    all_pipe_files = {f for f in os.listdir(examples_dir) if f.endswith('.pipe')}
+    table_files = {entry[0] for entry in EXAMPLES_TABLE}
+    missing = all_pipe_files - table_files
+    assert not missing, f"The following .pipe files in examples/ are missing from EXAMPLES_TABLE: {missing}"
+
+@pytest.mark.parametrize("filename,outcome,substring", EXAMPLES_TABLE)
+def test_example_from_table(filename, outcome, substring):
+    filepath = get_example_path(filename)
+    if outcome == "ok":
+        trace = run_pipeline(filepath)
+        assert any(substring in line for line in trace), f"Expected substring '{substring}' in trace: {trace}"
+    elif outcome == "lexical":
+        with pytest.raises(LexicalError) as exc_info:
+            run_pipeline(filepath)
+        assert substring in str(exc_info.value)
+    elif outcome == "syntax":
+        with pytest.raises(SyntaxError_) as exc_info:
+            run_pipeline(filepath)
+        assert substring in str(exc_info.value)
+    elif outcome == "semantic":
+        with pytest.raises(SemanticError) as exc_info:
+            run_pipeline(filepath)
+        assert substring in str(exc_info.value)
+    else:
+        pytest.fail(f"Unknown expected outcome: {outcome}")
+
