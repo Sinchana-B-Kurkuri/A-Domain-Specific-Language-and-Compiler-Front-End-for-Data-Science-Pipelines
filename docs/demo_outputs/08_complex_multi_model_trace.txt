@@ -1,0 +1,11 @@
+$ python -m ds_pipeline_dsl.cli examples/complex_multi_model.pipe --trace
+=== TRACE ===
+Loaded students.csv
+Dropped columns: id, notes
+Selected columns: cgpa, attendance, study_hours, exam_score
+Defined split 'train' = 70%
+Defined split 'test' = 30%
+Trained model 'm1' using decision_tree
+Evaluated model 'm1' (simulated accuracy trace)
+Trained model 'm2' using random_forest
+Evaluated model 'm2' (simulated accuracy trace)

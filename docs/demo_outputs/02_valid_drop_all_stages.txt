@@ -1,0 +1,67 @@
+$ python -m ds_pipeline_dsl.cli examples/valid_drop.pipe
+=== TOKENS ===
+Token(type='PIPELINE', value='pipeline', line=1, col=0)
+Token(type='IDENT', value='student_prediction', line=1, col=9)
+Token(type='LBRACE', value='{', line=1, col=28)
+Token(type='LOAD', value='load', line=2, col=4)
+Token(type='STRING', value='"students.csv"', line=2, col=9)
+Token(type='SEMI', value=';', line=2, col=23)
+Token(type='CLEAN', value='clean', line=3, col=4)
+Token(type='IDENT', value='missing_values', line=3, col=10)
+Token(type='SEMI', value=';', line=3, col=24)
+Token(type='DROP', value='drop', line=4, col=4)
+Token(type='IDENT', value='student_id', line=4, col=9)
+Token(type='COMMA', value=',', line=4, col=19)
+Token(type='IDENT', value='name', line=4, col=21)
+Token(type='SEMI', value=';', line=4, col=25)
+Token(type='SELECT', value='select', line=5, col=4)
+Token(type='IDENT', value='cgpa', line=5, col=11)
+Token(type='COMMA', value=',', line=5, col=15)
+Token(type='IDENT', value='attendance', line=5, col=17)
+Token(type='COMMA', value=',', line=5, col=27)
+Token(type='IDENT', value='study_hours', line=5, col=29)
+Token(type='SEMI', value=';', line=5, col=40)
+Token(type='SPLIT', value='split', line=6, col=4)
+Token(type='TRAIN', value='train', line=6, col=10)
+Token(type='EQUALS', value='=', line=6, col=16)
+Token(type='PERCENT', value='80%', line=6, col=18)
+Token(type='SEMI', value=';', line=6, col=21)
+Token(type='TRAIN', value='train', line=7, col=4)
+Token(type='IDENT', value='model', line=7, col=10)
+Token(type='EQUALS', value='=', line=7, col=16)
+Token(type='IDENT', value='decision_tree', line=7, col=18)
+Token(type='SEMI', value=';', line=7, col=31)
+Token(type='EVALUATE', value='evaluate', line=8, col=4)
+Token(type='IDENT', value='model', line=8, col=13)
+Token(type='SEMI', value=';', line=8, col=18)
+Token(type='RBRACE', value='}', line=9, col=0)
+Token(type='EOF', value='', line=10, col=0)
+=== AST ===
+PipelineNode(name='student_prediction', statements=[LoadStmt(filename='students.csv', line=2), CleanStmt(strategy='missing_values', line=3), DropStmt(columns=['student_id', 'name'], line=4), SelectStmt(columns=['cgpa', 'attendance', 'study_hours'], line=5), SplitStmt(name='train', percent=80.0, line=6), TrainStmt(model_name='model', algorithm='decision_tree', line=7), EvaluateStmt(model_name='model', line=8)], line=1)
+=== IR ===
+IRInstruction(op='OP_LOAD', args={'filename': 'students.csv', 'line': 2})
+IRInstruction(op='OP_CLEAN', args={'strategy': 'missing_values', 'line': 3})
+IRInstruction(op='OP_DROP', args={'columns': ['student_id', 'name'], 'line': 4})
+IRInstruction(op='OP_SELECT', args={'columns': ['cgpa', 'attendance', 'study_hours'], 'line': 5})
+IRInstruction(op='OP_SPLIT', args={'name': 'train', 'percent': 80.0, 'line': 6})
+IRInstruction(op='OP_TRAIN', args={'model_name': 'model', 'algorithm': 'decision_tree', 'line': 7})
+IRInstruction(op='OP_EVAL', args={'model_name': 'model', 'line': 8})
+=== OPTIMIZED IR ===
+IRInstruction(op='OP_LOAD', args={'filename': 'students.csv', 'line': 2})
+IRInstruction(op='OP_CLEAN', args={'strategy': 'missing_values', 'line': 3})
+IRInstruction(op='OP_DROP', args={'columns': ['student_id', 'name'], 'line': 4})
+IRInstruction(op='OP_SELECT', args={'columns': ['cgpa', 'attendance', 'study_hours'], 'line': 5})
+IRInstruction(op='OP_SPLIT', args={'name': 'train', 'percent': 80.0, 'line': 6})
+IRInstruction(op='OP_TRAIN', args={'model_name': 'model', 'algorithm': 'decision_tree', 'line': 7})
+IRInstruction(op='OP_EVAL', args={'model_name': 'model', 'line': 8})
+=== OPTIMIZATION NOTES ===
+(no optimizations applied)
+IR instructions: 7 -> 7
+=== TRACE ===
+Loaded students.csv
+Cleaned using missing_values
+Dropped columns: student_id, name
+Selected columns: cgpa, attendance, study_hours
+Defined split 'train' = 80%
+Trained model 'model' using decision_tree
+Evaluated model 'model' (simulated accuracy trace)
