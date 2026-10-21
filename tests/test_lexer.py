@@ -44,3 +44,17 @@ def test_tokenize_multiline_string_unterminated():
     with pytest.raises(LexicalError) as exc_info:
         tokenize(source)
     assert "unterminated string literal" in str(exc_info.value)
+
+def test_tokenize_drop_keyword():
+    source = 'drop col1, col2;'
+    tokens = tokenize(source)
+    assert tokens[0].type == "DROP"
+    assert tokens[0].value == "drop"
+    assert tokens[1].type == "IDENT"
+    assert tokens[1].value == "col1"
+
+def test_tokenize_droplet_identifier():
+    source = 'select droplet;'
+    tokens = tokenize(source)
+    assert tokens[1].type == "IDENT"
+    assert tokens[1].value == "droplet"

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from ds_pipeline_dsl.ast_nodes import (
-    PipelineNode, LoadStmt, CleanStmt, SelectStmt,
+    PipelineNode, LoadStmt, CleanStmt, SelectStmt, DropStmt,
     SplitStmt, TrainStmt, EvaluateStmt
 )
 from ds_pipeline_dsl.semantic import SymbolTable
@@ -20,6 +20,8 @@ def lower_to_ir(pipeline_ast: PipelineNode, symbol_table: SymbolTable) -> List[I
             ir.append(IRInstruction(op="OP_CLEAN", args={"strategy": stmt.strategy, "line": stmt.line}))
         elif isinstance(stmt, SelectStmt):
             ir.append(IRInstruction(op="OP_SELECT", args={"columns": stmt.columns, "line": stmt.line}))
+        elif isinstance(stmt, DropStmt):
+            ir.append(IRInstruction(op="OP_DROP", args={"columns": stmt.columns, "line": stmt.line}))
         elif isinstance(stmt, SplitStmt):
             ir.append(IRInstruction(op="OP_SPLIT", args={"name": stmt.name, "percent": stmt.percent, "line": stmt.line}))
         elif isinstance(stmt, TrainStmt):

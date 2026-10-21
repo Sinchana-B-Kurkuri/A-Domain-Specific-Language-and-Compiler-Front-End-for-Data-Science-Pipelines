@@ -1,0 +1,9 @@
+pipeline student_prediction {
+    load "students.csv";
+    clean missing_values;
+    select cgpa, attendance;
+    drop cgpa, attendance;
+    split train = 80%;
+    train model = decision_tree;
+    evaluate model;
+}

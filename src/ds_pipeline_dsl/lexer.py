@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import List
 
 KEYWORDS = {
-    "pipeline", "load", "clean", "select", "split", "train", "evaluate"
+    "pipeline", "load", "clean", "select", "split", "train", "evaluate", "drop"
 }
 
 TOKEN_SPEC = [

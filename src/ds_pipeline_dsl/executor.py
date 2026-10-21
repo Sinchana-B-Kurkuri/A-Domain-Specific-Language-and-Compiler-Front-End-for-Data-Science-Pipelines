@@ -11,6 +11,9 @@ def execute(ir_list: List[IRInstruction]) -> List[str]:
         elif instr.op == "OP_SELECT":
             cols = ", ".join(instr.args["columns"])
             trace.append(f"Selected columns: {cols}")
+        elif instr.op == "OP_DROP":
+            cols = ", ".join(instr.args["columns"])
+            trace.append(f"Dropped columns: {cols}")
         elif instr.op == "OP_SPLIT":
             percent = instr.args["percent"]
             if percent == int(percent):

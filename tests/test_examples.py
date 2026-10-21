@@ -66,3 +66,47 @@ def test_invalid_clean_after_train():
     with pytest.raises(SemanticError) as exc_info:
         run_pipeline(get_example_path('invalid_clean_after_train.pipe'))
     assert "'clean' used after model 'model' was trained" in str(exc_info.value)
+
+def test_valid_drop():
+    with open(get_example_path('valid_drop.pipe'), 'r') as f:
+        code = f.read()
+    tokens = tokenize(code)
+    assert any(t.type == "DROP" for t in tokens)
+    ast = Parser(tokens).parse_pipeline()
+    assert any(stmt.__class__.__name__ == "DropStmt" for stmt in ast.statements)
+    table = analyze(ast)
+    ir = lower_to_ir(ast, table)
+    assert any(i.op == "OP_DROP" for i in ir)
+    opt_ir = optimize(ir)
+    assert any(i.op == "OP_DROP" for i in opt_ir)
+    trace = execute(opt_ir)
+    assert "Dropped columns: student_id, name" in trace
+
+def test_valid_select_then_drop():
+    trace = run_pipeline(get_example_path('valid_select_then_drop.pipe'))
+    assert "Dropped columns: extra_col" in trace
+
+def test_invalid_drop_before_load():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_drop_before_load.pipe'))
+    assert "'drop' used before any 'load' statement." in str(exc_info.value)
+
+def test_invalid_drop_after_train():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_drop_after_train.pipe'))
+    assert "'drop' used after model 'model' was trained" in str(exc_info.value)
+
+def test_invalid_drop_all_selected():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_drop_all_selected.pipe'))
+    assert "'drop' would remove every selected column." in str(exc_info.value)
+
+def test_invalid_select_dropped_column():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_select_dropped_column.pipe'))
+    assert "was dropped at line 4 and cannot be selected." in str(exc_info.value)
+
+def test_invalid_drop_twice():
+    with pytest.raises(SemanticError) as exc_info:
+        run_pipeline(get_example_path('invalid_drop_twice.pipe'))
+    assert "column 'student_id' was already dropped at line 4." in str(exc_info.value)

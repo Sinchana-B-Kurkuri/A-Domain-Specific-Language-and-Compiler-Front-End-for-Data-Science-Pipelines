@@ -33,3 +33,19 @@ def test_executor():
     assert trace[3] == "Defined split 'train' = 80%"
     assert trace[4] == "Trained model 'model' using decision_tree"
     assert trace[5] == "Evaluated model 'model' (simulated accuracy trace)"
+
+def test_executor_with_drop():
+    program = '''
+pipeline p {
+    load "students.csv";
+    drop a, b;
+    select c;
+}
+'''
+    tokens = tokenize(program)
+    ast = Parser(tokens).parse_pipeline()
+    table = analyze(ast)
+    ir = lower_to_ir(ast, table)
+    trace = execute(ir)
+    assert "Dropped columns: a, b" in trace
+    assert trace[1] == "Dropped columns: a, b"

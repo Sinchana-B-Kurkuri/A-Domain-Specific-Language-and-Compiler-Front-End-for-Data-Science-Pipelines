@@ -17,6 +17,11 @@ class SelectStmt:
     line: int
 
 @dataclass
+class DropStmt:
+    columns: List[str]
+    line: int
+
+@dataclass
 class SplitStmt:
     name: str
     percent: float

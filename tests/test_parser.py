@@ -56,3 +56,36 @@ def test_parser_empty_body():
     assert isinstance(ast, PipelineNode)
     assert ast.name == "p"
     assert len(ast.statements) == 0
+
+def test_parser_drop_single_column():
+    source = 'pipeline p { load "d.csv"; drop c1; }'
+    ast = Parser(tokenize(source)).parse_pipeline()
+    assert len(ast.statements) == 2
+    stmt = ast.statements[1]
+    assert stmt.__class__.__name__ == "DropStmt"
+    assert stmt.columns == ["c1"]
+    assert stmt.line == 1
+
+def test_parser_drop_multiple_columns():
+    source = 'pipeline p { load "d.csv"; drop c1, c2, c3; }'
+    ast = Parser(tokenize(source)).parse_pipeline()
+    assert len(ast.statements) == 2
+    stmt = ast.statements[1]
+    assert stmt.__class__.__name__ == "DropStmt"
+    assert stmt.columns == ["c1", "c2", "c3"]
+    assert stmt.line == 1
+
+def test_parser_drop_missing_semicolon():
+    source = 'pipeline p { load "d.csv"; drop c1 }'
+    with pytest.raises(SyntaxError_):
+        Parser(tokenize(source)).parse_pipeline()
+
+def test_parser_drop_missing_column():
+    source = 'pipeline p { load "d.csv"; drop ; }'
+    with pytest.raises(SyntaxError_):
+        Parser(tokenize(source)).parse_pipeline()
+
+def test_parser_drop_trailing_comma():
+    source = 'pipeline p { load "d.csv"; drop c1, ; }'
+    with pytest.raises(SyntaxError_):
+        Parser(tokenize(source)).parse_pipeline()

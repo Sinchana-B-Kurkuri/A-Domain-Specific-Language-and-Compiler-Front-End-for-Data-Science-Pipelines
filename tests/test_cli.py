@@ -81,3 +81,27 @@ def test_cli_semantic_error(invalid_file):
             
     assert "Semantic Error" in output
     assert "=== TRACE ===" not in output
+
+def test_cli_valid_drop():
+    example_path = os.path.join(os.path.dirname(__file__), '..', 'examples', 'valid_drop.pipe')
+    test_args = ["cli.py", example_path]
+    with patch.object(sys, 'argv', test_args):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            main()
+            output = fake_out.getvalue()
+    assert "Token(type='DROP'" in output
+    assert "DropStmt(" in output
+    assert "IRInstruction(op='OP_DROP'" in output
+    assert "Dropped columns: student_id, name" in output
+
+def test_cli_invalid_drop():
+    example_path = os.path.join(os.path.dirname(__file__), '..', 'examples', 'invalid_drop_before_load.pipe')
+    test_args = ["cli.py", example_path]
+    with patch.object(sys, 'argv', test_args):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            with pytest.raises(SystemExit) as e:
+                main()
+            assert e.value.code == 1
+            output = fake_out.getvalue()
+    assert "'drop' used before any 'load' statement." in output
+    assert "Traceback" not in output

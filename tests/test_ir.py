@@ -42,3 +42,22 @@ def test_lower_to_ir():
     
     assert ir[5].op == "OP_EVAL"
     assert ir[5].args["model_name"] == "model"
+
+def test_lower_to_ir_with_drop():
+    program = '''
+pipeline p {
+    load "d.csv";
+    drop id, name;
+    select cgpa;
+}
+'''
+    tokens = tokenize(program)
+    ast = Parser(tokens).parse_pipeline()
+    table = analyze(ast)
+    ir = lower_to_ir(ast, table)
+    assert len(ir) == 3
+    assert ir[0].op == "OP_LOAD"
+    assert ir[1].op == "OP_DROP"
+    assert ir[1].args["columns"] == ["id", "name"]
+    assert ir[1].args["line"] == 4
+    assert ir[2].op == "OP_SELECT"

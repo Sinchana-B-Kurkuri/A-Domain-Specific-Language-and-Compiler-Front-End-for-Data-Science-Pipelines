@@ -1,5 +1,5 @@
 from ds_pipeline_dsl.ast_nodes import (
-    PipelineNode, LoadStmt, CleanStmt, SelectStmt,
+    PipelineNode, LoadStmt, CleanStmt, SelectStmt, DropStmt,
     SplitStmt, TrainStmt, EvaluateStmt
 )
 
@@ -19,6 +19,8 @@ class SymbolTable:
         self.split_lines: dict = {}
         self.model_lines: dict = {}
         self.first_train = None
+        self.selected_columns = None
+        self.dropped_columns: dict = {}
 
 def analyze(pipeline: PipelineNode) -> SymbolTable:
     table = SymbolTable()
@@ -69,6 +71,62 @@ def analyze(pipeline: PipelineNode) -> SymbolTable:
                         f"Semantic Error at line {stmt.line}: column '{col}' appears more than once in 'select'."
                     )
                 seen_cols.add(col)
+
+            for col in stmt.columns:
+                if col in table.dropped_columns:
+                    m = table.dropped_columns[col]
+                    raise SemanticError(
+                        f"Semantic Error at line {stmt.line}: column '{col}' was dropped at line {m} and cannot be selected."
+                    )
+
+            table.selected_columns = list(stmt.columns)
+
+        elif isinstance(stmt, DropStmt):
+            if not table.data_loaded:
+                raise SemanticError(
+                    f"Semantic Error at line {stmt.line}: 'drop' used before "
+                    f"any 'load' statement."
+                )
+            if table.first_train:
+                m, t = table.first_train
+                raise SemanticError(
+                    f"Semantic Error at line {stmt.line}: 'drop' used after model '{m}' "
+                    f"was trained at line {t}; data-preparation statements must appear before any 'train'."
+                )
+            seen_cols = set()
+            for col in stmt.columns:
+                if col in seen_cols:
+                    raise SemanticError(
+                        f"Semantic Error at line {stmt.line}: column '{col}' appears more than once in 'drop'."
+                    )
+                seen_cols.add(col)
+
+            for col in stmt.columns:
+                if col in table.dropped_columns:
+                    m = table.dropped_columns[col]
+                    raise SemanticError(
+                        f"Semantic Error at line {stmt.line}: column '{col}' was already dropped at line {m}."
+                    )
+
+            if table.selected_columns is not None:
+                current_selected_set = set(table.selected_columns)
+                for col in stmt.columns:
+                    if col not in current_selected_set:
+                        raise SemanticError(
+                            f"Semantic Error at line {stmt.line}: cannot drop column '{col}': it is not in the current selection."
+                        )
+                drop_set = set(stmt.columns)
+                if len(current_selected_set - drop_set) == 0:
+                    raise SemanticError(
+                        f"Semantic Error at line {stmt.line}: 'drop' would remove every selected column."
+                    )
+
+            for col in stmt.columns:
+                table.dropped_columns[col] = stmt.line
+
+            if table.selected_columns is not None:
+                drop_set = set(stmt.columns)
+                table.selected_columns = [col for col in table.selected_columns if col not in drop_set]
 
         elif isinstance(stmt, SplitStmt):
             if not table.data_loaded:

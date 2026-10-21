@@ -238,3 +238,140 @@ def test_semantic_clean_select_before_train_valid():
     ast = Parser(tokenize(code)).parse_pipeline()
     table = analyze(ast)
     assert table.data_cleaned is True
+
+def test_semantic_valid_drop_before_select():
+    code = '''pipeline p {
+    load "d.csv";
+    drop id, name;
+    select c1, c2;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    table = analyze(ast)
+    assert "id" in table.dropped_columns
+    assert "name" in table.dropped_columns
+    assert table.selected_columns == ["c1", "c2"]
+
+def test_semantic_valid_select_then_drop():
+    code = '''pipeline p {
+    load "d.csv";
+    select c1, c2, c3;
+    drop c2;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    table = analyze(ast)
+    assert table.selected_columns == ["c1", "c3"]
+    assert "c2" in table.dropped_columns
+
+def test_semantic_drop_before_load_error():
+    code = '''pipeline p {
+    drop c1;
+    load "d.csv";
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 2" in err
+    assert "'drop' used before any 'load' statement." in err
+
+def test_semantic_drop_after_train_error():
+    code = '''pipeline p {
+    load "d.csv";
+    split train = 80%;
+    train m = dt;
+    drop c1;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 5" in err
+    assert "'drop' used after model 'm' was trained at line 4; data-preparation statements must appear before any 'train'." in err
+
+def test_semantic_drop_duplicate_column_error():
+    code = '''pipeline p {
+    load "d.csv";
+    drop c1, c2, c1;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 3" in err
+    assert "column 'c1' appears more than once in 'drop'." in err
+
+def test_semantic_drop_already_dropped_error():
+    code = '''pipeline p {
+    load "d.csv";
+    drop c1;
+    drop c1;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 4" in err
+    assert "column 'c1' was already dropped at line 3." in err
+
+def test_semantic_drop_not_in_selection_error():
+    code = '''pipeline p {
+    load "d.csv";
+    select c1, c2;
+    drop c3;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 4" in err
+    assert "cannot drop column 'c3': it is not in the current selection." in err
+
+def test_semantic_drop_all_selected_error():
+    code = '''pipeline p {
+    load "d.csv";
+    select c1, c2;
+    drop c1, c2;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 4" in err
+    assert "'drop' would remove every selected column." in err
+
+def test_semantic_select_dropped_column_error():
+    code = '''pipeline p {
+    load "d.csv";
+    drop c1;
+    select c1, c2;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    with pytest.raises(SemanticError) as exc_info:
+        analyze(ast)
+    err = str(exc_info.value)
+    assert "line 4" in err
+    assert "column 'c1' was dropped at line 3 and cannot be selected." in err
+
+def test_semantic_drop_then_select_different_valid():
+    code = '''pipeline p {
+    load "d.csv";
+    drop c1;
+    select c2, c3;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    table = analyze(ast)
+    assert "c1" in table.dropped_columns
+    assert table.selected_columns == ["c2", "c3"]
+
+def test_semantic_drop_after_split_before_train_valid():
+    code = '''pipeline p {
+    load "d.csv";
+    split train = 80%;
+    drop c1;
+    train m = dt;
+    evaluate m;
+}'''
+    ast = Parser(tokenize(code)).parse_pipeline()
+    table = analyze(ast)
+    assert "c1" in table.dropped_columns
+    assert "m" in table.models

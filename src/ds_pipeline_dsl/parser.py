@@ -1,7 +1,36 @@
+r"""
+Complete Grammar Specification (EBNF):
+
+pipeline_decl    ::= 'pipeline' IDENT '{' statement* '}'
+statement        ::= load_stmt
+                   | clean_stmt
+                   | select_stmt
+                   | drop_stmt
+                   | split_stmt
+                   | train_stmt
+                   | evaluate_stmt
+
+load_stmt        ::= 'load' STRING ';'
+clean_stmt       ::= 'clean' IDENT ';'
+select_stmt      ::= 'select' IDENT (',' IDENT)* ';'
+drop_stmt        ::= 'drop' IDENT (',' IDENT)* ';'
+split_stmt       ::= 'split' split_name '=' PERCENT ';'
+split_name       ::= IDENT | 'train'
+train_stmt       ::= 'train' IDENT '=' IDENT ';'
+evaluate_stmt    ::= 'evaluate' IDENT ';'
+
+Lexical Notes:
+  IDENT          ::= [A-Za-z_][A-Za-z0-9_]*
+  PERCENT        ::= [0-9]+(\.[0-9]+)?'%'
+  STRING         ::= '"' [^"\\n]* '"'
+  Comments       ::= '//' [^\\n]* (single-line comments to end of line)
+  Whitespace     ::= [ \t\r\n]+ (skipped)
+"""
+
 from typing import List
 from ds_pipeline_dsl.lexer import Token
 from ds_pipeline_dsl.ast_nodes import (
-    PipelineNode, LoadStmt, CleanStmt, SelectStmt,
+    PipelineNode, LoadStmt, CleanStmt, SelectStmt, DropStmt,
     SplitStmt, TrainStmt, EvaluateStmt
 )
 
@@ -78,6 +107,15 @@ class Parser:
                 cols.append(self.expect("IDENT").value)
             self.expect("SEMI")
             return SelectStmt(cols, tok.line)
+
+        if tok.type == "DROP":
+            self.advance()
+            cols = [self.expect("IDENT").value]
+            while self.peek().type == "COMMA":
+                self.advance()
+                cols.append(self.expect("IDENT").value)
+            self.expect("SEMI")
+            return DropStmt(cols, tok.line)
 
         if tok.type == "SPLIT":
             self.advance()
