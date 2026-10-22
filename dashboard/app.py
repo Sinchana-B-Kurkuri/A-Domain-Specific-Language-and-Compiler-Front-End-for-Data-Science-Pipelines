@@ -53,69 +53,65 @@ st.markdown("""<style>
 .hero {box-sizing:border-box; width:100%; background:linear-gradient(120deg,#122C49,#1C4666);
  color:#FFF; border-radius:18px !important; overflow:hidden; isolation:isolate;
  padding:36px 30px 38px; margin:0 0 22px; text-align:center; box-shadow:0 8px 26px #17324D0D;}
-.hero h1 {color:#FFF !important; background:transparent; font-size:clamp(1.8rem,2.8vw,2.55rem);
+.hero h1 {color:#FFF !important; background:transparent; font-size:clamp(1.55rem,2.2vw,2.05rem);
  font-weight:650; letter-spacing:-.04em; line-height:1.18; margin:12px 0 14px; padding:0;}
 .hero p {color:#D6E5F0; font-size:.96rem; margin:0 auto; max-width:820px; line-height:1.8; text-align:center;}
-.eyebrow {letter-spacing:.16em; font-size:.68rem; font-weight:650; color:#9FE3E0;}
+.eyebrow {letter-spacing:-.025em; font-size:clamp(1.85rem,3vw,2.85rem); line-height:1.2; font-weight:650; color:#9FE3E0;}
 .hero-brand {display:flex; align-items:center; justify-content:center; gap:10px;}
-.hero-brand img {display:block; width:30px; height:30px; border-radius:8px;}
-.section-label {color:var(--muted); font-size:.69rem; letter-spacing:.13em; text-transform:uppercase; font-weight:650;}
-.language-label {text-align:center; color:var(--muted); font-size:.87rem; margin:0 0 20px;}
-.language-label strong {color:var(--ink); font-weight:600;}
+.hero-brand img {display:block; width:44px; height:44px; border-radius:8px;}
+.section-label {color:var(--muted); font-size:.93rem; letter-spacing:.13em; text-transform:uppercase; font-weight:650;}
 .language-panel {text-align:center; margin:8px auto 26px; max-width:950px;}
 .declaration {display:inline-flex; flex-direction:column; gap:8px; padding:3px 26px 15px; margin-bottom:12px; border-bottom:1px solid var(--line);}
 .declaration code {font-size:1.1rem; color:var(--ink); background:transparent; font-weight:600;}
 .chips,.flow,.stage-strip {display:flex; flex-wrap:wrap; gap:9px; margin:14px 0 22px; align-items:center; justify-content:center;}
-.chip {padding:7px 13px; border-radius:7px; font: .84rem Consolas,monospace; color:#07616D; background:#E6F2F2;}
+.chip {padding:7px 13px; border-radius:7px; font: .96rem Consolas,monospace; color:#07616D; background:#E6F2F2;}
 .flow {row-gap:13px;}
-.flow-node {padding:10px 14px; border-radius:9px; border:1px solid var(--line); background:#FFF; color:var(--ink); font-size:.82rem;}
+.flow-node {padding:10px 14px; border-radius:9px; border:1px solid var(--line); background:#FFF; color:var(--ink); font-size:.93rem;}
 .flow-arrow {color:#91A4B7; font-size:.85rem;}
 .stage {border:1px solid var(--line); border-radius:12px; padding:13px 10px; background:#FFF;
  flex:1; min-width:112px; text-align:center;}
-.stage strong {display:block; font-size:.82rem; margin-bottom:9px; color:var(--ink);}
-.pill {display:inline-block; border-radius:20px; padding:3px 10px; font-size:.71rem; font-weight:600; line-height:1.45;}
+.stage strong {display:block; font-size:.93rem; margin-bottom:9px; color:var(--ink);}
+.pill {display:inline-block; border-radius:20px; padding:3px 10px; font-size:.85rem; font-weight:600; line-height:1.45;}
 .ok,.kept {color:#166534; background:#E5F5EB;} .failed {color:#991B1B; background:#FDEBEC;}
-.skipped {color:#53657A; background:#EDF1F6;} .timing {display:block; font-size:.71rem; color:var(--muted); margin-top:7px;}
+.skipped {color:#53657A; background:#EDF1F6;} .timing {display:block; font-size:.85rem; color:var(--muted); margin-top:7px;}
 .compile-summary {text-align:center; color:var(--muted); font-size:.9rem; margin:6px 0 18px;}
 [data-testid="stMetric"] {background:#FFF; border:1px solid var(--line); border-radius:12px; padding:19px 12px; text-align:center;}
 [data-testid="stMetricLabel"] {justify-content:center; color:var(--muted);}
 [data-testid="stMetricValue"] {font-size:1.9rem; font-weight:650; color:var(--ink);}
 .fact-card {background:#FFF; border:1px solid var(--line); border-radius:12px; padding:21px 12px; text-align:center; height:100%;}
 .fact-card .fact-value {color:var(--ink); font-size:1.75rem; font-weight:650; letter-spacing:-.04em; margin:8px 0 3px;}
-.fact-card .fact-detail {font-size:.76rem; color:var(--muted);}
+.fact-card .fact-detail {font-size:.9rem; color:var(--muted);}
 [data-testid="stSidebar"] {background:#FFF; border-right:1px solid var(--line);}
-[data-testid="stSidebarUserContent"] {padding-top:2rem;}
-.sidebar-brand {text-align:center; padding:0 8px 25px;}
+[data-testid="stSidebarContent"] {height:100dvh; overflow:hidden !important;}
+[data-testid="stSidebarUserContent"] {padding:clamp(12px,3vh,28px) 20px 16px; overflow:hidden;}
+[data-testid="stSidebarUserContent"] > [data-testid="stVerticalBlock"] {gap:clamp(4px,1vh,12px);}
+.sidebar-brand {text-align:center; padding:0 8px clamp(10px,2vh,20px);}
 .brand-mark {display:inline-flex; width:54px; height:54px; border-radius:14px; align-items:center; justify-content:center;
  margin-bottom:14px; box-shadow:0 5px 14px #142D4E15;}
 .brand-mark img {display:block; width:54px; height:54px; border-radius:14px;}
-.brand-name {font-size:1.28rem; font-weight:650; line-height:1.35; letter-spacing:-.035em; color:var(--ink);}
-.brand-description {font-size:.73rem; color:var(--muted); margin-top:9px;}
-.st-key-page [role="radiogroup"] {gap:5px;}
-.st-key-page label[data-baseweb="radio"] {box-sizing:border-box; width:100%; margin:0; padding:12px 16px;
- border-left:3px solid transparent; border-radius:0 8px 8px 0; color:#53677D; transition:background .15s;}
-.st-key-page label[data-baseweb="radio"] > div:first-child {display:none;}
-.st-key-page label[data-baseweb="radio"] input {position:absolute; opacity:0;}
-.st-key-page label[data-baseweb="radio"]:hover {background:#F5F8FB;}
-.st-key-page label[data-baseweb="radio"]:has(input:checked) {background:#EDF6F6; border-left-color:var(--teal); color:#07616D;}
-.st-key-page label[data-baseweb="radio"]:has(input:checked) p {font-weight:600;}
-.st-key-page label[data-baseweb="radio"]:has(input:focus-visible) {outline:2px solid var(--teal); outline-offset:2px;}
-.sidebar-language {margin:10px 8px 8px; text-align:center;}
-.sidebar-root {display:flex; flex-direction:column; gap:7px; padding:17px 0 13px; color:var(--ink);}
-.sidebar-root code {font-size:.98rem; background:transparent; color:var(--ink); font-weight:650;}
-.sidebar-operations {display:flex; flex-wrap:wrap; justify-content:center; gap:7px; border-top:1px solid var(--line); padding:15px 0 8px;}
-.sidebar-operations .chip {font-size:.73rem; padding:5px 10px;}
+.brand-name {font-size:1.6rem; font-weight:650; line-height:1.35; letter-spacing:-.035em; color:var(--ink);}
+.brand-description {font-size:.87rem; color:var(--muted); margin-top:9px;}
+/* Navigation uses text buttons, with no radio controls or option boxes. */
+[class*="st-key-nav_"] button {display:flex; justify-content:center; width:100%; min-height:42px;
+ border:0 !important; box-shadow:none !important; background:transparent !important;
+ color:var(--muted); border-radius:8px; padding:10px 12px;}
+[class*="st-key-nav_"] button p {font-size:1.05rem; text-align:center;}
+[class*="st-key-nav_"] button:hover {color:var(--teal); background:#F0F7F8 !important;}
+[class*="st-key-nav_"] button[kind="primary"] {color:var(--teal);}
+[class*="st-key-nav_"] button[kind="primary"] p {font-weight:700; text-decoration:underline;
+ text-decoration-color:#7BC3C7; text-underline-offset:8px; text-decoration-thickness:2px;}
+[class*="st-key-nav_"] button:focus-visible {outline:2px solid var(--teal); outline-offset:2px;}
 [data-testid="stSidebar"] [data-testid="stCaptionContainer"] {text-align:center; line-height:1.7;}
 [data-baseweb="tab-list"] {justify-content:center; gap:8px; border-bottom:1px solid var(--line); margin-top:12px;}
-[data-baseweb="tab"] {padding:12px 15px; font-size:.86rem;}
+[data-baseweb="tab"] {padding:12px 15px; font-size:.96rem;}
 [data-baseweb="tab"][aria-selected="true"] {color:var(--teal); font-weight:600;}
 [data-testid="stExpander"] {background:#FFF; border-radius:12px;}
 [data-testid="stExpander"] details {border-color:var(--line); border-radius:12px;}
-[data-testid="stTextArea"] textarea {font-family:Consolas,'Courier New',monospace; font-size:14px; line-height:1.8;}
+[data-testid="stTextArea"] textarea {font-family:Consolas,'Courier New',monospace; font-size:15px; line-height:1.8;}
 [data-baseweb="textarea"],[data-baseweb="select"] > div {border-radius:10px;}
 .st-key-compile_btn button {min-height:44px; border-radius:9px; font-weight:600; box-shadow:0 4px 10px #087F8C16;}
 .source-wrap {overflow:auto; max-height:440px; border:1px solid var(--line); border-radius:10px; margin:12px 0; background:#FFF;}
-.source-table {border-collapse:collapse; width:100%; font:13px/1.8 Consolas,monospace;}
+.source-table {border-collapse:collapse; width:100%; font:14px/1.8 Consolas,monospace;}
 .source-table td {padding:0 12px; white-space:pre; text-align:left;}
 .source-table .line-no {width:45px; color:#65758B; border-right:1px solid #E4EAF0; user-select:none; text-align:right;}
 .source-table tr.error-line {background:#FEE2E2; color:#7F1D1D;}
@@ -124,26 +120,48 @@ st.markdown("""<style>
 .ir-panel {min-width:0;}
 .ir-panel h4 {text-align:center; font-size:.98rem; font-weight:600; margin:0 0 13px; color:var(--ink);}
 .ir-table-wrap {border:1px solid var(--line); border-radius:11px; background:#FFF; max-height:580px; overflow-y:auto;}
-.ir-table {table-layout:fixed; border-collapse:collapse; width:100%; font-size:.76rem; color:var(--ink);}
-.ir-table th {background:#EEF3F8; color:#53677D; font-size:.66rem; letter-spacing:.035em; font-weight:650; text-align:center; padding:12px 5px;}
+.ir-table {table-layout:fixed; border-collapse:collapse; width:100%; font-size:.9rem; color:var(--ink);}
+.ir-table th {background:#EEF3F8; color:#53677D; font-size:.92rem; letter-spacing:.035em; font-weight:650; text-align:center; padding:12px 5px;}
 .ir-table td {padding:11px 7px; border-top:1px solid #E9EEF4; vertical-align:top; white-space:normal; overflow-wrap:anywhere; text-align:center;}
 .ir-table td.ir-args {font-family:Consolas,monospace; text-align:left; line-height:1.7;}
-.ir-table .ir-op {font-family:Consolas,monospace; font-size:.72rem;}
-.ir-table .ir-status {font-size:.65rem; border-radius:5px; padding:3px 4px; display:inline-block;}
+.ir-table .ir-op {font-family:Consolas,monospace; font-size:.96rem;}
+.ir-table .ir-status {font-size:.92rem; border-radius:5px; padding:3px 4px; display:inline-block;}
 .ir-table .removed {background:#FFF3E3; color:#875318;}
 .ir-table tbody tr:nth-child(even) {background:#FBFCFE;}
 .empty-ir {text-align:center; color:var(--muted); padding:24px; font-size:.85rem;}
 .architecture-purpose {text-align:center; color:var(--ink); font-size:.95rem; margin:6px auto 21px; max-width:850px; line-height:1.8;}
-.architecture-details {display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; text-align:center; margin:0 12px 16px;}
-.architecture-details p {font-size:.84rem; color:var(--muted); line-height:1.8; overflow-wrap:anywhere; margin:9px 0;}
-.architecture-details code {color:#096875; background:transparent; font-size:.8rem;}
+.architecture-details {display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; text-align:center; margin:0 12px;}
+.architecture-details p {font-size:.96rem; color:var(--muted); line-height:1.8; overflow-wrap:anywhere; margin:9px 0;}
+.architecture-details code {color:#096875; background:transparent; font-size:.92rem;}
 .stage-live {display:flex; justify-content:center; flex-wrap:wrap; gap:16px; align-items:center; border-top:1px solid #E8EEF4;
- padding:16px 0 2px; font-size:.8rem; color:var(--muted);}
+ padding:16px 0; font-size:.92rem; color:var(--muted);}
 .stage-live strong {color:var(--ink); font-weight:600;}
 .pass-list {display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin:12px 0 20px;}
-.pass-list span {font: .75rem Consolas,monospace; color:#096875; padding:6px 10px; background:#EDF6F6; border-radius:6px; overflow-wrap:anywhere;}
+.pass-list span {font: .9rem Consolas,monospace; color:#096875; padding:6px 10px; background:#EDF6F6; border-radius:6px; overflow-wrap:anywhere;}
 .st-key-grammar_reference [data-testid="stMarkdownContainer"] > p,.st-key-grammar_reference h2,.st-key-grammar_reference h3 {text-align:left;}
-@media (max-width:1280px) {.ir-grid {grid-template-columns:minmax(0,1fr);} .ir-table {font-size:.8rem;}}
+.st-key-grammar_heading h2 {font-size:2rem; margin-top:12px;}
+[class*="st-key-architecture_"] [data-testid="stExpander"] summary p {font-size:1rem; line-height:1.65; color:var(--muted);}
+[class*="st-key-architecture_"] [data-testid="stExpander"] summary strong {font-size:1.2rem; color:var(--ink); margin-right:8px;}
+[class*="st-key-architecture_"] [data-testid="stExpanderDetails"] {padding-bottom:16px;}
+.architecture-details p {font-size:1rem;}
+.architecture-details code {font-size:.94rem;}
+.observation {margin:12px auto 28px; padding:16px 22px; border-left:3px solid #85BFC5;
+ background:#EFF6F8; border-radius:0 10px 10px 0; max-width:1000px; color:var(--ink);}
+.observation ul {margin:8px 0 0; padding-left:22px; list-style:disc;}
+.observation li {font-size:1rem; line-height:1.75; margin:6px 0; text-align:left; padding-left:3px;}
+[data-testid="stCaptionContainer"] p {font-size:.95rem; line-height:1.65;}
+[data-testid="stWidgetLabel"] p {font-size:1rem;}
+@media (max-height:640px) {
+ [data-testid="stSidebarUserContent"] {padding-top:10px; padding-bottom:10px;}
+ .sidebar-brand {padding-bottom:8px;}
+ .brand-mark,.brand-mark img {width:40px; height:40px;}
+ .brand-mark {margin-bottom:8px;}
+ .brand-name {font-size:1.3rem;}
+ .brand-description {margin-top:6px;}
+ [class*="st-key-nav_"] button {min-height:36px; padding:6px 12px;}
+ [data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {font-size:.85rem; line-height:1.5;}
+}
+@media (max-width:1280px) {.ir-grid {grid-template-columns:minmax(0,1fr);} .ir-table {font-size:.92rem;}}
 @media (max-width:850px) {
  .block-container {padding:1.3rem 1.2rem 2.5rem;} .hero {padding:29px 19px; border-radius:14px !important;}
  .architecture-details {grid-template-columns:minmax(0,1fr); gap:12px;} .stage {min-width:100px;}
@@ -165,7 +183,7 @@ def safe_render(label):
 
 def header(title, description):
     st.markdown(f'<div class="hero"><div class="hero-brand"><img src="{LOGO_URL}" alt="">'
-                '<div class="eyebrow">DATA SCIENCE PIPELINE DSL</div></div>'
+                '<div class="eyebrow">Data Science Pipeline DSL</div></div>'
                 f'<h1>{escape(title)}</h1><p>{escape(description)}</p></div>', unsafe_allow_html=True)
 
 
@@ -265,8 +283,7 @@ def overview():
     header("A pipeline, from source to symbolic trace.",
            "Explore a compiler front-end for a Data Science pipeline language. Follow real source through lexical, "
            "syntactic and semantic analysis, then inspect its intermediate representation, four optimizer passes and symbolic execution.")
-    st.markdown('<div class="language-label">Language: <strong>Data Science Pipeline DSL</strong> · .pipe</div>'
-                '<div class="language-panel"><div class="declaration"><span class="section-label">Program declaration</span>'
+    st.markdown('<div class="language-panel"><div class="declaration"><span class="section-label">Program declaration</span>'
                 '<code>pipeline</code></div><div class="section-label">Pipeline operations</div><div class="chips">'
                 + ''.join(f'<span class="chip">{escape(s)}</span>' for s in
                           ("load", "clean", "select", "drop", "split", "train", "evaluate"))
@@ -292,9 +309,13 @@ def overview():
         + '</div>', unsafe_allow_html=True)
     grammar = ROOT / "docs" / "grammar.md"
     if grammar.is_file():
-        with st.expander("Language grammar"):
-            with st.container(key="grammar_reference"), safe_render("language grammar"):
-                st.markdown(grammar.read_text(encoding="utf-8"))
+        with st.container(key="grammar_heading"):
+            st.header("Language grammar")
+        with st.container(key="grammar_reference"), safe_render("language grammar"):
+            grammar_text = grammar.read_text(encoding="utf-8")
+            # Display the specification itself without the document's title/introduction.
+            first_section = re.search(r"^##\s", grammar_text, re.MULTILINE)
+            st.markdown(grammar_text[first_section.start():] if first_section else grammar_text)
 
 
 def load_selected_example():
@@ -481,26 +502,29 @@ def architecture():
     st.caption("Stage colors reflect the last compile: green = ok, red = failed, grey = skipped." if result
                else "Compile a program in the Playground to see live stage colors.")
     for name, purpose, flow, module, errors in STAGE_INFO:
-        with st.expander(name, expanded=name == "Semantic"):
-            st.markdown(f'<p class="architecture-purpose">{escape(purpose)}</p>'
-                        '<div class="architecture-details"><div><div class="section-label">Input → output</div>'
-                        f'<p><code>{escape(flow)}</code></p><div class="section-label">Implementation</div>'
-                        f'<p><code>{escape(module)}</code></p></div><div><div class="section-label">Validation &amp; diagnostics</div>'
-                        f'<p>{escape(errors)}</p></div></div>', unsafe_allow_html=True)
-            if name == "Optimizer":
-                st.markdown('<div class="pass-list">' + ''.join(
-                    f'<span>{i}. {escape(p)}</span>' for i, p in enumerate(PASSES, 1)) + '</div>', unsafe_allow_html=True)
-            if name in statuses:
-                stage = statuses[name]
-                count = ""
-                if stage.count is not None:
-                    unit = {"Lexer": "tokens", "Parser": "statements", "Semantic": "symbol-table fields",
-                            "IR": "IR instructions", "Optimizer": "optimized IR instructions", "Executor": "trace lines"}[name]
-                    count = f'<span><strong>{stage.count}</strong> {escape(unit)}</span>'
-                st.markdown('<div class="stage-live"><span class="section-label">Last compile</span>'
-                            f'<span class="pill {escape(stage.status)}">{escape(stage.status)}</span>'
-                            f'<span>{stage.ms:.3f} ms</span>{count}</div>', unsafe_allow_html=True)
+        with st.container(key=f"architecture_{name.lower()}"):
+            stage_details(name, purpose, flow, module, errors, statuses)
 
+
+def stage_details(name, purpose, flow, module, errors, statuses):
+    with st.expander(f"**{name}** — {purpose}", expanded=False):
+        st.markdown('<div class="architecture-details"><div><div class="section-label">Input → output</div>'
+                    f'<p><code>{escape(flow)}</code></p><div class="section-label">Implementation</div>'
+                    f'<p><code>{escape(module)}</code></p></div><div><div class="section-label">Validation &amp; diagnostics</div>'
+                    f'<p>{escape(errors)}</p></div></div>', unsafe_allow_html=True)
+        if name == "Optimizer":
+            st.markdown('<div class="pass-list">' + ''.join(
+                f'<span>{i}. {escape(p)}</span>' for i, p in enumerate(PASSES, 1)) + '</div>', unsafe_allow_html=True)
+        if name in statuses:
+            stage = statuses[name]
+            count = ""
+            if stage.count is not None:
+                unit = {"Lexer": "tokens", "Parser": "statements", "Semantic": "symbol-table fields",
+                        "IR": "IR instructions", "Optimizer": "optimized IR instructions", "Executor": "trace lines"}[name]
+                count = f'<span><strong>{stage.count}</strong> {escape(unit)}</span>'
+            st.markdown('<div class="stage-live"><span class="section-label">Last compile</span>'
+                        f'<span class="pill {escape(stage.status)}">{escape(stage.status)}</span>'
+                        f'<span>{stage.ms:.3f} ms</span>{count}</div>', unsafe_allow_html=True)
 
 def performance():
     data = performance_loader.load_performance(PERFORMANCE_PATH)
@@ -514,6 +538,28 @@ def performance():
         st.subheader("Environment")
         st.text(data.environment)
     table = data.table
+    notes = {"benchmark": [], "stage": [], "scaling": [], "optimization": []}
+    for observation in re.split(r"\n(?=\s*\d+[.)]\s)", data.observations.strip()):
+        if not observation.strip():
+            continue
+        text = observation.lower()
+        if any(word in text for word in ("dominant stage", "lexer", "bottleneck")):
+            group = "stage"
+        elif any(word in text for word in ("scaling", "per statement", "linear")):
+            group = "scaling"
+        elif any(word in text for word in ("speedup", "optimization", "ir size", "reduction")):
+            group = "optimization"
+        else:
+            group = "benchmark"
+        notes[group].append(observation)
+
+    def observations(group):
+        if notes[group]:
+            items = [re.sub(r"^\s*\d+[.)]\s+", "", note) for note in notes[group]]
+            st.markdown('<div class="observation"><div class="section-label">Recorded observations</div>'
+                        + '<ul>' + ''.join(f'<li>{escape(note)}</li>' for note in items) + '</ul></div>',
+                        unsafe_allow_html=True)
+
     st.subheader("Benchmark results")
     if data.marked_rows:
         st.warning("Marked rows report skipped runs or reduced repetitions; consult Status before comparing results.")
@@ -521,6 +567,8 @@ def performance():
                      hide_index=True, width="stretch")
     else:
         st.dataframe(table, hide_index=True, width="stretch")
+    observations("benchmark")
+
     def chart(title, columns, stack=False):
         columns = [c for c in columns if c in table.columns]
         if "Statements" not in table or not columns:
@@ -534,23 +582,25 @@ def performance():
         st.subheader(title)
         st.bar_chart(numeric, stack=stack, sort=False, width="stretch")
     chart("Stage time by program size (ms)", ["Lexer ms", "Parser ms", "Semantic ms", "IR ms", "Optimizer ms", "Exec(opt) ms"], True)
+    observations("stage")
     chart("Time per statement (µs)", ["us/stmt"])
+    observations("scaling")
     chart("IR size before and after optimization", ["IR before", "IR after"])
-    if data.observations:
-        st.subheader("Observations")
-        st.text(data.observations)
+    observations("optimization")
+
+
+def navigate(page):
+    st.session_state["page"] = page
 
 
 with st.sidebar:
     st.markdown(f'<div class="sidebar-brand"><div class="brand-mark"><img src="{LOGO_URL}" alt="Data Science Pipeline DSL logo"></div>'
                 '<div class="brand-name">Data Science<br>Pipeline DSL</div>'
                 '<div class="brand-description">Source. Validate. Optimize.</div></div>', unsafe_allow_html=True)
-    st.radio("Navigation", PAGES, key="page", label_visibility="collapsed")
-    st.divider()
-    st.markdown('<div class="sidebar-language"><div class="section-label">Language reference</div>'
-                '<div class="sidebar-root"><code>pipeline</code><span class="section-label">Program declaration</span></div>'
-                '<div class="sidebar-operations">' + ''.join(f'<span class="chip">{escape(s)}</span>' for s in
-                ("load", "clean", "select", "drop", "split", "train", "evaluate")) + '</div></div>', unsafe_allow_html=True)
+    for page in PAGES:
+        st.button(page, key=f"nav_{page.lower().replace(' ', '_')}",
+                  type="primary" if st.session_state["page"] == page else "tertiary",
+                  width="stretch", on_click=navigate, args=(page,))
     st.divider()
     st.caption("Symbolic execution only: no files are read, no models are trained.")
 

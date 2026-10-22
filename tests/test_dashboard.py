@@ -248,14 +248,14 @@ def app():
 
 
 def playground(app):
-    app.sidebar.radio(key="page").set_value("Compiler Playground").run()
+    app.sidebar.button(key="nav_compiler_playground").click().run()
     assert not app.exception
     return app
 
 
 def test_ui_every_page_and_default_compile(app):
     for page in ("Overview", "Compiler Playground", "Architecture", "Performance"):
-        app.sidebar.radio(key="page").set_value(page).run()
+        app.sidebar.button(key="nav_" + page.lower().replace(" ", "_")).click().run()
         assert not app.exception
         assert not app.warning
     playground(app).button(key="compile_btn").click().run()
@@ -277,7 +277,7 @@ def test_ui_error_highlighting_and_live_architecture(app, kind, source):
     assert any(c.value == result.error.message for c in app.code)
     if kind == "Lexical":
         assert any("<mark>@</mark>" in m.value for m in app.markdown)
-    app.sidebar.radio(key="page").set_value("Architecture").run()
+    app.sidebar.button(key="nav_architecture").click().run()
     assert not app.exception
     assert not app.warning
     chart = app.get("graphviz_chart")[0]
@@ -321,7 +321,7 @@ def test_ui_missing_docs_examples_and_unreadable_example(app, monkeypatch):
     assert any("Could not read" in w.value for w in app.warning)
     import performance_loader
     monkeypatch.setattr(performance_loader, "load_performance", lambda p: performance_loader.PerformanceData(False, "missing report"))
-    app.sidebar.radio(key="page").set_value("Performance").run()
+    app.sidebar.button(key="nav_performance").click().run()
     assert not app.exception
     assert any("python benchmarks/benchmark.py" in w.value for w in app.warning)
 
