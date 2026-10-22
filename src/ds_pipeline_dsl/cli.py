@@ -8,16 +8,16 @@ from ds_pipeline_dsl.optimizer import optimize
 from ds_pipeline_dsl.executor import execute
 
 def main():
-    parser = argparse.ArgumentParser(description="DS Pipeline DSL Compiler")
+    parser = argparse.ArgumentParser(description="Data Science Pipeline DSL Compiler")
     parser.add_argument("file", help="Path to the .pipe source file")
     parser.add_argument("--tokens", action="store_true", help="Print lexer token output")
     parser.add_argument("--ast", action="store_true", help="Print parsed AST")
     parser.add_argument("--ir", action="store_true", help="Print unoptimized IR")
     parser.add_argument("--optimized-ir", action="store_true", help="Print optimized IR")
     parser.add_argument("--trace", action="store_true", help="Print executor trace")
-    
+
     args = parser.parse_args()
-    
+
     # If no flags provided, set all to True
     if not (args.tokens or args.ast or args.ir or getattr(args, 'optimized_ir') or args.trace):
         args.tokens = True
@@ -25,34 +25,34 @@ def main():
         args.ir = True
         args.optimized_ir = True
         args.trace = True
-        
+
     try:
-        with open(args.file, "r") as f:
+        with open(args.file, "r", encoding="utf-8") as f:
             code = f.read()
     except Exception as e:
         print(f"Error reading file: {e}")
         sys.exit(1)
-        
+
     try:
         tokens = tokenize(code)
         if args.tokens:
             print("=== TOKENS ===")
             for tok in tokens:
                 print(tok)
-                
+
         ast = Parser(tokens).parse_pipeline()
         if args.ast:
             print("=== AST ===")
             print(ast)
-            
+
         table = analyze(ast)
-        
+
         ir = lower_to_ir(ast, table)
         if args.ir:
             print("=== IR ===")
             for i in ir:
                 print(i)
-                
+
         notes = []
         opt_ir = optimize(ir, notes)
         if args.optimized_ir:
@@ -66,13 +66,13 @@ def main():
             else:
                 print("(no optimizations applied)")
             print(f"IR instructions: {len(ir)} -> {len(opt_ir)}")
-                
+
         trace = execute(opt_ir)
         if args.trace:
             print("=== TRACE ===")
             for line in trace:
                 print(line)
-                
+
     except LexicalError as e:
         print(e)
         sys.exit(1)

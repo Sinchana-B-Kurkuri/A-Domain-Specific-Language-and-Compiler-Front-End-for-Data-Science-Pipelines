@@ -1,4 +1,3 @@
-import pytest
 from ds_pipeline_dsl.lexer import tokenize
 from ds_pipeline_dsl.parser import Parser
 from ds_pipeline_dsl.semantic import analyze
@@ -23,9 +22,9 @@ def test_executor():
     table = analyze(ast)
     ir = lower_to_ir(ast, table)
     opt_ir = optimize(ir)
-    
+
     trace = execute(opt_ir)
-    
+
     assert len(trace) == 6
     assert trace[0] == "Loaded students.csv"
     assert trace[1] == "Cleaned using missing_values"

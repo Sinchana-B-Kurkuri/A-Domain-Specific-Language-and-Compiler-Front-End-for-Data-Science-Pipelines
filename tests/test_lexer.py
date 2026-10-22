@@ -1,5 +1,5 @@
 import pytest
-from ds_pipeline_dsl.lexer import tokenize, Token, LexicalError
+from ds_pipeline_dsl.lexer import tokenize, LexicalError
 
 def test_tokenize_valid():
     source = 'pipeline my_pipe { load "data.csv"; }'
@@ -109,4 +109,3 @@ def test_tokenize_line_and_col_numbers_line3_plus():
     assert clean_tok.col == 0
     assert missing_tok.line == 3
     assert missing_tok.col == 6
-

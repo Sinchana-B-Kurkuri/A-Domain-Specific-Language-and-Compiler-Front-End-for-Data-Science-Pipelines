@@ -39,3 +39,5 @@ Token(type='EOF', value='', line=10, col=0)
 === AST ===
 PipelineNode(name='student_prediction', statements=[LoadStmt(filename='students.csv', line=2), CleanStmt(strategy='missing_values', line=3), SelectStmt(columns=['cgpa', 'attendance', 'study_hours'], line=4), SplitStmt(name='train', percent=80.0, line=5), SplitStmt(name='test', percent=30.0, line=6), TrainStmt(model_name='model', algorithm='decision_tree', line=7), EvaluateStmt(model_name='model', line=8)], line=1)
 Semantic Error at line 6: cumulative split total would be 110%, which exceeds 100%.
+
+Exit code: 1

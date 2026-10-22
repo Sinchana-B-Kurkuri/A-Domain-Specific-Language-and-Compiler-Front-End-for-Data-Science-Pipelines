@@ -9,3 +9,5 @@ Trained model 'm1' using decision_tree
 Evaluated model 'm1' (simulated accuracy trace)
 Trained model 'm2' using random_forest
 Evaluated model 'm2' (simulated accuracy trace)
+
+Exit code: 0

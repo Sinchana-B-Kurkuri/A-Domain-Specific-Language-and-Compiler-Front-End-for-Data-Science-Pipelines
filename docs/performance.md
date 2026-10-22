@@ -17,8 +17,9 @@ The template systematically exercises all compiler front-end stages and optimize
 - Trailing model train: placed after the final evaluate statement; removed by the unreachable-code elimination pass.
 
 ## Safeguards & Methodology
-Benchmark safeguards prevent hangs or budget overruns: sizes run in ascending order with quadratic projection
-checks enforcing a total time budget of 120 s; single repetitions are capped at 30 s;
+Sizes run in ascending order with quadratic projection checks against a total time budget
+of 120 s; repetitions exceeding 30 s trigger fewer repeats after they finish.
+These are projection and post-run checks, not preemptive timeouts; a running stage is not interrupted.
 source sizes are bounded at 2000000 characters and size parameter at 20000; each size performs an untimed
 warm-up pass and correctness validation before timing; garbage collection is disabled during timed regions and run between repetitions;
 inner timing loops scale inversely with statement count to minimize timer quantization noise.

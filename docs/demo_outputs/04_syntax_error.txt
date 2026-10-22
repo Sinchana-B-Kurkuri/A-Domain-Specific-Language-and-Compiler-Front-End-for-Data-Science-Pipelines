@@ -31,3 +31,5 @@ Token(type='SEMI', value=';', line=7, col=18)
 Token(type='RBRACE', value='}', line=8, col=0)
 Token(type='EOF', value='', line=9, col=0)
 Syntax Error at line 3: expected SEMI, found CLEAN ('clean')
+
+Exit code: 1

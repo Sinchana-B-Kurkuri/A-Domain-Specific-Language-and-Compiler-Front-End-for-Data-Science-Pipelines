@@ -57,3 +57,5 @@ Selected columns: cgpa, attendance, study_hours
 Defined split 'train' = 80%
 Trained model 'model' using decision_tree
 Evaluated model 'model' (simulated accuracy trace)
+
+Exit code: 0

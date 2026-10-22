@@ -133,7 +133,6 @@ st.markdown("""<style>
 .ir-table .removed {background:#FFF3E3; color:#875318;}
 .ir-table tbody tr:nth-child(even) {background:#FBFCFE;}
 .empty-ir {text-align:center; color:var(--muted); padding:24px; font-size:.85rem;}
-.architecture-purpose {text-align:center; color:var(--ink); font-size:.95rem; margin:6px auto 21px; max-width:850px; line-height:1.8;}
 .architecture-details {display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; text-align:center; margin:0 12px;}
 .architecture-details p {font-size:.96rem; color:var(--muted); line-height:1.8; overflow-wrap:anywhere; margin:9px 0;}
 .architecture-details code {color:#096875; background:transparent; font-size:.92rem;}

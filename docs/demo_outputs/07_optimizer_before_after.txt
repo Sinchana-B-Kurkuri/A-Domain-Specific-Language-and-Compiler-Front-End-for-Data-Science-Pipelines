@@ -25,3 +25,5 @@ dead-train: removed OP_TRAIN 'dead_model' (line 10); model is never evaluated
 drop-merge: merged 2 adjacent OP_DROP (lines 5, 6) into one
 duplicate: removed repeated OP_CLEAN (line 4)
 IR instructions: 11 -> 7
+
+Exit code: 0

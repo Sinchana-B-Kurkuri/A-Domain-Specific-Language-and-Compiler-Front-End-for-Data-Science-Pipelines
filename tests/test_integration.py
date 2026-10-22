@@ -1,15 +1,11 @@
 import os
 import sys
-import tempfile
 from io import StringIO
 from unittest.mock import patch
 import pytest
 
 from ds_pipeline_dsl.cli import main
-from ds_pipeline_dsl.lexer import tokenize
-from ds_pipeline_dsl.parser import Parser
-from ds_pipeline_dsl.semantic import analyze
-from ds_pipeline_dsl.ir import lower_to_ir, IRInstruction
+from ds_pipeline_dsl.ir import IRInstruction
 from ds_pipeline_dsl.optimizer import optimize
 from ds_pipeline_dsl.executor import execute
 from tests.helpers import compile_to_ir, evaluation_records, assert_order_preserving

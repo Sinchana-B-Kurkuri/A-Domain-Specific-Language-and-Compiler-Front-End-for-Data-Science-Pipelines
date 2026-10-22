@@ -1,5 +1,4 @@
 import sys
-import os
 import time
 import statistics
 import gc
@@ -37,10 +36,10 @@ MAX_SIZE = 20000
 # MAX_SOURCE_CHARS: maximum allowed source string character length.
 MAX_SOURCE_CHARS = 2_000_000
 
-# TOTAL_TIME_BUDGET_S: overall wall-clock ceiling across all benchmark sizes.
+# TOTAL_TIME_BUDGET_S: budget used by the projection check between sizes.
 TOTAL_TIME_BUDGET_S = 120
 
-# REPEAT_TIME_LIMIT_S: single-repetition timeout triggering reduced repetitions.
+# REPEAT_TIME_LIMIT_S: post-run threshold triggering reduced repetitions.
 REPEAT_TIME_LIMIT_S = 30
 
 # Static assertions on benchmark configuration
@@ -377,8 +376,9 @@ def generate_report(results: list, wall_clock_s: float) -> str:
         "- Trailing model train: placed after the final evaluate statement; removed by the unreachable-code elimination pass.",
         "",
         "## Safeguards & Methodology",
-        "Benchmark safeguards prevent hangs or budget overruns: sizes run in ascending order with quadratic projection",
-        f"checks enforcing a total time budget of {TOTAL_TIME_BUDGET_S} s; single repetitions are capped at {REPEAT_TIME_LIMIT_S} s;",
+        "Sizes run in ascending order with quadratic projection checks against a total time budget",
+        f"of {TOTAL_TIME_BUDGET_S} s; repetitions exceeding {REPEAT_TIME_LIMIT_S} s trigger fewer repeats after they finish.",
+        "These are projection and post-run checks, not preemptive timeouts; a running stage is not interrupted.",
         f"source sizes are bounded at {MAX_SOURCE_CHARS} characters and size parameter at {MAX_SIZE}; each size performs an untimed",
         f"warm-up pass and correctness validation before timing; garbage collection is disabled during timed regions and run between repetitions;",
         "inner timing loops scale inversely with statement count to minimize timer quantization noise.",

@@ -1,269 +1,216 @@
-# A Domain-Specific Language and Compiler Front-End for Data Science Pipelines
+# Data Science Pipeline DSL
 
-A robust, modular compiler front-end and symbolic execution engine for a data-science-pipeline domain-specific language (`ds_pipeline_dsl`). The system validates, lowers, optimizes, and simulates data science workflow declarations with complete lexical, syntactic, semantic, and intermediate representation (IR) guarantees.
+A Python compiler front-end for a small language that describes data science pipelines. Inspect how source becomes tokens, an abstract syntax tree, a symbol table, intermediate instructions, optimized instructions and a readable execution trace.
 
----
+**[Live demo](https://ds-pipeline-compiler.streamlit.app/)** · **[GitHub repository](https://github.com/Sinchana-B-Kurkuri/A-Domain-Specific-Language-and-Compiler-Front-End-for-Data-Science-Pipelines)** · [Architecture](docs/architecture.md) · [Grammar](docs/grammar.md)
 
-## 1. Overview & Key Features
+![Python 3.12 or newer](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![268 passing tests](https://img.shields.io/badge/tests-268%20passing-22863A)
+![Symbolic execution](https://img.shields.io/badge/execution-symbolic-087F8C)
 
-`ds_pipeline_dsl` is designed for declaring end-to-end data science pipelines (loading, cleaning, column selection, column dropping, partitioning, model training, and evaluation). It replaces unstructured configuration scripts with a statically validated language.
+**Execution is symbolic.** Dataset and algorithm names are declarations: no CSV contents are read, no models are fitted, and no numerical accuracy or predictions are computed.
 
-- **Modular Compiler Architecture**: Decoupled multi-pass pipeline: Lexer $\to$ Recursive-Descent Parser $\to$ AST $\to$ Semantic Analyzer (SymbolTable) $\to$ IR Lowering $\to$ Four-Pass Optimizer $\to$ Symbolic Execution Engine.
-- **Strict Dependency & Semantic Validation**: Enforces dataset availability, partition constraints ($0 < p < 100$, cumulative $\le 100\%$), strict data-preparation ordering before training, column set disjointness, duplicate detection, and model life-cycle checks.
-- **Safe Linear-Time ($O(n)$) Optimization**: Four independent passes eliminate unreachable instructions, dead model training, duplicate consecutive cleans/selects, and merge contiguous drop statements.
-- **Symbolic Simulation Engine**: Fast, deterministic execution trace generation without invoking heavy machine learning libraries or reading external CSV data.
-- **Complete Test & Benchmark Suite**: 223 automated unit and integration tests passing in under 0.3s; reproducible performance benchmark demonstrating linear scaling across 10,000 statements in 0.67s.
+![Dashboard overview](docs/screenshots/overview.png)
 
----
+## Why this project
 
-## 2. Project Layout
+A pipeline description contains dependencies that can be checked before a runtime starts: a training split must exist before training, a model must exist before evaluation, and selected columns cannot have been dropped. This project makes those rules explicit in a compact DSL and exposes each compiler representation for inspection.
+
+The objectives are to design an unambiguous grammar, implement a modular compiler, report source-based diagnostics, transform an explicit IR, and validate transformations with automated tests. The result is a compiler construction project with a data science vocabulary, rather than a workflow scheduler or ML training platform.
+
+## What it implements
+
+- Regex lexer with source coordinates, comments, whitespace handling and lexical diagnostics.
+- Hand-written recursive-descent parser, one-token lookahead and dataclass AST nodes.
+- Symbol-table analysis with 21 explicit semantic checks for declarations, ordering, columns and partitions.
+- Seven IR opcodes, source-line metadata and four ordered optimization passes.
+- Symbolic executor and CLI with selectable output sections and meaningful exit codes.
+- Four-page Streamlit dashboard that calls the same compiler modules.
+- Valid, invalid, complex and optimization examples; unit, integration, boundary and equivalence tests.
+
+## Compilation workflow
+
+```mermaid
+flowchart LR
+    S[Source text] --> L[Lexer]
+    L -->|Tokens| P[Parser]
+    P -->|AST| A[Semantic analyzer]
+    A -->|AST and symbol table| I[IR lowering]
+    I --> O[Four-pass optimizer]
+    O --> E[Symbolic executor]
+    E --> T[Trace strings]
+```
+
+Both the CLI and dashboard coordinate this workflow. The first lexical, syntax or semantic error stops later stages. The dashboard retains completed intermediate results and highlights the reported source location.
+
+| Stage | Main implementation | Result |
+|---|---|---|
+| Lexical analysis | [lexer.py](src/ds_pipeline_dsl/lexer.py) | `Token(type, value, line, col)` records |
+| Syntax analysis | [parser.py](src/ds_pipeline_dsl/parser.py) | `PipelineNode` and statement dataclasses |
+| Semantic analysis | [semantic.py](src/ds_pipeline_dsl/semantic.py) | Declaration/state checks and `SymbolTable` |
+| IR generation | [ir.py](src/ds_pipeline_dsl/ir.py) | `IRInstruction(op, args)` list |
+| Optimization | [optimizer.py](src/ds_pipeline_dsl/optimizer.py) | Transformed IR and optional notes |
+| Symbolic execution | [executor.py](src/ds_pipeline_dsl/executor.py) | Formatted instruction log |
+
+The IR is an opcode-and-arguments representation, not machine code or conventional arithmetic three-address code. See the [architecture and safety discussion](docs/architecture.md).
+
+## Language at a glance
+
+A file has one `pipeline` declaration and seven possible body statement forms. Statements end in semicolons; `//` introduces a comment.
+
+| Construct | Example | Meaning |
+|---|---|---|
+| Program declaration | `pipeline demo { ... }` | Names the single pipeline |
+| Load | `load "students.csv";` | Declares a symbolic dataset source |
+| Clean | `clean missing_values;` | Records a cleaning strategy |
+| Select | `select cgpa, attendance;` | Sets the current selected columns |
+| Drop | `drop student_id, name;` | Records excluded columns |
+| Split | `split train = 80%;` | Declares a named percentage partition |
+| Train | `train model = decision_tree;` | Declares a model and algorithm |
+| Evaluate | `evaluate model;` | Requests evaluation of an existing model |
+
+From [valid_drop.pipe](examples/valid_drop.pipe):
 
 ```text
-.
-├── src/ds_pipeline_dsl/      # Core compiler package
-│   ├── __init__.py           # Package exports and version metadata
-│   ├── ast_nodes.py          # Typed AST dataclasses for pipeline nodes and statements
-│   ├── cli.py                # Command-line driver and output formatter
-│   ├── executor.py           # Symbolic execution engine generating trace logs
-│   ├── ir.py                 # Intermediate representation dataclass and AST lowering
-│   ├── lexer.py              # Regex-based scanner with line and column coordinate tracking
-│   ├── optimizer.py          # Four-pass linear-time dead code & redundancy optimizer
-│   ├── parser.py             # LL(1) recursive-descent parser producing validated AST
-│   └── semantic.py           # Symbol table state tracking and semantic validation rules
-├── tests/                    # Comprehensive pytest test suite (223 tests)
-│   ├── helpers.py            # Test helpers: compile_to_ir, evaluation_records, assert_order_preserving
-│   ├── test_benchmark.py     # Benchmark structural integrity, counts, and safeguard tests
-│   ├── test_boundary.py      # Edge cases: 200 cols, 1k stmts, single-line, 5k ident, boundaries
-│   ├── test_cli.py           # CLI invocation, argument flags, exit codes, trace formatting
-│   ├── test_examples.py      # Parametrized validation table covering every .pipe file in examples/
-│   ├── test_executor.py      # Symbolic execution traces and opcode format validation
-│   ├── test_integration.py   # Multi-stage integration tests, clean error exits without tracebacks
-│   ├── test_ir.py            # AST-to-IR lowering and opcode mapping tests
-│   ├── test_lexer.py         # Token scanning, CRLF, non-ASCII handling, error diagnostics
-│   ├── test_optimizer.py     # Equivalence, idempotence, positive, negative, and sensitivity tests
-│   ├── test_parser.py        # Grammar constraints, missing delimiters, syntax error checks
-│   └── test_semantic.py      # Comprehensive semantic rules pass/fail unit tests
-├── examples/                 # Canonical DSL programs (.pipe files)
-│   ├── valid_basic.pipe      # Baseline canonical 6-statement pipeline
-│   ├── valid_drop.pipe       # Pipeline showcasing column drop before selection
-│   ├── ...                   # 20 curated valid, invalid, and complex pipeline examples
-├── benchmarks/               # Performance measurement
-│   └── benchmark.py          # Automated benchmark with safeguards, quadratic projection, and report generator
-├── docs/                     # Technical documentation & captured evidence
-│   ├── architecture.md       # Architectural flowchart, ASCII diagram, and IR specification
-│   ├── grammar.md            # Formal EBNF grammar and lexical specification
-│   ├── performance.md        # Benchmark measurements, scaling factors, and observations
-│   ├── test_results.txt      # Full pytest execution log (223 passed)
-│   ├── demo.md               # 5-minute presentation script and viva quick reference
-│   ├── demo_outputs/         # Captured stdout/stderr logs for all demo commands
-│   ├── screenshots/          # Suggested screenshots guide for submission
-│   └── report_and_presentation_checklist.md # Mapping to university manual chapters & criteria
-├── pyproject.toml            # Project packaging specification
-└── README.md                 # Project documentation and user manual
+pipeline student_prediction {
+    load "students.csv";
+    clean missing_values;
+    drop student_id, name;
+    select cgpa, attendance, study_hours;
+    split train = 80%;
+    train model = decision_tree;
+    evaluate model;
+}
 ```
 
----
+A load is required before data operations; clean/select/drop must precede the first training declaration. Each split must be strictly between 0 and 100, with a cumulative total at most 100 (subject to the implementation's floating-point tolerance). Names of splits and models must be unique. After a selection, a drop must use currently selected columns and leave at least one.
 
-## 3. Installation & Usage
+Cleaning strategies and algorithms are free identifiers, not validated library names. An empty pipeline is accepted. Evaluation is not terminal: later training and evaluation statements can be legal. The [full grammar](docs/grammar.md) documents keyword and lexical details.
 
-### 3.1 Requirements & Installation
-- **Python**: Version 3.12 or newer.
-- **Dependencies**: Python standard library only (no external dependencies required). `pytest` is used for running tests.
+## Run locally
 
-Install the package in editable mode from the repository root:
-```bash
-pip install -e .
-```
+Requires **Python 3.12+**. The compiler has no third-party runtime dependencies. Streamlit is optional for the UI, and pytest is optional for testing. The audit environment used Python 3.14.7, Streamlit 1.66.0 and pytest 9.1.1; other Python versions were not executed during this audit.
 
-### 3.2 Running the Compiler via CLI
-The compiler driver is accessible via the module CLI:
-```bash
-python -m ds_pipeline_dsl.cli <path_to_pipe_file> [flags]
-```
-
-#### Available Flags
-- `--tokens`: Display the scanned token stream with line and column numbers.
-- `--ast`: Display the parsed Abstract Syntax Tree representation.
-- `--ir`: Display the unoptimized linear Intermediate Representation instructions.
-- `--optimized-ir`: Display the optimized IR instructions and diagnostic optimization notes.
-- `--trace`: Display the simulated execution trace produced by the symbolic engine.
-- *(No flags specified)*: By default, displays all five stages sequentially.
-
-#### Exit Codes
-- `0`: Successful compilation and execution.
-- `1`: Error encountered during lexical analysis, parsing, semantic analysis, or file reading. Errors print a clean, single-line message to `stderr`/`stdout` without Python stack traces.
-
----
-
-## 4. Language Reference (All 8 Statements)
-
-| Statement | Syntax | Purpose & Description | Example |
-|:---|:---|:---|:---|
-| `pipeline` | `pipeline <IDENT> { <statements> }` | Top-level pipeline block container. Exactly one per file. | `pipeline student_model { ... }` |
-| `load` | `load "<filepath>";` | Loads the source dataset. Exactly one load required per pipeline. | `load "students.csv";` |
-| `clean` | `clean <strategy>;` | Applies a data cleaning strategy (free identifier). | `clean missing_values;` |
-| `select` | `select <col1>, <col2>, ...;` | Selects feature columns. Replaces prior column selection. | `select cgpa, attendance, hours;` |
-| `drop` | `drop <col1>, <col2>, ...;` | Drops specified columns. Cannot drop columns not in current selection. | `drop student_id, name;` |
-| `split` | `split <name> = <percent>%;` | Partitions dataset ($0 < p < 100$; cumulative total $\le 100\%$). | `split train = 80%;` |
-| `train` | `train <model> = <algorithm>;` | Trains model using algorithm (free identifier). Requires `train` split. | `train model1 = decision_tree;` |
-| `evaluate` | `evaluate <model>;` | Evaluates a previously trained model. Can be called multiple times. | `evaluate model1;` |
-
----
-
-## 5. Diagnostic Errors & Error Classes
-
-The compiler halts on the first encountered error and produces clean, line-referenced diagnostic messages:
-
-### 5.1 Lexical Errors (`LexicalError`)
-- **Unterminated string literal**: `Lexical Error at line 2, col 9: unterminated string literal`
-- **Unexpected character**: `Lexical Error at line 3, col 12: unexpected character '@'`
-
-### 5.2 Syntax Errors (`SyntaxError_`)
-- **Expected token mismatch**: `Syntax Error at line 2: expected SEMI, found IDENT ('clean')`
-- **Missing closing brace / unexpected EOF**: `Syntax Error at line 5: unexpected end of file; expected '}' to close pipeline 'p'`
-- **Multiple pipelines**: `Syntax Error at line 8: only one pipeline per file is supported`
-- **Unexpected token after pipeline**: `Syntax Error at line 10: unexpected token IDENT ('extra') after end of pipeline`
-- **Invalid percentage format**: `Syntax Error at line 4: expected PERCENT, found NUMBER ('80')`
-- **Missing column in select/drop**: `Syntax Error at line 3: expected IDENT, found SEMI (';')`
-
-### 5.3 Semantic Errors (`SemanticError`)
-All 21 semantic error conditions checked in [`semantic.py`](src/ds_pipeline_dsl/semantic.py):
-1. **Duplicate load**: `Semantic Error at line 3: 'load' used more than once; a dataset was already loaded at line 2.`
-2. **Empty load filename**: `Semantic Error at line 2: 'load' requires a non-empty filename.`
-3. **Clean before load**: `Semantic Error at line 2: 'clean' used before any 'load' statement. No dataset is available.`
-4. **Clean after train**: `Semantic Error at line 5: 'clean' used after model 'm' was trained at line 4; data-preparation statements must appear before any 'train'.`
-5. **Select before load**: `Semantic Error at line 2: 'select' used before any 'load' statement.`
-6. **Select after train**: `Semantic Error at line 5: 'select' used after model 'm' was trained at line 4; data-preparation statements must appear before any 'train'.`
-7. **Duplicate column in select**: `Semantic Error at line 3: column 'cgpa' appears more than once in 'select'.`
-8. **Select of dropped column**: `Semantic Error at line 4: column 'c1' was dropped at line 3 and cannot be selected.`
-9. **Drop before load**: `Semantic Error at line 2: 'drop' used before any 'load' statement.`
-10. **Drop after train**: `Semantic Error at line 5: 'drop' used after model 'm' was trained at line 4; data-preparation statements must appear before any 'train'.`
-11. **Duplicate column in drop**: `Semantic Error at line 3: column 'c1' appears more than once in 'drop'.`
-12. **Drop already dropped column**: `Semantic Error at line 4: column 'c1' was already dropped at line 3.`
-13. **Drop column not in selection**: `Semantic Error at line 4: cannot drop column 'c3': it is not in the current selection.`
-14. **Drop all selected columns**: `Semantic Error at line 4: 'drop' would remove every selected column.`
-15. **Split before load**: `Semantic Error at line 2: 'split' used before any 'load' statement.`
-16. **Split percentage out of bounds**: `Semantic Error at line 3: split percentage must be strictly between 0 and 100.`
-17. **Duplicate split name**: `Semantic Error at line 4: split 'train' is already defined at line 3.`
-18. **Cumulative split exceeds 100%**: `Semantic Error at line 4: cumulative split total would be 100.1%, which exceeds 100%.`
-19. **Train before split definition**: `Semantic Error at line 3: training data has not been defined. A 'split train = <percent>%;' statement must appear before 'train m = dt;'.`
-20. **Duplicate model name**: `Semantic Error at line 5: model 'm' is already defined at line 4.`
-21. **Evaluate before train**: `Semantic Error at line 4: model 'm' is evaluated before it has been trained.`
-
----
-
-## 6. Optimizer Architecture & Safety Principles
-
-The optimizer [`optimizer.py`](src/ds_pipeline_dsl/optimizer.py) executes four independent, linear-time ($O(n)$) passes in strict program order:
-
-1. `_remove_unreachable`: Removes instructions appearing after the **last** `OP_EVAL`. If no evaluations exist, the IR is untouched.
-2. `_remove_dead_trains`: Backward scan identifying models evaluated in the pipeline; eliminates `OP_TRAIN` instructions for models that are never evaluated.
-3. `_merge_adjacent_drops`: Combines consecutive runs of $\ge 2$ `OP_DROP` instructions into a single merged drop with ordered, deduplicated columns.
-4. `_collapse_duplicates`: Collapses consecutive identical `OP_CLEAN` or `OP_SELECT` instructions (ignoring source line numbers during comparison).
-
-### Safety Argument
-- **Observable Behavior**: The observable behavior of a pipeline is defined as the sequence of model evaluation records:
-  $$\text{Record} = (\text{model\_name}, \text{algorithm}, \text{train\_state}, \text{eval\_state})$$
-- Instructions appearing after the last evaluation produce no observable records and affect no subsequent evaluations.
-- Models trained but never evaluated write only to internal model state that is never read. Removing them produces zero observable difference.
-- Because data-preparation statements cannot appear after model training (enforced by semantic rules), dead train elimination never makes previously separated data-preparation statements adjacent.
-- If a pipeline contains no `evaluate` statement, the optimizer conservatively preserves all instructions without pruning.
-
----
-
-## 7. Example Programs & Test Suite
-
-The `examples/` directory contains 20 curated pipeline programs covering all language features:
-
-| File Name | Purpose | Expected Outcome |
-|:---|:---|:---|
-| [`valid_basic.pipe`](examples/valid_basic.pipe) | Baseline canonical 6-statement pipeline | Compiles & executes (Exit 0) |
-| [`valid_drop.pipe`](examples/valid_drop.pipe) | Drop columns before selection | Compiles & executes (Exit 0) |
-| [`valid_select_then_drop.pipe`](examples/valid_select_then_drop.pipe) | Select columns and drop a subset | Compiles & executes (Exit 0) |
-| [`optimizer_demo.pipe`](examples/optimizer_demo.pipe) | Exercises all 4 optimizer passes in one program | Compiles, optimizes (11 $\to$ 7), executes (Exit 0) |
-| [`complex_multi_model.pipe`](examples/complex_multi_model.pipe) | Multi-model evaluation chain with dead train removal | Compiles & executes both evaluations (Exit 0) |
-| [`complex_redundant.pipe`](examples/complex_redundant.pipe) | Heavy redundancies (cleans, selects, drops, dead trains) | Compiles, optimizes (12 $\to$ 7), executes (Exit 0) |
-| [`complex_valid_drop_chain.pipe`](examples/complex_valid_drop_chain.pipe) | Non-adjacent drops separated by a split statement | Compiles, preserves separate drops, executes (Exit 0) |
-| [`invalid_clean_after_train.pipe`](examples/invalid_clean_after_train.pipe) | Data cleaning after model training | Semantic Error (Exit 1) |
-| [`invalid_drop_after_train.pipe`](examples/invalid_drop_after_train.pipe) | Dropping columns after model training | Semantic Error (Exit 1) |
-| [`invalid_drop_all_selected.pipe`](examples/invalid_drop_all_selected.pipe) | Dropping all currently selected columns | Semantic Error (Exit 1) |
-| [`invalid_drop_before_load.pipe`](examples/invalid_drop_before_load.pipe) | Dropping columns before dataset loading | Semantic Error (Exit 1) |
-| [`invalid_drop_twice.pipe`](examples/invalid_drop_twice.pipe) | Dropping the same column multiple times | Semantic Error (Exit 1) |
-| [`invalid_duplicate_load.pipe`](examples/invalid_duplicate_load.pipe) | Loading multiple datasets in one pipeline | Semantic Error (Exit 1) |
-| [`invalid_duplicate_model.pipe`](examples/invalid_duplicate_model.pipe) | Training multiple models with identical names | Semantic Error (Exit 1) |
-| [`invalid_duplicate_split.pipe`](examples/invalid_duplicate_split.pipe) | Defining multiple splits with identical names | Semantic Error (Exit 1) |
-| [`invalid_lexical_error.pipe`](examples/invalid_lexical_error.pipe) | Illegal character (`@`) in pipeline body | Lexical Error (Exit 1) |
-| [`invalid_select_dropped_column.pipe`](examples/invalid_select_dropped_column.pipe) | Selecting a column that was previously dropped | Semantic Error (Exit 1) |
-| [`invalid_split_total_over_100.pipe`](examples/invalid_split_total_over_100.pipe) | Cumulative split percentages exceeding 100% | Semantic Error (Exit 1) |
-| [`invalid_syntax_error.pipe`](examples/invalid_syntax_error.pipe) | Syntax error (missing statement semicolon) | Syntax Error (Exit 1) |
-| [`invalid_train_before_split.pipe`](examples/invalid_train_before_split.pipe) | Training a model before defining the `train` split | Semantic Error (Exit 1) |
-
----
-
-## 8. Running Tests & Benchmarks
-
-### 8.1 Automated Test Suite
-Run the complete test suite with `pytest`:
-```bash
-python -m pytest -q
-```
-*Expected Result*: `223 passed in ~0.25s` with 0 failures and 0 warnings.
-
-### 8.2 Performance Benchmark
-Run the automated performance benchmark driver:
-```bash
-python benchmarks/benchmark.py
-```
-*Expected Result*: Measures execution across 10, 100, 1,000, and 10,000 statements, outputs the performance table to stdout, and updates [`docs/performance.md`](docs/performance.md) in ~0.67s.
-
----
-
-## 9. Scope & Limitations
-
-1. **Symbolic Execution Only**: The compiler analyzes and simulates pipeline execution logic; it does not read physical CSV files or execute numeric machine learning routines.
-2. **Single Pipeline per File**: Exactly one pipeline declaration per `.pipe` file.
-3. **Fail-Fast Error Handling**: Emits diagnostic messages on the first encountered lexical, syntactic, or semantic error.
-4. **Reserved Keywords**: Language keywords (`load`, `clean`, `select`, `drop`, `split`, `train`, `evaluate`, `pipeline`) cannot be used as column or model names.
-5. **Free Identifiers**: Strategy names in `clean` and algorithm names in `train` are free identifiers to accommodate arbitrary data science frameworks.
-
-
-## Web Dashboard
-
-The Streamlit dashboard presents the existing compiler for a live university demo: real tokens, AST, semantic state, original and optimized IR, optimizer notes, and symbolic execution traces. The compiler is unchanged. Execution is symbolic only: no CSV is read, no model is trained, and no numeric accuracy or prediction is produced. The UI runs locally and works offline after dependencies are installed; it makes no external network calls.
-
-From the repository root in PowerShell, run these five commands:
+From the repository root in PowerShell:
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install -e .
-python -m pip install -r requirements-dashboard.txt
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e ".[dashboard,test]"
+python -m ds_pipeline_dsl.cli examples/valid_basic.pipe --trace
 python -m streamlit run dashboard/app.py
 ```
 
-Open http://localhost:8501. If PowerShell blocks activation, first run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, then activate again. If `streamlit` is not on PATH, always use `python -m streamlit` as above. If port 8501 is busy, launch with `python -m streamlit run dashboard/app.py --server.port 8502` and open http://localhost:8502. Stop the server with Ctrl+C.
+On macOS/Linux, replace activation with `source .venv/bin/activate`. For the compiler alone, install with `python -m pip install -e .`. The existing `python -m pip install -r requirements-dashboard.txt` command remains supported. Open [localhost:8501](http://localhost:8501) while the server is running; stop it with Ctrl+C. If the port is occupied, use `--server.port 8502` and open port 8502. See [deployment and troubleshooting](docs/deployment.md).
 
-The dashboard inserts the local `src/` directory into its import path, so it also works without an editable package install. The dashboard dependency file adds only Streamlit (tested with 1.66.0); pandas is supplied by Streamlit. No system Graphviz installation is needed.
-
-Page guide:
-
-- **Overview**: project purpose, language statements, discovered example count, saved test evidence if present, and the language grammar if available.
-- **Compiler Playground**: choose an example category, edit the source, press Compile, and inspect the six output tabs. Results remain visible when the editor changes, with a notice that they describe the previous source. Errors retain the compiler's original message and highlight its source location; columns use the compiler's zero-based numbering.
-- **Architecture**: the real compilation flow, semantic checks, four optimizer passes in execution order, and stage colors from the last compile.
-- **Performance**: the saved benchmark table, environment, stage-time and IR charts, and verbatim observations. It reads `docs/performance.md`; `python benchmarks/benchmark.py` creates that report. The dashboard never runs a benchmark automatically, and missing reports produce a friendly message.
-
-Five-step live demo (about five minutes):
-
-1. Open Compiler Playground, compile `valid_basic.pipe`, and inspect Tokens, AST, Semantic Analysis, IR and Execution Trace.
-2. Compile `invalid_lexical_error.pipe`, `invalid_syntax_error.pipe` and `invalid_train_before_split.pipe`; explain the error class, highlighted line and skipped later stages.
-3. Compile `optimizer_demo.pipe`, open Optimization, and compare the real instruction counts, removed/merged labels, optimizer notes and trace-line counts.
-4. Open Architecture to show the successful stage colors and the four ordered optimizer passes. Return after an invalid compilation to demonstrate failed/skipped colors.
-5. Open Performance to discuss the recorded environment, scaling and IR reduction without launching a new benchmark during the presentation.
-
-Run all compiler and dashboard tests from the repository root:
+## CLI and actual output
 
 ```powershell
-python -m pytest -q
+python -m ds_pipeline_dsl.cli examples/valid_drop.pipe --trace
+python -m ds_pipeline_dsl.cli examples/optimizer_demo.pipe --ir --optimized-ir
+python -m ds_pipeline_dsl.cli examples/invalid_train_before_split.pipe --trace
 ```
 
-Pure runner tests always run; UI smoke tests use `streamlit.testing.v1.AppTest` and skip cleanly when Streamlit is absent. Benchmark parsing tests requiring pandas skip when pandas is absent. The dashboard handles empty sources using the real compiler, preserves partial results after a failure, and rejects sources longer than 100,000 characters. Token tables display at most 1,000 rows and retain the final EOF token in a caption for longer streams. IR kept/removed/merged labels are a best-effort comparison of real instruction data, not optimizer provenance. Trace counts can differ because optimization changes the symbolic instruction log; they are not a claim of identical full traces.
+The first command prints:
+
+```text
+=== TRACE ===
+Loaded students.csv
+Cleaned using missing_values
+Dropped columns: student_id, name
+Selected columns: cgpa, attendance, study_hours
+Defined split 'train' = 80%
+Trained model 'model' using decision_tree
+Evaluated model 'model' (simulated accuracy trace)
+```
+
+The last phrase is an existing trace label, not a computed accuracy score. The invalid example exits with code 1 and prints:
+
+```text
+Semantic Error at line 5: training data has not been defined. A 'split train = <percent>%;' statement must appear before 'train model = decision_tree;'.
+```
+
+Flags are `--tokens`, `--ast`, `--ir`, `--optimized-ir` and `--trace`. With no flags, all five output sections are displayed. Flags control display; they do not stop compilation early. Successful runs exit 0; handled compiler/file-reading errors exit 1 and print to stdout. Lexer line numbers are one-based and columns zero-based. [Captured CLI examples](docs/demo_outputs/) include full intermediate outputs and exit codes.
+
+## Optimization and correctness
+
+| Order | Pass | Transformation |
+|---|---|---|
+| 1 | `_remove_unreachable` | Removes only the tail after the **last** `OP_EVAL` |
+| 2 | `_remove_dead_trains` | Removes training declarations whose models are never evaluated |
+| 3 | `_merge_adjacent_drops` | Merges immediately adjacent drop runs, retaining ordered unique columns |
+| 4 | `_collapse_duplicates` | Collapses adjacent equal clean/select operations, excluding source-line metadata from equality |
+
+[optimizer_demo.pipe](examples/optimizer_demo.pipe) reduces **11 instructions to 7**, with notes from all four passes. [complex_multi_model.pipe](examples/complex_multi_model.pipe) preserves both evaluations while reducing 10 instructions to 9.
+
+Correctness is tested against evaluation records containing model name, algorithm, training-state snapshot and evaluation-state snapshot. Full textual traces can change after optimization. Adjacent identical cleaning is treated as idempotent by this symbolic model; this is not a guarantee about arbitrary real cleaning functions. Without an evaluation, the two removal passes are conservative, while merging and duplicate collapse can still apply.
+
+## Interactive dashboard
+
+| Page | What to explore |
+|---|---|
+| Overview | Project scope, constructs, example count, saved test evidence and visible grammar |
+| Compiler Playground | Example library, editor, Compile action, six output tabs, source diagnostics and IR comparison |
+| Architecture | Pipeline diagram, collapsible stage details and last-run stage status |
+| Performance | Saved environment and timings, stage/scaling/IR charts, observations beside the analysis |
+
+Compilation results persist until Compile is pressed again. Source edits show a stale-result notice. The UI limits input to 100,000 characters and displays at most 1,000 token rows while retaining EOF information. IR change labels are a best-effort comparison, not optimizer provenance. The Performance page reads a saved report and never runs benchmarks automatically.
+
+[Dashboard screenshots and capture details](docs/screenshots/README.md) · [Five-minute demonstration](docs/demo.md)
+
+## Testing
+
+```powershell
+python -m pytest -v
+```
+
+**268 passed, 0 failed, 0 skipped** on 23 October 2026, including **44 dashboard tests**. The suite covers tokenization, grammar, all implemented semantic checks, IR lowering, optimizer equivalence/idempotence and sensitivity, execution, CLI, boundaries, examples, benchmark guards and Streamlit AppTest interactions. All 20 supplied `.pipe` examples were executed: seven accepted and thirteen rejected (one lexical, one syntax, eleven semantic).
+
+The badge is a dated verified result, not a live CI indicator. Coverage was not measured. Timing varies by machine; no fixed test-duration promise is made. [Full test log](docs/test_results.txt) · [Audit results and limitations](docs/verification.md) · [Machine-readable evidence](docs/verification_results.json)
+
+## Recorded performance
+
+The dashboard's saved benchmark was measured on Windows with Python 3.14.7 on **22 October 2026**. Selected columns below are copied from [the complete measurements](docs/performance.md):
+
+| Actual statements | Total ms | µs/statement | Original IR | Optimized IR | Reduction |
+|---:|---:|---:|---:|---:|---:|
+| 13 | 0.098 | 7.54 | 13 | 8 | 38.5% |
+| 99 | 0.671 | 6.78 | 99 | 60 | 39.4% |
+| 999 | 6.952 | 6.96 | 999 | 600 | 39.9% |
+| 9999 | 73.560 | 7.36 | 9999 | 6000 | 40.0% |
+
+`Total ms` sums the lexer, parser, semantic, IR, optimizer and optimized-executor medians; it excludes the separately measured unoptimized executor. The 0.63-second harness wall time is a different measurement. Nominal generator sizes 10/100/1000/10000 produce the actual statement counts shown above.
+
+```powershell
+python benchmarks/benchmark.py
+```
+
+This command prints a new report and **overwrites `docs/performance.md`**. The audit instead called the benchmark functions and stored fresh results separately in [verification_results.json](docs/verification_results.json). All four fresh rows completed successfully, and evaluation-record equivalence was checked at every size.
+
+The measurements describe one synthetic template on one machine. They support approximately linear scaling for that workload, not a universal complexity proof. Repeated split-total summation and column-list operations can depend on input shape. Benchmark budget checks use projections and post-run thresholds, not preemptive timeouts. No memory profile or numerical ML result is claimed.
+
+## Repository guide
+
+```text
+src/ds_pipeline_dsl/     Compiler package and CLI
+dashboard/              Streamlit UI, compiler adapter, benchmark loader and logo
+tests/                  Unit, integration, equivalence and dashboard tests
+examples/               20 .pipe programs and a frontend demonstration script
+benchmarks/             Synthetic benchmark and correctness guards
+docs/                   Current technical docs, captures, evidence and phase materials
+final_report/           Final DOCX/PDF, build sources, figures and historical evidence
+.streamlit/             Shared dashboard theme
+pyproject.toml          Package metadata and optional dependency groups
+requirements.txt        Community Cloud dependency entry point
+```
+
+Academic reports and review decks are retained under `docs/`; the [final PDF](final_report/Final_Report.pdf) and [editable report](final_report/Final_Report.docx) remain unchanged. Historical reports describe their own phase and are not current API or test-count specifications.
+
+## Limitations and next steps
+
+Current limits include symbolic execution, one pipeline per file, first-error reporting, no dataset-schema validation, no general type inference, and free strategy/algorithm identifiers. There are no loops, functions, warning severities or cross-pipeline scopes.
+
+Possible extensions are schema-aware validation, optional restricted vocabularies, multiple-pipeline scopes, diagnostic recovery, and a separate real execution backend. Real execution would require new runtime semantics and a fresh review of optimization safety.
+
+For navigation, start with [architecture](docs/architecture.md), [grammar](docs/grammar.md), [deployment](docs/deployment.md), [verification](docs/verification.md), and the [academic review checklist](docs/report_and_presentation_checklist.md).

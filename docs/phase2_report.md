@@ -1,5 +1,7 @@
 # Data Science Pipeline DSL - Phase 2 Report
 
+> Historical Phase 2 snapshot. Test counts, data structures and optimizer descriptions below describe that phase, not the final implementation. See the [current architecture](architecture.md), [verification results](verification.md) and [final report](../final_report/Final_Report.pdf) for the completed project.
+
 ## 1. Project Overview
 The Data Science Pipeline DSL (Domain-Specific Language) is a custom compiler frontend designed to simplify and standardize the creation of machine learning pipelines. It addresses the complexity and boilerplate of setting up end-to-end data workflows by providing a clean, declarative language tailored specifically for tasks like loading datasets, cleaning values, selecting features, creating train/test splits, and evaluating machine learning models.
 

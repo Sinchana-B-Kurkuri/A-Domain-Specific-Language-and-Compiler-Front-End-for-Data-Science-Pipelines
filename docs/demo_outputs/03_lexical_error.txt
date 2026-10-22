@@ -1,2 +1,4 @@
 $ python -m ds_pipeline_dsl.cli examples/invalid_lexical_error.pipe
 Lexical Error at line 2, col 9: unexpected character '@'
+
+Exit code: 1

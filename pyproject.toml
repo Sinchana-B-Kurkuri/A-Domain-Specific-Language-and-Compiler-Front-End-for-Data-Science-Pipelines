@@ -5,6 +5,18 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ds-pipeline-dsl"
 version = "0.1.0"
+description = "A compiler front-end and symbolic executor for a data science pipeline DSL"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dashboard = ["streamlit>=1.66.0"]
+test = ["pytest>=8"]
+
+[project.urls]
+Repository = "https://github.com/Sinchana-B-Kurkuri/A-Domain-Specific-Language-and-Compiler-Front-End-for-Data-Science-Pipelines"
+Demo = "https://ds-pipeline-compiler.streamlit.app/"
 
 [tool.setuptools.packages.find]
 where = ["src"]

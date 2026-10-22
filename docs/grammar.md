@@ -12,13 +12,13 @@ The following 8 words are reserved keywords. When encountered by the scanner as 
 | Keyword | Token Type | Purpose |
 |:---|:---|:---|
 | `pipeline` | `PIPELINE` | Declares the top-level pipeline block |
-| `load` | `LOAD` | Loads a dataset source file |
-| `clean` | `CLEAN` | Applies a data cleaning strategy |
+| `load` | `LOAD` | Declares a symbolic dataset filename |
+| `clean` | `CLEAN` | Records a cleaning strategy |
 | `select` | `SELECT` | Specifies feature columns |
 | `drop` | `DROP` | Removes columns from the pipeline |
 | `split` | `SPLIT` | Defines data partition percentages |
-| `train` | `TRAIN` | Trains a model with a specified algorithm |
-| `evaluate` | `EVALUATE` | Evaluates a trained model |
+| `train` | `TRAIN` | Declares a model and algorithm |
+| `evaluate` | `EVALUATE` | Requests symbolic evaluation of an existing model |
 
 > **Contextual Keyword Exception**: In a `split` statement, the split name accepts either an `IDENT` or the `TRAIN` keyword (`split_name ::= IDENT | 'train'`). This allows statements such as `split train = 80%;` without ambiguity. In all other contexts, keywords are reserved and cannot be used as column, dataset, or model identifiers.
 
@@ -27,7 +27,7 @@ Tokens are matched using Python regular expressions compiled into a single maste
 
 | Token Name | Regular Expression | Description / Semantic Value |
 |:---|:---|:---|
-| `STRING` | `"[^"\n]*"` | Double-quoted ASCII/UTF-8 string without linebreaks. The parser strips enclosing quotes. |
+| `STRING` | `"[^"\n]*"` | Double-quoted string excluding LF and double quotes; no escape decoding. The parser strips enclosing quotes. |
 | `BAD_STRING` | `"[^"\n]*` | Unterminated string literal reaching a newline or EOF. Raises `LexicalError`. |
 | `PERCENT` | `\d+(\.\d+)?%` | Numeric percentage value followed immediately by `%`. Stripped and parsed as a `float`. |
 | `NUMBER` | `\d+(\.\d+)?` | Raw numeric literal. Used to provide precise syntax diagnostics when `%` is omitted. |
@@ -97,3 +97,7 @@ The recursive-descent parser enforces the following structural constraints:
    Syntax Error at line {line}: expected PERCENT, found NUMBER ('80')
    ```
 6. **Identifiers and Strategy/Algorithm Free Names**: Strategy names in `clean` and algorithm names in `train` are free identifiers conforming to `[A-Za-z_][A-Za-z0-9_]*`.
+
+## 4. Lexical and semantic boundaries
+
+Lines are one-based; lexer columns are zero-based. CRLF counts as one line because LF advances the counter. Identifier letters are restricted by the ASCII identifier regex; comments and string contents can contain Unicode. Percentage digits use Python regex `\d` matching. The parser checks EOF after the closing brace and accepts an empty statement sequence. Semantic dependencies and split/column constraints are separate from grammar recognition; see the [architecture](architecture.md). All execution is symbolic.

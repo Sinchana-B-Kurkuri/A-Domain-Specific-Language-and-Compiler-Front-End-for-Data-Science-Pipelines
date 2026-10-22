@@ -1,7 +1,3 @@
-# Data Directory
+# Dataset references
 
-The DSL currently validates dataset filenames as string literals.
-The compiler does not read the contents of the referenced dataset.
-Therefore, no actual CSV file is required to run the demo.
-
-Optionally, you could place a public dataset such as the UCI Student Performance dataset here for a realistic-looking future demo.
+Dataset names in `.pipe` programs are symbolic string literals. No CSV contents are read, and no data files are required to run any supplied example. This directory documents that boundary; it is not a dataset download location.
