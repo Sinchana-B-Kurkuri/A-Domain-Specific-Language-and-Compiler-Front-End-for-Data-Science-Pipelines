@@ -52,12 +52,16 @@ st.markdown("""<style>
 [data-testid="stColumn"] {min-width:0;}
 .hero {box-sizing:border-box; width:100%; background:linear-gradient(120deg,#122C49,#1C4666);
  color:#FFF; border-radius:18px !important; overflow:hidden; isolation:isolate;
+ display:flex; flex-direction:column; align-items:center;
  padding:36px 30px 38px; margin:0 0 22px; text-align:center; box-shadow:0 8px 26px #17324D0D;}
 .hero h1 {color:#FFF !important; background:transparent; font-size:clamp(1.55rem,2.2vw,2.05rem);
- font-weight:650; letter-spacing:-.04em; line-height:1.18; margin:12px 0 14px; padding:0;}
-.hero p {color:#D6E5F0; font-size:.96rem; margin:0 auto; max-width:820px; line-height:1.8; text-align:center;}
-.eyebrow {letter-spacing:-.025em; font-size:clamp(1.85rem,3vw,2.85rem); line-height:1.2; font-weight:650; color:#9FE3E0;}
-.hero-brand {display:flex; align-items:center; justify-content:center; gap:10px;}
+ font-weight:650; letter-spacing:-.04em; line-height:1.18; margin:12px auto 14px; padding:0;
+ display:block; width:100%; text-align:center !important; text-wrap:balance;}
+/* Streamlit's heading-link control otherwise shifts the visible text left. */
+.hero h1 [data-testid="stHeaderActionElements"] {display:none;}
+.hero p {color:#D6E5F0; font-size:.96rem; margin:0 auto; width:100%; max-width:820px; line-height:1.8; text-align:center !important; text-wrap:balance;}
+.eyebrow {letter-spacing:-.025em; font-size:clamp(1.85rem,3vw,2.85rem); line-height:1.2; font-weight:650; color:#9FE3E0; text-align:center; text-wrap:balance;}
+.hero-brand {display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; gap:12px;}
 .hero-brand img {display:block; width:44px; height:44px; border-radius:8px;}
 .section-label {color:var(--muted); font-size:.93rem; letter-spacing:.13em; text-transform:uppercase; font-weight:650;}
 .language-panel {text-align:center; margin:8px auto 26px; max-width:950px;}
