@@ -225,3 +225,45 @@ python benchmarks/benchmark.py
 3. **Fail-Fast Error Handling**: Emits diagnostic messages on the first encountered lexical, syntactic, or semantic error.
 4. **Reserved Keywords**: Language keywords (`load`, `clean`, `select`, `drop`, `split`, `train`, `evaluate`, `pipeline`) cannot be used as column or model names.
 5. **Free Identifiers**: Strategy names in `clean` and algorithm names in `train` are free identifiers to accommodate arbitrary data science frameworks.
+
+
+## Web Dashboard
+
+The Streamlit dashboard presents the existing compiler for a live university demo: real tokens, AST, semantic state, original and optimized IR, optimizer notes, and symbolic execution traces. The compiler is unchanged. Execution is symbolic only: no CSV is read, no model is trained, and no numeric accuracy or prediction is produced. The UI runs locally and works offline after dependencies are installed; it makes no external network calls.
+
+From the repository root in PowerShell, run these five commands:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -e .
+python -m pip install -r requirements-dashboard.txt
+python -m streamlit run dashboard/app.py
+```
+
+Open http://localhost:8501. If PowerShell blocks activation, first run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, then activate again. If `streamlit` is not on PATH, always use `python -m streamlit` as above. If port 8501 is busy, launch with `python -m streamlit run dashboard/app.py --server.port 8502` and open http://localhost:8502. Stop the server with Ctrl+C.
+
+The dashboard inserts the local `src/` directory into its import path, so it also works without an editable package install. The dashboard dependency file adds only Streamlit (tested with 1.66.0); pandas is supplied by Streamlit. No system Graphviz installation is needed.
+
+Page guide:
+
+- **Overview**: project purpose, language statements, discovered example count, saved test evidence if present, and the language grammar if available.
+- **Compiler Playground**: choose an example category, edit the source, press Compile, and inspect the six output tabs. Results remain visible when the editor changes, with a notice that they describe the previous source. Errors retain the compiler's original message and highlight its source location; columns use the compiler's zero-based numbering.
+- **Architecture**: the real compilation flow, semantic checks, four optimizer passes in execution order, and stage colors from the last compile.
+- **Performance**: the saved benchmark table, environment, stage-time and IR charts, and verbatim observations. It reads `docs/performance.md`; `python benchmarks/benchmark.py` creates that report. The dashboard never runs a benchmark automatically, and missing reports produce a friendly message.
+
+Five-step live demo (about five minutes):
+
+1. Open Compiler Playground, compile `valid_basic.pipe`, and inspect Tokens, AST, Semantic Analysis, IR and Execution Trace.
+2. Compile `invalid_lexical_error.pipe`, `invalid_syntax_error.pipe` and `invalid_train_before_split.pipe`; explain the error class, highlighted line and skipped later stages.
+3. Compile `optimizer_demo.pipe`, open Optimization, and compare the real instruction counts, removed/merged labels, optimizer notes and trace-line counts.
+4. Open Architecture to show the successful stage colors and the four ordered optimizer passes. Return after an invalid compilation to demonstrate failed/skipped colors.
+5. Open Performance to discuss the recorded environment, scaling and IR reduction without launching a new benchmark during the presentation.
+
+Run all compiler and dashboard tests from the repository root:
+
+```powershell
+python -m pytest -q
+```
+
+Pure runner tests always run; UI smoke tests use `streamlit.testing.v1.AppTest` and skip cleanly when Streamlit is absent. Benchmark parsing tests requiring pandas skip when pandas is absent. The dashboard handles empty sources using the real compiler, preserves partial results after a failure, and rejects sources longer than 100,000 characters. Token tables display at most 1,000 rows and retain the final EOF token in a caption for longer streams. IR kept/removed/merged labels are a best-effort comparison of real instruction data, not optimizer provenance. Trace counts can differ because optimization changes the symbolic instruction log; they are not a claim of identical full traces.

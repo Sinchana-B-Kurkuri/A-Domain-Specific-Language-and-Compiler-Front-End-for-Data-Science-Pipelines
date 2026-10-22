@@ -1,0 +1,646 @@
+{
+  "headings": [
+    {
+      "text": "Chapter 1 Introduction",
+      "level": 1
+    },
+    {
+      "text": "1.1 Background and problem area",
+      "level": 2
+    },
+    {
+      "text": "1.2 Motivation",
+      "level": 2
+    },
+    {
+      "text": "1.3 Language and implementation overview",
+      "level": 2
+    },
+    {
+      "text": "1.4 Report organization",
+      "level": 2
+    },
+    {
+      "text": "Chapter 2 Problem Statement",
+      "level": 1
+    },
+    {
+      "text": "2.1 Problem definition",
+      "level": 2
+    },
+    {
+      "text": "2.2 Functional boundaries",
+      "level": 2
+    },
+    {
+      "text": "2.3 Inputs outputs and acceptance conditions",
+      "level": 2
+    },
+    {
+      "text": "Chapter 3 Objectives",
+      "level": 1
+    },
+    {
+      "text": "3.1 Objectives carried forward from Phase 1",
+      "level": 2
+    },
+    {
+      "text": "3.2 Scope decisions and additional outcomes",
+      "level": 2
+    },
+    {
+      "text": "Chapter 4 Literature Survey or Background Study",
+      "level": 1
+    },
+    {
+      "text": "4.1 Workflow orchestration and library pipelines",
+      "level": 2
+    },
+    {
+      "text": "4.2 Compiler foundations",
+      "level": 2
+    },
+    {
+      "text": "4.3 Gap addressed",
+      "level": 2
+    },
+    {
+      "text": "Chapter 5 System Design",
+      "level": 1
+    },
+    {
+      "text": "5.1 Architecture and data flow",
+      "level": 2
+    },
+    {
+      "text": "5.2 Failure propagation",
+      "level": 2
+    },
+    {
+      "text": "5.3 Module responsibilities",
+      "level": 2
+    },
+    {
+      "text": "5.4 Symbol table and IR design",
+      "level": 2
+    },
+    {
+      "text": "5.5 Interfaces and presentation design",
+      "level": 2
+    },
+    {
+      "text": "5.6 Project directory organization",
+      "level": 2
+    },
+    {
+      "text": "Chapter 6 Methodology",
+      "level": 1
+    },
+    {
+      "text": "6.1 Phased development",
+      "level": 2
+    },
+    {
+      "text": "6.2 Development history",
+      "level": 2
+    },
+    {
+      "text": "6.3 Design decisions",
+      "level": 2
+    },
+    {
+      "text": "6.4 Optimizer corrections and regression validation",
+      "level": 2
+    },
+    {
+      "text": "6.5 Reconciliation of earlier descriptions",
+      "level": 2
+    },
+    {
+      "text": "Chapter 7 Compiler Design Concepts Used",
+      "level": 1
+    },
+    {
+      "text": "7.1 Lexical analysis",
+      "level": 2
+    },
+    {
+      "text": "7.2 Syntax analysis",
+      "level": 2
+    },
+    {
+      "text": "7.3 Abstract syntax tree",
+      "level": 2
+    },
+    {
+      "text": "7.4 Symbol table and semantic analysis",
+      "level": 2
+    },
+    {
+      "text": "7.5 Intermediate representation",
+      "level": 2
+    },
+    {
+      "text": "7.6 Four-pass optimization",
+      "level": 2
+    },
+    {
+      "text": "7.6.1 Removal after the last evaluation",
+      "level": 3
+    },
+    {
+      "text": "7.6.2 Elimination of unused model training",
+      "level": 3
+    },
+    {
+      "text": "7.6.3 Merging adjacent column drops",
+      "level": 3
+    },
+    {
+      "text": "7.6.4 Collapsing adjacent duplicates",
+      "level": 3
+    },
+    {
+      "text": "7.6.5 Observable behavior and safety limits",
+      "level": 3
+    },
+    {
+      "text": "7.7 Symbolic execution",
+      "level": 2
+    },
+    {
+      "text": "7.8 Error detection and handling",
+      "level": 2
+    },
+    {
+      "text": "Chapter 8 Implementation",
+      "level": 1
+    },
+    {
+      "text": "8.1 Language tools and versions",
+      "level": 2
+    },
+    {
+      "text": "8.2 Source inventory",
+      "level": 2
+    },
+    {
+      "text": "8.3 Core algorithms",
+      "level": 2
+    },
+    {
+      "text": "8.4 Selected implementation excerpts",
+      "level": 2
+    },
+    {
+      "text": "8.5 Command-line interface",
+      "level": 2
+    },
+    {
+      "text": "8.6 Benchmark implementation",
+      "level": 2
+    },
+    {
+      "text": "8.7 Dashboard implementation",
+      "level": 2
+    },
+    {
+      "text": "Chapter 9 Testing and Results",
+      "level": 1
+    },
+    {
+      "text": "9.1 Test strategy and executed results",
+      "level": 2
+    },
+    {
+      "text": "9.2 Baseline compilation and drop integration",
+      "level": 2
+    },
+    {
+      "text": "9.3 Representative expected and actual cases",
+      "level": 2
+    },
+    {
+      "text": "9.4 Error demonstrations",
+      "level": 2
+    },
+    {
+      "text": "9.5 Optimizer demonstration",
+      "level": 2
+    },
+    {
+      "text": "9.6 Complex cases and transformation boundaries",
+      "level": 2
+    },
+    {
+      "text": "9.7 All supplied example outcomes",
+      "level": 2
+    },
+    {
+      "text": "9.8 Recorded performance evaluation",
+      "level": 2
+    },
+    {
+      "text": "9.9 Performance charts and recorded observations",
+      "level": 2
+    },
+    {
+      "text": "9.10 Limits of the evaluation",
+      "level": 2
+    },
+    {
+      "text": "Chapter 10 Conclusion",
+      "level": 1
+    },
+    {
+      "text": "10.1 Achievements against objectives",
+      "level": 2
+    },
+    {
+      "text": "10.2 Limitations",
+      "level": 2
+    },
+    {
+      "text": "10.3 Learning outcomes",
+      "level": 2
+    },
+    {
+      "text": "Chapter 11 Future Enhancements",
+      "level": 1
+    },
+    {
+      "text": "11.1 Language and validation extensions",
+      "level": 2
+    },
+    {
+      "text": "11.2 Execution and optimization extensions",
+      "level": 2
+    },
+    {
+      "text": "11.3 Evaluation extensions",
+      "level": 2
+    },
+    {
+      "text": "References",
+      "level": 1
+    },
+    {
+      "text": "Appendix A Final Grammar and Lexical Specification",
+      "level": 1
+    },
+    {
+      "text": "A.1 Final EBNF",
+      "level": 2
+    },
+    {
+      "text": "A.2 Lexical details",
+      "level": 2
+    },
+    {
+      "text": "Appendix B Complete Diagnostic Catalogue",
+      "level": 1
+    },
+    {
+      "text": "B.1 Lexical and syntax patterns",
+      "level": 2
+    },
+    {
+      "text": "B.2 Semantic patterns and source locations",
+      "level": 2
+    },
+    {
+      "text": "B.3 Executed semantic trigger specimens",
+      "level": 2
+    },
+    {
+      "text": "B.4 Driver and dashboard boundaries",
+      "level": 2
+    },
+    {
+      "text": "Appendix C Key Source Listings",
+      "level": 1
+    },
+    {
+      "text": "C.1 AST data model",
+      "level": 2
+    },
+    {
+      "text": "C.2 IR representation and lowering",
+      "level": 2
+    },
+    {
+      "text": "C.3 Symbolic executor",
+      "level": 2
+    },
+    {
+      "text": "C.4 Evaluation state snapshots used by the tests",
+      "level": 2
+    },
+    {
+      "text": "Appendix D Example Programs and Sources",
+      "level": 1
+    },
+    {
+      "text": "D.1 valid basic",
+      "level": 2
+    },
+    {
+      "text": "D.2 valid drop",
+      "level": 2
+    },
+    {
+      "text": "D.3 optimizer demo",
+      "level": 2
+    },
+    {
+      "text": "D.4 complex multi model",
+      "level": 2
+    },
+    {
+      "text": "Appendix E Reproduction and User Instructions",
+      "level": 1
+    },
+    {
+      "text": "E.1 Compiler installation and CLI",
+      "level": 2
+    },
+    {
+      "text": "E.2 Tests and stage inspection",
+      "level": 2
+    },
+    {
+      "text": "E.3 Dashboard",
+      "level": 2
+    },
+    {
+      "text": "E.4 Benchmark and report build",
+      "level": 2
+    },
+    {
+      "text": "Appendix F Evolution Across Implementation Phases",
+      "level": 1
+    }
+  ],
+  "tables": [
+    {
+      "label": "Table 2.1",
+      "title": "Scope of the implemented processor",
+      "rows": 5,
+      "columns": 3
+    },
+    {
+      "label": "Table 3.1",
+      "title": "Original objectives and final status",
+      "rows": 9,
+      "columns": 4
+    },
+    {
+      "label": "Table 4.1",
+      "title": "Related approaches and the project boundary",
+      "rows": 5,
+      "columns": 4
+    },
+    {
+      "label": "Table 5.1",
+      "title": "Compiler modules and responsibilities",
+      "rows": 8,
+      "columns": 3
+    },
+    {
+      "label": "Table 5.2",
+      "title": "Dashboard pages and evidence shown",
+      "rows": 4,
+      "columns": 2
+    },
+    {
+      "label": "Table 6.1",
+      "title": "Recorded development milestones",
+      "rows": 7,
+      "columns": 2
+    },
+    {
+      "label": "Table 7.1",
+      "title": "Lexical patterns in scanner priority order",
+      "rows": 14,
+      "columns": 4
+    },
+    {
+      "label": "Table 7.2",
+      "title": "AST node classes and declared fields",
+      "rows": 8,
+      "columns": 2
+    },
+    {
+      "label": "Table 7.3",
+      "title": "SymbolTable fields",
+      "rows": 10,
+      "columns": 3
+    },
+    {
+      "label": "Table 7.4",
+      "title": "Complete implemented semantic rule catalogue",
+      "rows": 21,
+      "columns": 3
+    },
+    {
+      "label": "Table 7.5",
+      "title": "IR opcodes arguments and lowering sources",
+      "rows": 7,
+      "columns": 3
+    },
+    {
+      "label": "Table 7.6",
+      "title": "Real symbolic trace examples by opcode",
+      "rows": 7,
+      "columns": 2
+    },
+    {
+      "label": "Table 7.7",
+      "title": "Error classes and diagnostic formats",
+      "rows": 3,
+      "columns": 3
+    },
+    {
+      "label": "Table 8.1",
+      "title": "Verified execution environment",
+      "rows": 8,
+      "columns": 2
+    },
+    {
+      "label": "Table 8.2",
+      "title": "Compiler source line inventory",
+      "rows": 9,
+      "columns": 3
+    },
+    {
+      "label": "Table 8.3",
+      "title": "CLI display flags",
+      "rows": 6,
+      "columns": 2
+    },
+    {
+      "label": "Table 9.1",
+      "title": "Per-file executed tests and physical source lines",
+      "rows": 13,
+      "columns": 5
+    },
+    {
+      "label": "Table 9.2",
+      "title": "Representative expected and actual outcomes",
+      "rows": 7,
+      "columns": 3
+    },
+    {
+      "label": "Table 9.3",
+      "title": "Complete example-program outcomes",
+      "rows": 20,
+      "columns": 4
+    },
+    {
+      "label": "Table 9.4",
+      "title": "Complete recorded benchmark results",
+      "rows": 4,
+      "columns": 15
+    },
+    {
+      "label": "Table A.1",
+      "title": "Keyword to token mapping",
+      "rows": 8,
+      "columns": 2
+    },
+    {
+      "label": "Table B.1",
+      "title": "All explicit lexical and syntax diagnostics",
+      "rows": 8,
+      "columns": 2
+    },
+    {
+      "label": "Table B.2",
+      "title": "All explicit semantic diagnostics",
+      "rows": 21,
+      "columns": 2
+    },
+    {
+      "label": "Table D.1",
+      "title": "Supplied example files and report roles",
+      "rows": 20,
+      "columns": 2
+    },
+    {
+      "label": "Table F.1",
+      "title": "Phase 1 Phase 2 and final implementation evolution",
+      "rows": 8,
+      "columns": 4
+    }
+  ],
+  "figures": [
+    {
+      "label": "Figure 5.1",
+      "title": "Compiler architecture and representation flow",
+      "asset": "architecture.png"
+    },
+    {
+      "label": "Figure 5.2",
+      "title": "First-error control flow",
+      "asset": "error_flow.png"
+    },
+    {
+      "label": "Figure 5.3",
+      "title": "Compiler package structure",
+      "asset": "package_structure.png"
+    },
+    {
+      "label": "Figure 7.1",
+      "title": "AST produced for the basic valid pipeline",
+      "asset": "ast_basic.png"
+    },
+    {
+      "label": "Figure 7.2",
+      "title": "Symbol table evolution for the basic valid pipeline",
+      "asset": "symbol_evolution.png"
+    },
+    {
+      "label": "Figure 9.1",
+      "title": "Distribution of executed tests by file",
+      "asset": "test_distribution.png"
+    },
+    {
+      "label": "Figure 9.2",
+      "title": "Real original and optimized instruction sequences",
+      "asset": "ir_comparison.png"
+    },
+    {
+      "label": "Figure 9.3",
+      "title": "Recorded stage-time breakdown by program size",
+      "asset": "stage_times.png"
+    },
+    {
+      "label": "Figure 9.4",
+      "title": "Recorded microseconds per statement",
+      "asset": "microseconds.png"
+    },
+    {
+      "label": "Figure 9.5",
+      "title": "Recorded original and optimized IR sizes",
+      "asset": "ir_sizes.png"
+    }
+  ],
+  "snippets": [
+    {
+      "label": "Listing 8.1",
+      "path": "src/ds_pipeline_dsl/lexer.py",
+      "start": 29,
+      "end": 34,
+      "text": "@dataclass\nclass Token:\n    type: str\n    value: str\n    line: int\n    col: int"
+    },
+    {
+      "label": "Listing 8.2",
+      "path": "src/ds_pipeline_dsl/parser.py",
+      "start": 53,
+      "end": 60,
+      "text": "    def expect(self, ttype: str) -> Token:\n        tok = self.peek()\n        if tok.type != ttype:\n            raise SyntaxError_(\n                f\"Syntax Error at line {tok.line}: expected {ttype}, \"\n                f\"found {tok.type} ({tok.value!r})\"\n            )\n        return self.advance()"
+    },
+    {
+      "label": "Listing 8.3",
+      "path": "src/ds_pipeline_dsl/semantic.py",
+      "start": 13,
+      "end": 23,
+      "text": "    def __init__(self):\n        self.data_loaded = False\n        self.data_cleaned = False\n        self.splits: dict = {}\n        self.models: dict = {}\n        self.load_line = None\n        self.split_lines: dict = {}\n        self.model_lines: dict = {}\n        self.first_train = None\n        self.selected_columns = None\n        self.dropped_columns: dict = {}"
+    },
+    {
+      "label": "Listing 8.4",
+      "path": "src/ds_pipeline_dsl/optimizer.py",
+      "start": 143,
+      "end": 157,
+      "text": "def optimize(ir_list: List[IRInstruction], notes: Optional[list] = None) -> List[IRInstruction]:\n    \"\"\"Optimizes the IR instructions through four independent passes:\n    1. _remove_unreachable: removes dead tail instructions after the final evaluation.\n    2. _remove_dead_trains: removes training of models that are never evaluated.\n    3. _merge_adjacent_drops: combines runs of adjacent drop instructions.\n    4. _collapse_duplicates: eliminates consecutive duplicate clean and select instructions.\n\n    Note on order: Order of passes is chosen for readability; the passes are independent\n    because all data-preparation statements precede the first train (F1).\n    \"\"\"\n    ir = _remove_unreachable(ir_list, notes)\n    ir = _remove_dead_trains(ir, notes)\n    ir = _merge_adjacent_drops(ir, notes)\n    ir = _collapse_duplicates(ir, notes)\n    return ir"
+    },
+    {
+      "label": "Appendix listing",
+      "path": "src/ds_pipeline_dsl/ast_nodes.py",
+      "start": 1,
+      "end": 45,
+      "text": "from dataclasses import dataclass, field\nfrom typing import List\n\n@dataclass\nclass LoadStmt:\n    filename: str\n    line: int\n\n@dataclass\nclass CleanStmt:\n    strategy: str\n    line: int\n\n@dataclass\nclass SelectStmt:\n    columns: List[str]\n    line: int\n\n@dataclass\nclass DropStmt:\n    columns: List[str]\n    line: int\n\n@dataclass\nclass SplitStmt:\n    name: str\n    percent: float\n    line: int\n\n@dataclass\nclass TrainStmt:\n    model_name: str\n    algorithm: str\n    line: int\n\n@dataclass\nclass EvaluateStmt:\n    model_name: str\n    line: int\n\n@dataclass\nclass PipelineNode:\n    name: str\n    statements: List = field(default_factory=list)\n    line: int = 0"
+    },
+    {
+      "label": "Appendix listing",
+      "path": "src/ds_pipeline_dsl/ir.py",
+      "start": 1,
+      "end": 31,
+      "text": "from dataclasses import dataclass\nfrom typing import List\nfrom ds_pipeline_dsl.ast_nodes import (\n    PipelineNode, LoadStmt, CleanStmt, SelectStmt, DropStmt,\n    SplitStmt, TrainStmt, EvaluateStmt\n)\nfrom ds_pipeline_dsl.semantic import SymbolTable\n\n@dataclass\nclass IRInstruction:\n    op: str\n    args: dict\n\ndef lower_to_ir(pipeline_ast: PipelineNode, symbol_table: SymbolTable) -> List[IRInstruction]:\n    ir = []\n    for stmt in pipeline_ast.statements:\n        if isinstance(stmt, LoadStmt):\n            ir.append(IRInstruction(op=\"OP_LOAD\", args={\"filename\": stmt.filename, \"line\": stmt.line}))\n        elif isinstance(stmt, CleanStmt):\n            ir.append(IRInstruction(op=\"OP_CLEAN\", args={\"strategy\": stmt.strategy, \"line\": stmt.line}))\n        elif isinstance(stmt, SelectStmt):\n            ir.append(IRInstruction(op=\"OP_SELECT\", args={\"columns\": stmt.columns, \"line\": stmt.line}))\n        elif isinstance(stmt, DropStmt):\n            ir.append(IRInstruction(op=\"OP_DROP\", args={\"columns\": stmt.columns, \"line\": stmt.line}))\n        elif isinstance(stmt, SplitStmt):\n            ir.append(IRInstruction(op=\"OP_SPLIT\", args={\"name\": stmt.name, \"percent\": stmt.percent, \"line\": stmt.line}))\n        elif isinstance(stmt, TrainStmt):\n            ir.append(IRInstruction(op=\"OP_TRAIN\", args={\"model_name\": stmt.model_name, \"algorithm\": stmt.algorithm, \"line\": stmt.line}))\n        elif isinstance(stmt, EvaluateStmt):\n            ir.append(IRInstruction(op=\"OP_EVAL\", args={\"model_name\": stmt.model_name, \"line\": stmt.line}))\n    return ir"
+    },
+    {
+      "label": "Appendix listing",
+      "path": "src/ds_pipeline_dsl/executor.py",
+      "start": 1,
+      "end": 28,
+      "text": "from typing import List\nfrom ds_pipeline_dsl.ir import IRInstruction\n\ndef execute(ir_list: List[IRInstruction]) -> List[str]:\n    trace = []\n    for instr in ir_list:\n        if instr.op == \"OP_LOAD\":\n            trace.append(f\"Loaded {instr.args['filename']}\")\n        elif instr.op == \"OP_CLEAN\":\n            trace.append(f\"Cleaned using {instr.args['strategy']}\")\n        elif instr.op == \"OP_SELECT\":\n            cols = \", \".join(instr.args[\"columns\"])\n            trace.append(f\"Selected columns: {cols}\")\n        elif instr.op == \"OP_DROP\":\n            cols = \", \".join(instr.args[\"columns\"])\n            trace.append(f\"Dropped columns: {cols}\")\n        elif instr.op == \"OP_SPLIT\":\n            percent = instr.args[\"percent\"]\n            if percent == int(percent):\n                percent = int(percent)\n            trace.append(f\"Defined split '{instr.args['name']}' = {percent}%\")\n        elif instr.op == \"OP_TRAIN\":\n            trace.append(f\"Trained model '{instr.args['model_name']}' using {instr.args['algorithm']}\")\n        elif instr.op == \"OP_EVAL\":\n            trace.append(f\"Evaluated model '{instr.args['model_name']}' (simulated accuracy trace)\")\n        else:\n            trace.append(f\"Unknown instruction: {instr.op}\")\n    return trace"
+    },
+    {
+      "label": "Appendix listing",
+      "path": "tests/helpers.py",
+      "start": 13,
+      "end": 22,
+      "text": "def _snapshot_state(cleaning_history: List[str],\n                    selected_columns: Optional[Tuple[str, ...]],\n                    dropped_columns: set,\n                    splits: dict) -> Tuple[Tuple[str, ...], Optional[Tuple[str, ...]], frozenset, Tuple[Tuple[str, float], ...]]:\n    return (\n        tuple(cleaning_history),\n        selected_columns,\n        frozenset(dropped_columns),\n        tuple(sorted(splits.items()))\n    )"
+    }
+  ]
+}

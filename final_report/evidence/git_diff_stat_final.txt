@@ -1,0 +1,4 @@
+ README.md           | 42 ++++++++++++++++++++++++++++++++++++++++++
+ docs/performance.md | 20 ++++++++++----------
+ 2 files changed, 52 insertions(+), 10 deletions(-)
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it

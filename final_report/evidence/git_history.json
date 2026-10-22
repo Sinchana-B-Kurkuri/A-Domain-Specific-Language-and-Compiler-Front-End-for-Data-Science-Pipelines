@@ -1,0 +1,78 @@
+[
+  {
+    "hash": "7e8c390",
+    "subject": "Initial commit"
+  },
+  {
+    "hash": "f1756df",
+    "subject": "Phase 1: initial lexer/parser/AST/semantic prototype + design doc"
+  },
+  {
+    "hash": "e39721e",
+    "subject": "Merge branch 'main' of https://github.com/Sinchana-B-Kurkuri/A-Domain-Specific-Language-and-Compiler-Front-End-for-Data-Science-Pipelines"
+  },
+  {
+    "hash": "4c8e14f",
+    "subject": "Task 0: refactor prototype into pipelang package + pytest tests"
+  },
+  {
+    "hash": "d88dc0f",
+    "subject": "refactor: remove obsolete prototype file"
+  },
+  {
+    "hash": "e0ed13e",
+    "subject": "fix: validate split percentage range"
+  },
+  {
+    "hash": "460041f",
+    "subject": "feat: add IR structures and AST lowering"
+  },
+  {
+    "hash": "a3407bd",
+    "subject": "feat: add IR optimizer pass"
+  },
+  {
+    "hash": "eaa749a",
+    "subject": "feat: add symbolic execution engine"
+  },
+  {
+    "hash": "90fe669",
+    "subject": "feat: add command-line interface"
+  },
+  {
+    "hash": "ab9fe03",
+    "subject": "Phase 2: complete compiler pipeline, CLI, examples, and tests"
+  },
+  {
+    "hash": "363a6c0",
+    "subject": "Phase 2: complete compiler pipeline and documentation"
+  },
+  {
+    "hash": "7fb8b1d",
+    "subject": "docs: Add Review 2 presentation"
+  },
+  {
+    "hash": "4e3dd75",
+    "subject": "feat: complete Phase 3 Stage 1 frontend and semantic improvements"
+  },
+  {
+    "hash": "ac9564b",
+    "subject": "feat: implement drop statement across compiler pipeline"
+  },
+  {
+    "hash": "5d490ed",
+    "subject": "feat: implement safe optimizer passes and optimization diagnostics"
+  },
+  {
+    "hash": "e7d2cfe",
+    "subject": "test: add comprehensive compiler tests and integration scenarios"
+  },
+  {
+    "hash": "45a0532",
+    "subject": "feat: add compiler performance benchmarking and evaluation"
+  },
+  {
+    "hash": "9eca51a",
+    "subject": "docs: complete Phase 3 documentation and demo preparation"
+  }
+]

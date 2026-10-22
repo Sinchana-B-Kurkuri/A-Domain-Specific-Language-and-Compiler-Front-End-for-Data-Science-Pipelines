@@ -1,0 +1,18 @@
+{
+  "abstract_words": 219,
+  "snippet_count": 8,
+  "figure_count": 10,
+  "table_count": 25,
+  "semantic_rules": 21,
+  "diagnostic_patterns": 29,
+  "existing_project_files_unchanged": false,
+  "observed_external_changes": [
+    "docs/performance.md"
+  ],
+  "unexpected_changes": [],
+  "pdf": {
+    "pages": 62,
+    "blank_pages": []
+  },
+  "status": "structural checks passed; visual review recorded separately"
+}

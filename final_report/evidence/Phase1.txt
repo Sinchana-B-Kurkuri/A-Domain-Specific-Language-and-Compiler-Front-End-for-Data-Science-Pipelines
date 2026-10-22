@@ -1,0 +1,141 @@
+A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines
+
+Course Code: BCSE307P — Compiler Design Laboratory
+Fall Semester 2026–27
+
+PHASE 1: Problem Definition and System Design
+
+
+
+Prepared By:
+SINCHANA B KURKURI
+24BDS0352
+Slot: L49+L50
+1. Project Title	
+A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines.
+2. Abstract
+Data science workflows are commonly expressed as ordered sequences of operations — data loading, cleaning, feature selection, train/test splitting, model training, and evaluation — where each stage depends on artifacts produced by earlier stages. When such workflows are written as ad hoc scripts, ordering mistakes (for example, training a model before a training split has been defined) are only discovered at runtime, often after significant computation has already taken place. This project proposes a small domain-specific language (DSL) for describing data-processing pipelines declaratively, together with a language processor that performs lexical analysis, syntax analysis, AST construction, symbol-table-based semantic analysis, dependency validation, intermediate representation (IR) generation, basic optimization, and execution of valid pipelines. The system treats a pipeline definition the way a compiler treats a program: it is tokenized, parsed into a syntax tree, checked for static errors before anything runs, translated into an intermediate form, and only then executed. The emphasis of the project is squarely on the compiler-construction pipeline — lexer, parser, semantic analyzer, IR, and execution engine — rather than on machine learning itself; pipeline execution is handled symbolically so that the focus remains on validating and translating the pipeline description, not on training real models.
+3. Problem Statement
+Data science workflows commonly involve repetitive sequences of data loading, preprocessing, feature selection, model training, and evaluation. Such workflows can become difficult to configure and validate manually, especially as the number of stages grows or as pipelines are reused across projects. Existing general-purpose scripting approaches provide no static guarantee that a pipeline is well-formed: a script can reference a column that was never selected, evaluate a model that was never trained, or train a model before a training split exists, and none of these mistakes will surface until the script is actually run — which, for a data pipeline, may mean minutes or hours of wasted computation. There is a need for a small, declarative language in which such structural and dependency errors can be caught statically, before execution, using standard compiler techniques: lexical analysis, parsing, AST construction, and semantic analysis against a symbol table that tracks what data and model artifacts are available at each point in the pipeline.
+4. Motivation
+General-purpose languages such as Python make it easy to write a data pipeline but provide no structural guarantee that the pipeline is internally consistent — nothing stops a developer from calling a training function before a data split exists, or evaluating a model that was never trained; such mistakes are only caught by a runtime exception, if at all. Workflow tools such as Apache Airflow or Kubeflow Pipelines solve a related but different problem: they orchestrate and schedule already-correct tasks as a DAG, but they do not statically type-check or semantically validate the internal logic of a pipeline definition before it runs. A dedicated DSL sits between these two worlds: it is declarative and readable like a workflow specification, but it is processed by a genuine compiler front end — lexer, parser, AST, symbol table, and semantic analyzer — so that dependency errors, undefined references, and type mismatches are caught before a single row of data is touched. This project is motivated by the opportunity to apply classical compiler design concepts to a genuinely useful, modern problem domain, rather than to a purely academic toy language.
+5. Objectives
+Design a concise, readable, unambiguous grammar for describing data-processing pipelines, covering data loading, cleaning, feature selection, train/test splitting, model training, and evaluation.
+Implement a lexical analyzer that tokenizes the DSL's source files and reports lexical errors with line and column information.
+Implement a recursive-descent parser that validates the token stream against the grammar and constructs an Abstract Syntax Tree (AST), reporting syntax errors with clear diagnostics.
+Design and implement a symbol table that tracks the state of the pipeline (dataset loaded, columns selected, splits defined, models trained) as it is traversed.
+Implement a semantic analyzer that performs dependency validation (e.g. detecting a 'train' stage that references an undefined split), scope checking, and type/argument checking, and produces meaningful diagnostic messages rather than raw error codes.
+Translate a semantically valid AST into a simple intermediate representation (Pipeline IR) suitable for optimization and execution.
+Implement at least one optimization pass on the IR (e.g. elimination of redundant or unreachable pipeline stages).
+Implement a symbolic execution engine that executes a validated IR and produces a readable execution trace, without requiring the project to become a machine-learning system.
+Evaluate the system against a suite of valid and deliberately invalid test pipelines covering lexical, syntactic, and semantic error classes.
+6. Scope
+6.1 In Scope
+A defined grammar (in EBNF) for the DSL covering the statement types: pipeline, load, clean, select, split, train, and evaluate.
+A complete lexer, parser, and AST for the language.
+A symbol-table-based semantic analyzer that validates pipeline dependencies and statement ordering.
+Generation of an intermediate representation (IR) and at least one optimization pass over it. A symbolic execution engine that interprets the IR and reports what each stage would do, with clear, compiler-style diagnostic messages for every error class.
+A command-line interface for running pipeline scripts and viewing tokens, the AST, the IR, and the execution trace.
+6.2 Out of Scope
+Actually training machine learning models or computing real predictive accuracy. The 'train' and 'evaluate' stages are compiled and validated, and their execution is simulated/logged rather than backed by a real ML library, so that the project remains a compiler project and does not turn into a machine-learning project.
+Distributed or parallel execution of pipelines.
+A graphical pipeline editor (a command-line and/or simple visualization of the AST/IR is sufficient).
+Support for arbitrary general-purpose programming constructs (loops, user-defined functions) beyond what the pipeline domain requires.
+7. Background Study
+Workflow-orchestration systems such as Apache Airflow and Luigi model a pipeline as a Directed Acyclic Graph (DAG) of tasks and provide scheduling, retries, and monitoring, but the tasks themselves are written in general-purpose Python and are not statically validated for internal semantic correctness by the orchestrator. Library-level pipeline abstractions such as scikit-learn's Pipeline class compose transformers and estimators into a single object with a uniform fit/transform/predict interface, which solves API composability but again performs no static, compile-time validation of stage ordering — errors surface only when the pipeline is actually run.
+From compiler theory, the relevant background is: (a) finite-automata-based lexical analysis, typically implemented either by hand with regular expressions or via a lexer generator such as Lex/Flex; (b) context-free grammars and predictive/recursive-descent parsing for LL(1)-style grammars, which is a good fit for a small, keyword-driven DSL of this kind; (c) symbol-table design for tracking declarations and their attributes across a program, here adapted to track pipeline artifacts (loaded data, defined splits, trained models) instead of variable declarations; and (d) intermediate representations such as three-address code or simple linear IR, which decouple front-end analysis from back-end code generation or execution and make optimization passes such as dead/redundant-stage elimination straightforward to express. The proposed language applies this classical compiler pipeline to a pipeline-description domain: dependency checking in the semantic analyzer plays the same structural role that type checking plays in a general-purpose language front end.
+
+
+
+
+8. Compiler Design Concepts Involved
+CONCEPT | APPLICATION IN THE PROPOSED LANGUAGE
+Lexical Analysis | Tokenizing pipeline-script source into keywords (pipeline, load, clean, select, split, train, evaluate), identifiers, string/numeric/percentage literals, and punctuation; reporting lexical errors with line/column position.
+Syntax Analysis / Parsing | A hand-written recursive-descent parser validating the token stream against the language's grammar (EBNF) and reporting syntax errors with expected-vs-found diagnostics.
+Abstract Syntax Tree (AST) | A typed node hierarchy (PipelineNode, LoadStmt, CleanStmt, SelectStmt, SplitStmt, TrainStmt, EvaluateStmt) representing the parsed program structure.
+Symbol Table Management | Tracking pipeline state — dataset loaded, columns selected, named splits and their percentages, trained models and their algorithms — as the AST is traversed.
+Semantic Analysis | Dependency validation (train requires a prior split; evaluate requires a prior train), reference checking (undefined split/model names), and basic argument/type checking (e.g. split percentage must be numeric and in a valid range).
+Intermediate Code Generation | Lowering a validated AST into a linear Pipeline IR (an ordered list of typed operations) suitable for optimization and execution, independent of how the pipeline is ultimately run.
+Code Optimization | A redundant/unreachable-stage elimination pass over the IR (e.g. collapsing a duplicated clean or select stage, or flagging any stage that appears after a terminal evaluate as unreachable).
+Execution / Interpretation | A symbolic execution engine that walks the optimized IR and produces a step-by-step execution trace, standing in for a real runtime back end.
+Error Detection and Recovery | Distinct, clearly labelled diagnostics for lexical, syntax, and semantic errors at every stage of the pipeline, modelled on the sample diagnostics required by the manual.
+9. Proposed Methodology
+The system is developed as a classical multi-pass compiler front end, followed by a lightweight IR-based execution back end. The stages are:
+Stage 1 — Lexical Analysis: A hand-written scanner (regular-expression based, using Python's re module for the prototype) converts raw pipeline-script source text into a stream of typed tokens, discarding whitespace and comments and reporting any unrecognized character as a lexical error.
+Stage 2 — Syntax Analysis: A recursive-descent parser, one function per grammar production, consumes the token stream and builds an AST. The grammar is designed to be LL(1) so that a predictive, single-token-lookahead parser is sufficient — appropriate for a keyword-driven DSL of this size.
+Stage 3 — Semantic Analysis: The AST is traversed once, left to right, maintaining a symbol table that models pipeline state as a small set of flags and maps (data_loaded, data_cleaned, splits{}, models{}). Each statement type has an associated semantic rule (e.g. a TrainStmt requires a prior SplitStmt named 'train' to be present in the symbol table); violations raise a SemanticError carrying the offending line number and a human-readable explanation.
+Stage 4 — Intermediate Representation: A semantically valid AST is lowered into a flat sequence of IR operations (e.g. OP_LOAD, OP_CLEAN, OP_SELECT, OP_SPLIT, OP_TRAIN, OP_EVAL), each carrying its resolved arguments, decoupling the tree-shaped AST from the linear form needed for optimization and execution.
+Stage 5 — Optimization: A dataflow-style pass over the IR eliminates redundant, immediately-repeated stages (e.g. two consecutive identical clean or select statements collapse into one) and flags any stage that appears after a terminal evaluate as unreachable.
+Stage 6 — Execution: A symbolic execution engine walks the optimized IR in order and prints a structured trace describing what each stage would do ("loaded students.csv", "defined split 'train' = 80%", "trained model 'model' using decision_tree", …), giving a concrete, demonstrable output without requiring a real ML backend.
+Each stage is unit-tested independently using a small suite of valid pipelines (which should parse, validate, and execute cleanly) and deliberately invalid pipelines (each engineered to trigger exactly one lexical, syntax, or semantic error), so that the correctness of each phase can be verified in isolation before integration.
+10. System Architecture
+
+The architecture follows the standard compiler pipeline model. Source text flows top-down through the Lexical Analyzer and Syntax Analyzer to produce an AST; the Semantic Analyzer consults and updates the Symbol Table while walking the AST to catch dependency and reference errors before anything is executed; a validated AST is lowered to an Intermediate Representation, optionally rewritten by the Optimizer, and finally consumed by the Execution Engine, which produces a diagnostic/execution log as the visible output of the system. Any stage that detects an error short-circuits the pipeline and reports a labelled diagnostic (Lexical / Syntax / Semantic Error) instead of proceeding to the next stage.
+11. Technology Stack
+COMPONENT | CHOICE
+Implementation Language | Python 3.12
+Lexer / Parser | Hand-written (regex-based lexer, recursive-descent parser); ANTLR4 considered as an alternative/extension for grammar-driven parser generation in Phase 2
+Data Model | Python dataclasses for AST nodes and IR operations
+Testing | Python's built-in unittest / pytest for per-stage unit tests (lexer, parser, semantic analyzer, IR, execution)
+Version Control | Git, hosted on GitHub, with commit history used as the project development log
+Development Environment | Visual Studio Code
+Documentation | Markdown / Word for the project report; the architecture diagram is generated programmatically for reproducibility
+12. Initial Prototype
+An initial working prototype has been implemented, covering the lexer, the recursive-descent parser, AST construction, and the symbol-table-based semantic analyzer with dependency checking (Stages 1–3 of the methodology). Intermediate representation generation, optimization, and the execution engine (Stages 4–6) are planned for Phase 2. The prototype's grammar (simplified EBNF) is shown below, followed by real output captured from running the prototype on a valid pipeline and on a deliberately invalid one.
+12.1 Grammar (EBNF, simplified)
+pipeline_decl := 'pipeline' IDENT '{' statement* '}'
+statement     := load_stmt | clean_stmt | select_stmt
+               | split_stmt | train_stmt | evaluate_stmt
+load_stmt     := 'load' STRING ';'
+clean_stmt    := 'clean' IDENT ';'
+select_stmt   := 'select' IDENT (',' IDENT)* ';'
+split_stmt    := 'split' split_name '=' PERCENT ';'
+split_name    := IDENT | 'train' | 'test'
+train_stmt    := 'train' IDENT '=' IDENT ';'
+evaluate_stmt := 'evaluate' IDENT ';'
+12.2 Sample Input — Valid Pipeline
+pipeline student_prediction {
+    load "students.csv";
+    clean missing_values;
+    select cgpa, attendance, study_hours;
+    split train = 80%;
+    train model = decision_tree;
+    evaluate model;
+}
+12.3 Captured Prototype Output — Valid Pipeline
+[LEXER OUTPUT] 30 tokens generated:
+PIPELINE, IDENT(student_prediction), LBRACE, LOAD, STRING("students.csv"),
+SEMI, CLEAN, IDENT(missing_values), SEMI, SELECT, IDENT(cgpa), COMMA, ...
+ 
+[PARSER OUTPUT] AST for pipeline 'student_prediction':
+    LoadStmt(filename='students.csv', line=3)
+    CleanStmt(strategy='missing_values', line=4)
+    SelectStmt(columns=['cgpa','attendance','study_hours'], line=5)
+    SplitStmt(name='train', percent=80.0, line=6)
+    TrainStmt(model_name='model', algorithm='decision_tree', line=7)
+    EvaluateStmt(model_name='model', line=8)
+ 
+[SEMANTIC ANALYSIS]
+    No semantic errors found. Symbol table state:
+    data_loaded=True, data_cleaned=True, splits={'train': 80.0},
+    models={'model': 'decision_tree'}
+12.4 Sample Input — Invalid Pipeline (train before split)
+pipeline student_prediction {
+    load "students.csv";
+    clean missing_values;
+    select cgpa, attendance, study_hours;
+    train model = decision_tree;   // no prior split!
+    evaluate model;
+}
+12.5 Captured Prototype Output — Invalid Pipeline
+[SEMANTIC ANALYSIS]
+    Semantic Error at line 6: training data has not been defined.
+    A 'split train = <percent>%;' statement must appear before
+    'train model = decision_tree;'.
+This confirms the core claim of the proposal: the ordering mistake is caught statically, by the semantic analyzer consulting the symbol table, before any pipeline stage would actually run — exactly the kind of genuine compiler-style semantic check (as opposed to simple input validation) required by the project guidelines.
+13. Expected Outcomes and Roadmap
+PHASE | PLANNED DELIVERABLES
+Phase 1 | Finalized grammar, working lexer/parser/AST/semantic analyzer prototype, system architecture, and this design document.
+Phase 2 | Intermediate representation generation, the redundant-stage optimization pass, and an initial symbolic execution engine; expanded semantic checks (type checking on arguments, scope checking for multiple pipelines); module-wise test suite.
+Phase 3 | Full integration of all modules, comprehensive testing (valid, invalid, boundary, and complex pipelines), performance notes, a command-line demo tool, and the final project report and presentation.
+

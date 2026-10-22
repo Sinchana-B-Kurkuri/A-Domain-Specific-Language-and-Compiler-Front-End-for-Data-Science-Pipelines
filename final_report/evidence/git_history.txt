@@ -1,0 +1,19 @@
+7e8c390	Initial commit
+f1756df	Phase 1: initial lexer/parser/AST/semantic prototype + design doc
+e39721e	Merge branch 'main' of https://github.com/Sinchana-B-Kurkuri/A-Domain-Specific-Language-and-Compiler-Front-End-for-Data-Science-Pipelines
+4c8e14f	Task 0: refactor prototype into pipelang package + pytest tests
+d88dc0f	refactor: remove obsolete prototype file
+e0ed13e	fix: validate split percentage range
+460041f	feat: add IR structures and AST lowering
+a3407bd	feat: add IR optimizer pass
+eaa749a	feat: add symbolic execution engine
+90fe669	feat: add command-line interface
+ab9fe03	Phase 2: complete compiler pipeline, CLI, examples, and tests
+363a6c0	Phase 2: complete compiler pipeline and documentation
+7fb8b1d	docs: Add Review 2 presentation
+4e3dd75	feat: complete Phase 3 Stage 1 frontend and semantic improvements
+ac9564b	feat: implement drop statement across compiler pipeline
+5d490ed	feat: implement safe optimizer passes and optimization diagnostics
+e7d2cfe	test: add comprehensive compiler tests and integration scenarios
+45a0532	feat: add compiler performance benchmarking and evaluation
+9eca51a	docs: complete Phase 3 documentation and demo preparation

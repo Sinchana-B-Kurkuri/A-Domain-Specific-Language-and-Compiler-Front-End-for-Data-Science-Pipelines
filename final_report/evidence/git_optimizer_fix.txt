@@ -1,0 +1,12 @@
+commit 5d490edc3a592bb83bd5b965a08a1f97325f2045
+Author: Sinchana <sinchanabahubalikurkuri@gmail.com>
+Date:   Wed Oct 21 16:06:52 2026 +0530
+
+    feat: implement safe optimizer passes and optimization diagnostics
+
+ examples/optimizer_demo.pipe     |  13 +
+ src/ds_pipeline_dsl/cli.py       |  10 +-
+ src/ds_pipeline_dsl/optimizer.py | 165 +++++++++--
+ tests/helpers.py                 | 124 ++++++++
+ tests/test_optimizer.py          | 593 +++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 887 insertions(+), 18 deletions(-)

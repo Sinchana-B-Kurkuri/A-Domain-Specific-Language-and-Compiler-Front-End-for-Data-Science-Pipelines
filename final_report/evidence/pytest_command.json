@@ -1,0 +1,12 @@
+{
+  "command": [
+    "C:\\Users\\sinch\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-v",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0
+}

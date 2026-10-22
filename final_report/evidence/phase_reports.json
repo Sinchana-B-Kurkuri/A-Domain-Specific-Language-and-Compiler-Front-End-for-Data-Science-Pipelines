@@ -1,0 +1,3786 @@
+{
+  "Phase1.docx": [
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines",
+      "runs": [
+        {
+          "text": "A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines",
+          "font": null,
+          "size": 18.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Course Code: BCSE307P — Compiler Design Laboratory",
+      "runs": [
+        {
+          "text": "Course Code:",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": " BCSE307P — Compiler Design Laboratory",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Fall Semester 2026–27",
+      "runs": [
+        {
+          "text": "Fall Semester 2026–27",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "PHASE 1: Problem Definition and System Design",
+      "runs": [
+        {
+          "text": "PHASE 1:",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": " ",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": "Problem Definition ",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": "a",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": "nd System Design",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Prepared By:",
+      "runs": [
+        {
+          "text": "Prepared By:",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "SINCHANA B KURKURI",
+      "runs": [
+        {
+          "text": "SINCHANA B KURKURI",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "24BDS0352",
+      "runs": [
+        {
+          "text": "24BDS035",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": "2",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Slot: L49+L50",
+      "runs": [
+        {
+          "text": "Slot:",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": " L49+L50",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "1. Project Title\t",
+      "runs": [
+        {
+          "text": "1. Project Title",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "\t",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines.",
+      "runs": [
+        {
+          "text": "A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "2. Abstract",
+      "runs": [
+        {
+          "text": "2. Abstract",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data science workflows are commonly expressed as ordered sequences of operations — data loading, cleaning, feature selection, train/test splitting, model training, and evaluation — where each stage depends on artifacts produced by earlier stages. When such workflows are written as ad hoc scripts, ordering mistakes (for example, training a model before a training split has been defined) are only discovered at runtime, often after significant computation has already taken place. This project proposes a small domain-specific language (DSL) for describing data-processing pipelines declaratively, together with a language processor that performs lexical analysis, syntax analysis, AST construction, symbol-table-based semantic analysis, dependency validation, intermediate representation (IR) generation, basic optimization, and execution of valid pipelines. The system treats a pipeline definition the way a compiler treats a program: it is tokenized, parsed into a syntax tree, checked for static errors before anything runs, translated into an intermediate form, and only then executed. The emphasis of the project is squarely on the compiler-construction pipeline — lexer, parser, semantic analyzer, IR, and execution engine — rather than on machine learning itself; pipeline execution is handled symbolically so that the focus remains on validating and translating the pipeline description, not on training real models.",
+      "runs": [
+        {
+          "text": "Data science workflows are commonly expressed as ordered sequences of operations — data loading, cleaning, feature selection, train/test splitting, model training, and evaluation — where each stage depends on artifacts produced by earlier stages. When such workflows are written as ad hoc scripts, ordering mistakes (for example, training a model before a training split has been defined) are only discovered at runtime, often after significant computation has already taken place. This project proposes a small domain-specific language (DSL) for describing data-processing pipelines declaratively, together with a language processor that performs lexical analysis, syntax analysis, AST construction, symbol-table-based semantic analysis, dependency validation, intermediate representation (IR) generation, basic optimization, and execution of valid pipelines. The system treats a pipeline definition the way a compiler treats a program: it is tokenized, parsed into a syntax tree, checked for static errors before anything runs, translated into an intermediate form, and only then executed. The emphasis of the project is squarely on the compiler-construction pipeline — lexer, parser, semantic analyzer, IR, and execution engine — rather than on machine learning itself; pipeline execution is handled symbolically so that the focus remains on validating and translating the pipeline description, not on training real models.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "3. Problem Statement",
+      "runs": [
+        {
+          "text": "3. Problem Statement",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data science workflows commonly involve repetitive sequences of data loading, preprocessing, feature selection, model training, and evaluation. Such workflows can become difficult to configure and validate manually, especially as the number of stages grows or as pipelines are reused across projects. Existing general-purpose scripting approaches provide no static guarantee that a pipeline is well-formed: a script can reference a column that was never selected, evaluate a model that was never trained, or train a model before a training split exists, and none of these mistakes will surface until the script is actually run — which, for a data pipeline, may mean minutes or hours of wasted computation. There is a need for a small, declarative language in which such structural and dependency errors can be caught statically, before execution, using standard compiler techniques: lexical analysis, parsing, AST construction, and semantic analysis against a symbol table that tracks what data and model artifacts are available at each point in the pipeline.",
+      "runs": [
+        {
+          "text": "Data science workflows commonly involve repetitive sequences of data loading, preprocessing, feature selection, model training, and evaluation. Such workflows can become difficult to configure and validate manually, especially as the number of stages grows or as pipelines are reused across projects. Existing general-purpose scripting approaches provide no static guarantee that a pipeline is well-formed: a script can reference a column that was never selected, evaluate a model that was never trained, or train a model before a training split exists, and none of these mistakes will surface until the script is actually run — which, for a data pipeline, may mean minutes or hours of wasted computation. There is a need for a small, declarative language in which such structural and dependency errors can be caught statically, before execution, using standard compiler techniques: lexical analysis, parsing, AST construction, and semantic analysis against a symbol table that tracks what data and model artifacts are available at each point in the pipeline.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "4. Motivation",
+      "runs": [
+        {
+          "text": "4. Motivation",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "General-purpose languages such as Python make it easy to write a data pipeline but provide no structural guarantee that the pipeline is internally consistent — nothing stops a developer from calling a training function before a data split exists, or evaluating a model that was never trained; such mistakes are only caught by a runtime exception, if at all. Workflow tools such as Apache Airflow or Kubeflow Pipelines solve a related but different problem: they orchestrate and schedule already-correct tasks as a DAG, but they do not statically type-check or semantically validate the internal logic of a pipeline definition before it runs. A dedicated DSL sits between these two worlds: it is declarative and readable like a workflow specification, but it is processed by a genuine compiler front end — lexer, parser, AST, symbol table, and semantic analyzer — so that dependency errors, undefined references, and type mismatches are caught before a single row of data is touched. This project is motivated by the opportunity to apply classical compiler design concepts to a genuinely useful, modern problem domain, rather than to a purely academic toy language.",
+      "runs": [
+        {
+          "text": "General-purpose languages such as Python make it easy to write a data pipeline but provide no structural guarantee that the pipeline is internally consistent — nothing stops a developer from calling a training function before a data split exists, or evaluating a model that was never trained; such mistakes are only caught by a runtime ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "exception, if at all. Workflow tools such as Apache Airflow or Kubeflow Pipelines solve a related but different problem: they orchestrate and schedule already-correct tasks as a DAG, but they do not statically type-check or semantically validate the internal logic of a pipeline definition before it runs. A dedicated DSL sits between these two worlds: it is declarative and readable like a workflow specification, but it is processed by a genuine compiler front end — lexer, parser, AST, symbol table, and semantic analyzer — so that dependency errors, undefined references, and type mismatches are caught before a single row of data is touched. This project is motivated by the opportunity to apply classical compiler design concepts to a genuinely useful, modern problem domain, rather than to a purely academic toy language.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "5. Objectives",
+      "runs": [
+        {
+          "text": "5. Objectives",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Design a concise, readable, unambiguous grammar for describing data-processing pipelines, covering data loading, cleaning, feature selection, train/test splitting, model training, and evaluation.",
+      "runs": [
+        {
+          "text": "Design a concise, readable, unambiguous grammar for describing data-processing pipelines, covering data loading, cleaning, feature selection, train/test splitting, model training, and evaluation.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Implement a lexical analyzer that tokenizes the DSL's source files and reports lexical errors with line and column information.",
+      "runs": [
+        {
+          "text": "Implement a lexical analyzer that tokenizes ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "the DSL's ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "source files and reports lexical errors with line and column information.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Implement a recursive-descent parser that validates the token stream against the grammar and constructs an Abstract Syntax Tree (AST), reporting syntax errors with clear diagnostics.",
+      "runs": [
+        {
+          "text": "Implement a recursive-descent parser that validates the token stream against the grammar and constructs an Abstract Syntax Tree (AST), reporting syntax errors with clear diagnostics.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Design and implement a symbol table that tracks the state of the pipeline (dataset loaded, columns selected, splits defined, models trained) as it is traversed.",
+      "runs": [
+        {
+          "text": "Design and implement a symbol table that tracks the state of the pipeline (dataset loaded, columns selected, splits defined, models trained) as it is traversed.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Implement a semantic analyzer that performs dependency validation (e.g. detecting a 'train' stage that references an undefined split), scope checking, and type/argument checking, and produces meaningful diagnostic messages rather than raw error codes.",
+      "runs": [
+        {
+          "text": "Implement a semantic analyzer that performs dependency validation (e.g. detecting a 'train' stage that references an undefined split), scope checking, and type/argument checking, and produces meaningful diagnostic messages rather than raw error codes.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Translate a semantically valid AST into a simple intermediate representation (Pipeline IR) suitable for optimization and execution.",
+      "runs": [
+        {
+          "text": "Translate a semantically valid AST into a simple intermediate representation (Pipeline IR) suitable for optimization and execution.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Implement at least one optimization pass on the IR (e.g. elimination of redundant or unreachable pipeline stages).",
+      "runs": [
+        {
+          "text": "Implement at least one optimization pass on the IR (e.g. elimination of redundant or unreachable pipeline stages).",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Implement a symbolic execution engine that executes a validated IR and produces a readable execution trace, without requiring the project to become a machine-learning system.",
+      "runs": [
+        {
+          "text": "Implement a symbolic execution engine that executes a validated IR and produces a readable execution trace, without requiring the project to become a machine-learning system.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Evaluate the system against a suite of valid and deliberately invalid test pipelines covering lexical, syntactic, and semantic error classes.",
+      "runs": [
+        {
+          "text": "Evaluate the system against a suite of valid and deliberately invalid test pipelines covering lexical, syntactic, and semantic error classes.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "6. Scope",
+      "runs": [
+        {
+          "text": "6. Scope",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "6.1 In Scope",
+      "runs": [
+        {
+          "text": "6.1 In Scope",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "A defined grammar (in EBNF) for the DSL covering the statement types: pipeline, load, clean, select, split, train, and evaluate.",
+      "runs": [
+        {
+          "text": "A defined grammar (in EBNF) for the DSL covering the statement types: pipeline, load, clean, select, split, train, and evaluate.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "A complete lexer, parser, and AST for the language.",
+      "runs": [
+        {
+          "text": "A complete lexer, parser, and AST for the language.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "A symbol-table-based semantic analyzer that validates pipeline dependencies and statement ordering.",
+      "runs": [
+        {
+          "text": "A symbol-table-based semantic analyzer that validates pipeline dependencies and statement ordering.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Generation of an intermediate representation (IR) and at least one optimization pass over it. A symbolic execution engine that interprets the IR and reports what each stage would do, with clear, compiler-style diagnostic messages for every error class.",
+      "runs": [
+        {
+          "text": "Generation of an intermediate representation (IR) and at least one optimization pass over it.",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "A symbolic execution engine that interprets the IR and reports what each stage would do, with clear, compiler-style diagnostic messages for every error class.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "A command-line interface for running pipeline scripts and viewing tokens, the AST, the IR, and the execution trace.",
+      "runs": [
+        {
+          "text": "A command-line interface for running ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "pipeline ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "scripts and viewing tokens, the AST, the IR, and the execution trace.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "6.2 Out of Scope",
+      "runs": [
+        {
+          "text": "6.2 Out of Scope",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Actually training machine learning models or computing real predictive accuracy. The 'train' and 'evaluate' stages are compiled and validated, and their execution is simulated/logged rather than backed by a real ML library, so that the project remains a compiler project and does not turn into a machine-learning project.",
+      "runs": [
+        {
+          "text": "Actuall",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "y ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "training machine learning models or computing real predictive accuracy. The 'train' and 'evaluate' stages are compiled and validated, and their execution is simulated/logged rather than backed by a real ML library, so that the project remains a compiler project and does not turn into a machine-learning project.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Distributed or parallel execution of pipelines.",
+      "runs": [
+        {
+          "text": "Distributed or parallel execution of pipelines.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "A graphical pipeline editor (a command-line and/or simple visualization of the AST/IR is sufficient).",
+      "runs": [
+        {
+          "text": "A graphical pipeline editor (a command-line and/or simple visualization of the AST/IR is sufficient).",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Support for arbitrary general-purpose programming constructs (loops, user-defined functions) beyond what the pipeline domain requires.",
+      "runs": [
+        {
+          "text": "Support for arbitrary general-purpose programming constructs (loops, user-defined functions) beyond what the pipeline domain requires.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "7. Background Study",
+      "runs": [
+        {
+          "text": "7. Background Study",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Workflow-orchestration systems such as Apache Airflow and Luigi model a pipeline as a Directed Acyclic Graph (DAG) of tasks and provide scheduling, retries, and monitoring, but the tasks themselves are written in general-purpose Python and are not statically validated for internal semantic correctness by the orchestrator. Library-level pipeline abstractions such as scikit-learn's Pipeline class compose transformers and estimators into a single object with a uniform fit/transform/predict interface, which solves API composability but again performs no static, compile-time validation of stage ordering — errors surface only when the pipeline is actually run.",
+      "runs": [
+        {
+          "text": "Workflow-orchestration systems such as Apache Airflow and Luigi model a pipeline as a Directed Acyclic Graph (DAG) of tasks and provide scheduling, retries, and monitoring, but the tasks themselves are written in general-purpose Python and are not statically validated for internal semantic correctness by the orchestrator. Library-level pipeline abstractions such as scikit-learn's Pipeline class compose transformers and estimators into a single object with a uniform fit/transform/predict interface, which solves API composability but again performs no static, compile-time validation of stage ordering — errors surface only when the pipeline is actually run.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "From compiler theory, the relevant background is: (a) finite-automata-based lexical analysis, typically implemented either by hand with regular expressions or via a lexer generator such as Lex/Flex; (b) context-free grammars and predictive/recursive-descent parsing for LL(1)-style grammars, which is a good fit for a small, keyword-driven DSL of this kind; (c) symbol-table design for tracking declarations and their attributes across a program, here adapted to track pipeline artifacts (loaded data, defined splits, trained models) instead of variable declarations; and (d) intermediate representations such as three-address code or simple linear IR, which decouple front-end analysis from back-end code generation or execution and make optimization passes such as dead/redundant-stage elimination straightforward to express. The proposed language applies this classical compiler pipeline to a pipeline-description domain: dependency checking in the semantic analyzer plays the same structural role that type checking plays in a general-purpose language front end.",
+      "runs": [
+        {
+          "text": "From compiler theory, the relevant background is: (a) finite-automata-based lexical analysis, typically implemented either by hand with regular expressions or via a lexer generator such as Lex/Flex; (b) context-free grammars and predictive/recursive-descent parsing for LL(1)-style grammars, which is a good fit for a small, keyword-driven DSL ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "of this kind",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "; (c) symbol-table design for tracking declarations and their attributes across a program, here adapted to track pipeline artifacts (loaded data, defined splits, trained models) instead of variable declarations; and (d) intermediate representations such as three-address code or simple linear IR, which decouple front-end analysis from back-end code generation or execution and make optimization passes such as dead/redundant-stage elimination straightforward to express. ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "The proposed language ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "applies this classical compiler pipeline to a pipeline-description domain: dependency checking in the semantic analyzer plays the same structural role that type checking plays in a general-purpose language front end",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": ".",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "8. Compiler Design Concepts Involved",
+      "runs": [
+        {
+          "text": "8. Compiler Design Concepts Involved",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "CONCEPT",
+          "APPLICATION IN THE PROPOSED LANGUAGE"
+        ],
+        [
+          "Lexical Analysis",
+          "Tokenizing pipeline-script source into keywords (pipeline, load, clean, select, split, train, evaluate), identifiers, string/numeric/percentage literals, and punctuation; reporting lexical errors with line/column position."
+        ],
+        [
+          "Syntax Analysis / Parsing",
+          "A hand-written recursive-descent parser validating the token stream against the language's grammar (EBNF) and reporting syntax errors with expected-vs-found diagnostics."
+        ],
+        [
+          "Abstract Syntax Tree (AST)",
+          "A typed node hierarchy (PipelineNode, LoadStmt, CleanStmt, SelectStmt, SplitStmt, TrainStmt, EvaluateStmt) representing the parsed program structure."
+        ],
+        [
+          "Symbol Table Management",
+          "Tracking pipeline state — dataset loaded, columns selected, named splits and their percentages, trained models and their algorithms — as the AST is traversed."
+        ],
+        [
+          "Semantic Analysis",
+          "Dependency validation (train requires a prior split; evaluate requires a prior train), reference checking (undefined split/model names), and basic argument/type checking (e.g. split percentage must be numeric and in a valid range)."
+        ],
+        [
+          "Intermediate Code Generation",
+          "Lowering a validated AST into a linear Pipeline IR (an ordered list of typed operations) suitable for optimization and execution, independent of how the pipeline is ultimately run."
+        ],
+        [
+          "Code Optimization",
+          "A redundant/unreachable-stage elimination pass over the IR (e.g. collapsing a duplicated clean or select stage, or flagging any stage that appears after a terminal evaluate as unreachable)."
+        ],
+        [
+          "Execution / Interpretation",
+          "A symbolic execution engine that walks the optimized IR and produces a step-by-step execution trace, standing in for a real runtime back end."
+        ],
+        [
+          "Error Detection and Recovery",
+          "Distinct, clearly labelled diagnostics for lexical, syntax, and semantic errors at every stage of the pipeline, modelled on the sample diagnostics required by the manual."
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "9. Proposed Methodology",
+      "runs": [
+        {
+          "text": "9. Proposed Methodology",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The system is developed as a classical multi-pass compiler front end, followed by a lightweight IR-based execution back end. The stages are:",
+      "runs": [
+        {
+          "text": "The system is developed as a classical multi-pass compiler front end, followed by a lightweight IR-based execution back end. The stages are:",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Stage 1 — Lexical Analysis: A hand-written scanner (regular-expression based, using Python's re module for the prototype) converts raw pipeline-script source text into a stream of typed tokens, discarding whitespace and comments and reporting any unrecognized character as a lexical error.",
+      "runs": [
+        {
+          "text": "Stage 1 —",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " Lexical Analysis: A hand-written scanner (regular-expression based, using Python's re module for the prototype) converts raw ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "pipeline-script ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "source text into a stream of typed tokens, discarding whitespace and comments and reporting any unrecognized character as a lexical error.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Stage 2 — Syntax Analysis: A recursive-descent parser, one function per grammar production, consumes the token stream and builds an AST. The grammar is designed to be LL(1) so that a predictive, single-token-lookahead parser is sufficient — appropriate for a keyword-driven DSL of this size.",
+      "runs": [
+        {
+          "text": "Stage 2 —",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " Syntax Analysis: A recursive-descent parser, one function per grammar production, consumes the token stream and builds an AST. The grammar is designed to be ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "LL(",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "1) so that a predictive, single-token-lookahead parser is sufficient — appropriate for a keyword-driven DSL of this size.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Stage 3 — Semantic Analysis: The AST is traversed once, left to right, maintaining a symbol table that models pipeline state as a small set of flags and maps (data_loaded, data_cleaned, splits{}, models{}). Each statement type has an associated semantic rule (e.g. a TrainStmt requires a prior SplitStmt named 'train' to be present in the symbol table); violations raise a SemanticError carrying the offending line number and a human-readable explanation.",
+      "runs": [
+        {
+          "text": "Stage 3 —",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " Semantic Analysis: The AST is traversed once, left to right, maintaining a symbol table that models pipeline state as a small set of flags and maps (",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "data_loaded",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": ", ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "data_cleaned",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": ", ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "splits{",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "}, ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "models{",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "}). Each",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "statement type has an associated semantic rule (e.g. a ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "TrainStmt",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " requires a prior ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "SplitStmt",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " named 'train' to be present in the symbol table); violations raise a ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "SemanticError",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " carrying the offending line number and a human-readable explanation.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Stage 4 — Intermediate Representation: A semantically valid AST is lowered into a flat sequence of IR operations (e.g. OP_LOAD, OP_CLEAN, OP_SELECT, OP_SPLIT, OP_TRAIN, OP_EVAL), each carrying its resolved arguments, decoupling the tree-shaped AST from the linear form needed for optimization and execution.",
+      "runs": [
+        {
+          "text": "Stage 4 —",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " Intermediate Representation: A semantically valid AST is lowered into a flat sequence of IR operations (e.g. OP_LOAD, OP_CLEAN, OP_SELECT, OP_SPLIT, OP_TRAIN, OP_EVAL), each carrying its resolved arguments, decoupling the tree-shaped AST from the linear form needed for optimization and execution.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Stage 5 — Optimization: A dataflow-style pass over the IR eliminates redundant, immediately-repeated stages (e.g. two consecutive identical clean or select statements collapse into one) and flags any stage that appears after a terminal evaluate as unreachable.",
+      "runs": [
+        {
+          "text": "Stage 5 —",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " Optimization: A dataflow-style pass over the ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "IR ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "eliminates redundant, immediately-repeated stages (e.g. two consecutive identical clean or select statements collapse into one) and flags any stage that appears after a terminal evaluate as unreachable",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": ".",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Stage 6 — Execution: A symbolic execution engine walks the optimized IR in order and prints a structured trace describing what each stage would do (\"loaded students.csv\", \"defined split 'train' = 80%\", \"trained model 'model' using decision_tree\", …), giving a concrete, demonstrable output without requiring a real ML backend.",
+      "runs": [
+        {
+          "text": "Stage 6 —",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " Execution: A symbolic execution engine walks the optimized IR in order and prints a structured trace describing what each stage would do (\"loaded students.csv\", \"defined split 'train' = 80%\", \"trained model 'model' using ",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "decision_tree",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "\", …), giving a concrete, demonstrable output without requiring a real ML backend.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Each stage is unit-tested independently using a small suite of valid pipelines (which should parse, validate, and execute cleanly) and deliberately invalid pipelines (each engineered to trigger exactly one lexical, syntax, or semantic error), so that the correctness of each phase can be verified in isolation before integration.",
+      "runs": [
+        {
+          "text": "Each stage is unit-tested independently using a small suite of valid pipelines (which should parse, validate, and execute cleanly) and deliberately invalid pipelines (each engineered to trigger exactly one lexical, syntax, or semantic error), so that the correctness of each phase can be verified in isolation before integration.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "10. System Architecture",
+      "runs": [
+        {
+          "text": "10. System Architecture",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        {
+          "text": "",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The architecture follows the standard compiler pipeline model. Source text flows top-down through the Lexical Analyzer and Syntax Analyzer to produce an AST; the Semantic Analyzer consults and updates the Symbol Table while walking the AST to catch dependency and reference errors before anything is executed; a validated AST is lowered to an Intermediate Representation, optionally rewritten by the Optimizer, and finally consumed by the Execution Engine, which produces a diagnostic/execution log as the visible output of the system. Any stage that detects an error short-circuits the pipeline and reports a labelled diagnostic (Lexical / Syntax / Semantic Error) instead of proceeding to the next stage.",
+      "runs": [
+        {
+          "text": "The architecture follows the standard compiler pipeline model. Source text flows top-down through the Lexical Analyzer and Syntax Analyzer to produce an AST; the Semantic Analyzer consults and updates the Symbol Table while walking the AST to catch dependency and reference errors before anything is executed; a validated AST is lowered to an Intermediate Representation, optionally rewritten by the Optimizer, and finally consumed by the Execution Engine, which produces a diagnostic/execution log as the visible output of the system. Any stage that detects an error short-circuits the pipeline and reports a labelled diagnostic (Lexical / Syntax / Semantic Error) instead of proceeding to the next stage.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "11. Technology Stack",
+      "runs": [
+        {
+          "text": "11. Technology Stack",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "COMPONENT",
+          "CHOICE"
+        ],
+        [
+          "Implementation Language",
+          "Python 3.12"
+        ],
+        [
+          "Lexer / Parser",
+          "Hand-written (regex-based lexer, recursive-descent parser); ANTLR4 considered as an alternative/extension for grammar-driven parser generation in Phase 2"
+        ],
+        [
+          "Data Model",
+          "Python dataclasses for AST nodes and IR operations"
+        ],
+        [
+          "Testing",
+          "Python's built-in unittest / pytest for per-stage unit tests (lexer, parser, semantic analyzer, IR, execution)"
+        ],
+        [
+          "Version Control",
+          "Git, hosted on GitHub, with commit history used as the project development log"
+        ],
+        [
+          "Development Environment",
+          "Visual Studio Code"
+        ],
+        [
+          "Documentation",
+          "Markdown / Word for the project report; the architecture diagram is generated programmatically for reproducibility"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "12. Initial Prototype",
+      "runs": [
+        {
+          "text": "12. Initial Prototype",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "An initial working prototype has been implemented, covering the lexer, the recursive-descent parser, AST construction, and the symbol-table-based semantic analyzer with dependency checking (Stages 1–3 of the methodology). Intermediate representation generation, optimization, and the execution engine (Stages 4–6) are planned for Phase 2. The prototype's grammar (simplified EBNF) is shown below, followed by real output captured from running the prototype on a valid pipeline and on a deliberately invalid one.",
+      "runs": [
+        {
+          "text": "An initial working prototype has been implemented, covering the lexer, the recursive-descent parser, AST construction, and the symbol-table-based semantic analyzer with dependency checking (Stages 1–3 of the methodology). Intermediate representation generation, optimization, and the execution engine (Stages 4–6) are planned for Phase 2. The prototype's grammar (simplified EBNF) is shown below, followed by real output captured from running the prototype on a valid pipeline and on a deliberately invalid one.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "12.1 Grammar (EBNF, simplified)",
+      "runs": [
+        {
+          "text": "12.1 Grammar (EBNF, simplified)",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "pipeline_decl := 'pipeline' IDENT '{' statement* '}'\nstatement     := load_stmt | clean_stmt | select_stmt\n               | split_stmt | train_stmt | evaluate_stmt\nload_stmt     := 'load' STRING ';'\nclean_stmt    := 'clean' IDENT ';'\nselect_stmt   := 'select' IDENT (',' IDENT)* ';'\nsplit_stmt    := 'split' split_name '=' PERCENT ';'",
+      "runs": [
+        {
+          "text": "pipeline_",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "decl",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'pipeline' IDENT '{' statement* '}'",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "statement   ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "load_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " | ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "clean_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " | ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "select_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "               | ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "split_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " | ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "train_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " | ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "evaluate_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "load_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "   ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'load' STRING ';'",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "clean_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'clean' IDENT ';'",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "select_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'select' IDENT (',' ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "IDENT)*",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " ';'",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "split_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'split' ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "split_name",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " '=' PERCENT ';'",
+          "font": "Consolas",
+          "size": 9.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "split_name    := IDENT | 'train' | 'test'\ntrain_stmt    := 'train' IDENT '=' IDENT ';'\nevaluate_stmt := 'evaluate' IDENT ';'",
+      "runs": [
+        {
+          "text": "split_name",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= IDENT | 'train' | 'test'",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "train_stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "  :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'train' IDENT '=' IDENT ';'",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "evaluate_",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "stmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " :",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "= 'evaluate' IDENT ';'",
+          "font": "Consolas",
+          "size": 9.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "12.2 Sample Input — Valid Pipeline",
+      "runs": [
+        {
+          "text": "12.2 Sample Input — Valid Pipeline",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "pipeline student_prediction {\n    load \"students.csv\";\n    clean missing_values;\n    select cgpa, attendance, study_hours;\n    split train = 80%;\n    train model = decision_tree;\n    evaluate model;\n}",
+      "runs": [
+        {
+          "text": "pipeline ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "student_prediction",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " {",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    load \"students.csv\";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    clean ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "missing_values",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    select ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "cgpa",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ", attendance, ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "study_hours",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    split train = 80%;",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    train model = ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "decision_tree",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    evaluate model;",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "}",
+          "font": "Consolas",
+          "size": 9.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "12.3 Captured Prototype Output — Valid Pipeline",
+      "runs": [
+        {
+          "text": "12.3 Captured Prototype Output — Valid Pipeline",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "[LEXER OUTPUT] 30 tokens generated:\nPIPELINE, IDENT(student_prediction), LBRACE, LOAD, STRING(\"students.csv\"),\nSEMI, CLEAN, IDENT(missing_values), SEMI, SELECT, IDENT(cgpa), COMMA, ...\n \n[PARSER OUTPUT] AST for pipeline 'student_prediction':\n    LoadStmt(filename='students.csv', line=3)\n    CleanStmt(strategy='missing_values', line=4)\n    SelectStmt(columns=['cgpa','attendance','study_hours'], line=5)\n    SplitStmt(name='train', percent=80.0, line=6)\n    TrainStmt(model_name='model', algorithm='decision_tree', line=7)\n    EvaluateStmt(model_name='model', line=8)\n \n[SEMANTIC ANALYSIS]\n    No semantic errors found. Symbol table state:\n    data_loaded=True, data_cleaned=True, splits={'train': 80.0},\n    models={'model': 'decision_tree'}",
+      "runs": [
+        {
+          "text": "[LEXER OUTPUT] 30 tokens generated:",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "PIPELINE, IDENT(",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "student_prediction",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "), LBRACE, LOAD, STRING(\"students.csv\"),",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "SEMI, CLEAN, IDENT(",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "missing_values",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "), SEMI, SELECT, IDENT(",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "cgpa",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "), COMMA, ...",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "[PARSER OUTPUT] AST for pipeline '",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "student_prediction",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "':",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "LoadStmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "(filename='students.csv', line=3)",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "CleanStmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "(strategy='",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "missing_values",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "', line=4)",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "SelectStmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "(columns=['",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "cgpa",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "','attendance','",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "study_hours",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "'], line=5)",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "SplitStmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "(name='train', percent=80.0, line=6)",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "TrainStmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "(",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "model_name",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "='model', algorithm='",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "decision_tree",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "', line=7)",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "EvaluateStmt",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "(",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "model_name",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "='model', line=8)",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": " ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "[SEMANTIC ANALYSIS]",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    No semantic errors found. Symbol table state:",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "data_loaded",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "=True, ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "data_cleaned",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "=True, splits",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "={",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "'train': 80.0},",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    models",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "={",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "'model': '",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "decision_tree",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "'}",
+          "font": "Consolas",
+          "size": 9.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "12.4 Sample Input — Invalid Pipeline (train before split)",
+      "runs": [
+        {
+          "text": "12.4 Sample Input — Invalid Pipeline (train before split)",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "pipeline student_prediction {\n    load \"students.csv\";\n    clean missing_values;\n    select cgpa, attendance, study_hours;\n    train model = decision_tree;   // no prior split!\n    evaluate model;\n}",
+      "runs": [
+        {
+          "text": "pipeline ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "student_prediction",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": " {",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    load \"students.csv\";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    clean ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "missing_values",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    select ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "cgpa",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ", attendance, ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "study_hours",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    train model = ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "decision_",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "tree",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";   ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "// no prior split!",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    evaluate model;",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "}",
+          "font": "Consolas",
+          "size": 9.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "12.5 Captured Prototype Output — Invalid Pipeline",
+      "runs": [
+        {
+          "text": "12.5 Captured Prototype Output — Invalid Pipeline",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "[SEMANTIC ANALYSIS]\n    Semantic Error at line 6: training data has not been defined.\n    A 'split train = <percent>%;' statement must appear before\n    'train model = decision_tree;'.",
+      "runs": [
+        {
+          "text": "[SEMANTIC ANALYSIS]",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    Semantic Error at line 6: training data has not been defined.",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    A 'split train = <percent>%;' statement must appear before",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "\n",
+          "font": null,
+          "size": null
+        },
+        {
+          "text": "    'train model = ",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": "decision_tree",
+          "font": "Consolas",
+          "size": 9.0
+        },
+        {
+          "text": ";'.",
+          "font": "Consolas",
+          "size": 9.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "This confirms the core claim of the proposal: the ordering mistake is caught statically, by the semantic analyzer consulting the symbol table, before any pipeline stage would actually run — exactly the kind of genuine compiler-style semantic check (as opposed to simple input validation) required by the project guidelines.",
+      "runs": [
+        {
+          "text": "This confirms the core claim of the proposal: the ordering mistake is caught statically, by the semantic analyzer consulting the symbol table, before any pipeline stage would actually run — exactly the kind of genuine compiler-style semantic check (as opposed to simple input validation) required by the project guidelines.",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "13. Expected Outcomes and Roadmap",
+      "runs": [
+        {
+          "text": "13. Expected Outcomes and Roadmap",
+          "font": null,
+          "size": null
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "PHASE",
+          "PLANNED DELIVERABLES"
+        ],
+        [
+          "Phase 1",
+          "Finalized grammar, working lexer/parser/AST/semantic analyzer prototype, system architecture, and this design document."
+        ],
+        [
+          "Phase 2",
+          "Intermediate representation generation, the redundant-stage optimization pass, and an initial symbolic execution engine; expanded semantic checks (type checking on arguments, scope checking for multiple pipelines); module-wise test suite."
+        ],
+        [
+          "Phase 3",
+          "Full integration of all modules, comprehensive testing (valid, invalid, boundary, and complex pipelines), performance notes, a command-line demo tool, and the final project report and presentation."
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    }
+  ],
+  "Phase2.docx": [
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines",
+      "runs": [
+        {
+          "text": "A Domain-Specific Language and Compiler Front-End for Describing, Validating, and Executing Data Science Pipelines",
+          "font": null,
+          "size": 18.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Course Code: BCSE307P — Compiler Design Laboratory",
+      "runs": [
+        {
+          "text": "Course Code:",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": " BCSE307P — Compiler Design Laboratory",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Fall Semester 2026–27",
+      "runs": [
+        {
+          "text": "Fall Semester 2026–27",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "PHASE 2: Core Implementation",
+      "runs": [
+        {
+          "text": "PHASE 2:",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": " Core Implementation",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Prepared By:",
+      "runs": [
+        {
+          "text": "Prepared By:",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "SINCHANA B KURKURI",
+      "runs": [
+        {
+          "text": "SINCHANA B KURKURI",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "24BDS0352",
+      "runs": [
+        {
+          "text": "24BDS0352",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Slot: L49+L50",
+      "runs": [
+        {
+          "text": "Slot:",
+          "font": null,
+          "size": 15.0
+        },
+        {
+          "text": " L49+L50",
+          "font": null,
+          "size": 15.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Project Overview",
+      "runs": [
+        {
+          "text": "Project Overview",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The Data Science Pipeline DSL (Domain-Specific Language) is a custom compiler frontend designed to simplify and standardize the creation of machine learning pipelines. It addresses the complexity and boilerplate of setting up end-to-end data workflows by providing a clean, declarative language tailored specifically for tasks like loading datasets, cleaning values, selecting features, creating train/test splits, and evaluating machine learning models.",
+      "runs": [
+        {
+          "text": "The Data Science Pipeline DSL (Domain-Specific Language) is a custom compiler frontend designed to simplify and standardize the creation of machine learning pipelines. It addresses the complexity and boilerplate of setting up end-to-end data workflows by providing a clean, declarative language tailored specifically for tasks like loading datasets, cleaning values, selecting features, creating train/test splits, and evaluating machine learning models.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Phase 1 Recap",
+      "runs": [
+        {
+          "text": "Phase 1 Recap",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Before Phase 2, the project existed as a single-file prototype (initial_prototype.py) which grouped the lexer, parser, AST structures, and a semantic analyzer into one monolithic script. This early iteration proved the viability of the language grammar and logic but lacked modularity, intermediate representations, optimizations, an executor, and testing infrastructure.",
+      "runs": [
+        {
+          "text": "Before Phase 2, the project existed as a single-file prototype (initial_prototype.py) which grouped the lexer, parser, AST structures, and a semantic analyzer into one monolithic script. This early iteration proved the viability of the language grammar and logic but lacked modularity, intermediate representations, optimizations, an executor, and testing infrastructure.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Scope & Objectives",
+      "runs": [
+        {
+          "text": "Scope & Objectives",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The objectives of Phase 2 focused on transforming the prototype into a structured, modular compiler architecture. The goals were to:",
+      "runs": [
+        {
+          "text": "The objectives of Phase 2 focused on transforming the prototype into a structured, modular compiler architecture. The goals were to:",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Refactor the monolith into a proper Python package (ds_pipeline_dsl) with separated modules.",
+      "runs": [
+        {
+          "text": "Refactor the monolith into a proper Python package (ds_pipeline_dsl) with separated modules.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Introduce an Intermediate Representation (IR) generation stage (lower_to_ir).",
+      "runs": [
+        {
+          "text": "Introduce an Intermediate Representation (IR) generation stage (lower_to_ir).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Implement an Optimizer to collapse redundant statements and drop unreachable code.",
+      "runs": [
+        {
+          "text": "Implement an Optimizer to collapse redundant statements and drop unreachable code.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Create a Symbolic Executor to provide a human-readable execution trace.",
+      "runs": [
+        {
+          "text": "Create a Symbolic Executor to provide a human-readable execution trace.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Expose a fully-featured Command-Line Interface (cli.py) for inspecting each compiler stage.",
+      "runs": [
+        {
+          "text": "Expose a fully-featured Command-Line Interface (cli.py) for inspecting each compiler stage.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Establish a rigorous automated test suite covering all compiler stages and error states.",
+      "runs": [
+        {
+          "text": "Establish a rigorous automated test suite covering all compiler stages and error states.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "System Architecture",
+      "runs": [
+        {
+          "text": "System Architecture",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The pipeline now follows a standard multi-pass compiler architecture:",
+      "runs": [
+        {
+          "text": "The pipeline now follows a standard multi-pass compiler architecture:",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        {
+          "text": "",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Module-wise Implementation Details",
+      "runs": [
+        {
+          "text": "Module-wise Implementation Details",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "__init__.py",
+      "runs": [
+        {
+          "text": "__init__.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Marks the src/ds_pipeline_dsl/ directory as a Python package.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Marks the src/ds_pipeline_dsl/ directory as a Python package.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "ast_nodes.py",
+      "runs": [
+        {
+          "text": "ast_nodes.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Defines the Abstract Syntax Tree (AST) node structures.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Defines the Abstract Syntax Tree (AST) node structures.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: Dataclasses like PipelineNode, LoadStmt, CleanStmt, SplitStmt, TrainStmt, EvaluateStmt.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Dataclasses like PipelineNode, LoadStmt, CleanStmt, SplitStmt, TrainStmt, EvaluateStmt.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Provides purely structural representation of a parsed pipeline and its statements.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Provides purely structural representation of a parsed pipeline and its statements.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Instantiated by the parser and traversed by the semantic analyzer and IR lowerer.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Instantiated by the parser and traversed by the semantic analyzer and IR lowerer.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "lexer.py",
+      "runs": [
+        {
+          "text": "lexer.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Converts a raw string of DSL code into a sequential stream of tokens.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Converts a raw string of DSL code into a sequential stream of tokens.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: A Token namedtuple and a list of regex rules defining token patterns.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "A Token namedtuple and a list of regex rules defining token patterns.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Applies regex matches iteratively over the input string, discarding whitespace/comments and emitting Token objects. Raises a LexicalError on invalid characters.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Applies regex matches iteratively over the input string, discarding whitespace/comments and emitting Token objects. Raises a LexicalError on invalid characters.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Feeds the resulting token list into the parser.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Feeds the resulting token list into the parser.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "parser.py",
+      "runs": [
+        {
+          "text": "parser.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Constructs an Abstract Syntax Tree (AST) from the token stream.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Constructs an Abstract Syntax Tree (AST) from the token stream.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: A recursive-descent Parser class.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "A recursive-descent Parser class.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Uses peek(), advance(), and expect() methods to match tokens against the expected DSL grammar. Raises a SyntaxError_ if the tokens violate the grammar.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Uses peek(), advance(), and expect() methods to match tokens against the expected DSL grammar. Raises a SyntaxError_ if the tokens violate the grammar.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Takes input from the lexer and passes its output (PipelineNode) to the semantic analyzer.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Takes input from the lexer and passes its output (PipelineNode) to the semantic analyzer.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "semantic.py",
+      "runs": [
+        {
+          "text": "semantic.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Validates the logical correctness of the AST.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Validates the logical correctness of the AST.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: SymbolTable to track defined datasets, splits, and models.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "SymbolTable to track defined datasets, splits, and models.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Traverses the AST statements, ensuring operations are logically ordered (e.g., you cannot train before split and percentages must strictly fall between 0 and 100). Raises a SemanticError upon violations.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Traverses the AST statements, ensuring operations are logically ordered (e.g., you cannot train before split and percentages must strictly fall between 0 and 100). Raises a SemanticError upon violations.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Analyzes the AST produced by the parser before it is lowered to IR.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Analyzes the AST produced by the parser before it is lowered to IR.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "ir.py",
+      "runs": [
+        {
+          "text": "ir.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Lowers the hierarchical AST into a flat Intermediate Representation (IR).",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Lowers the hierarchical AST into a flat Intermediate Representation (IR).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: IRInstruction dataclass containing an opcode op and a dictionary of args.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "IRInstruction dataclass containing an opcode op and a dictionary of args.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Maps each AST statement node into exactly one corresponding IRInstruction sequentially.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Maps each AST statement node into exactly one corresponding IRInstruction sequentially.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Receives the validated AST and outputs an IR instruction list to the optimizer.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Receives the validated AST and outputs an IR instruction list to the optimizer.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "optimizer.py",
+      "runs": [
+        {
+          "text": "optimizer.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Improves the efficiency of the compiled code by transforming the IR.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Improves the efficiency of the compiled code by transforming the IR.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: Modifies a sequential list of IRInstruction objects.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Modifies a sequential list of IRInstruction objects.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Applies two passes simultaneously: collapsing immediately consecutive duplicate instructions (e.g., redundant OP_CLEAN or OP_SELECT with identical arguments) and stripping unreachable instructions that follow an OP_EVAL instruction.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Applies two passes simultaneously: collapsing immediately consecutive duplicate instructions (e.g., redundant OP_CLEAN or OP_SELECT with identical arguments) and stripping unreachable instructions that follow an OP_EVAL instruction.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Takes unoptimized IR from ir.py and provides optimized IR to the executor.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Takes unoptimized IR from ir.py and provides optimized IR to the executor.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "executor.py",
+      "runs": [
+        {
+          "text": "executor.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Performs a symbolic execution of the optimized IR.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Performs a symbolic execution of the optimized IR.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: Generates and returns a list of human-readable trace strings.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Generates and returns a list of human-readable trace strings.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Iterates over the optimized IR list and maps each opcode to a formatted, declarative status message.",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Iterates over the optimized IR list and maps each opcode to a formatted, declarative status message.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: Acts as the final endpoint of the compilation pipeline, translating machine-like IR back to the user context.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Acts as the final endpoint of the compilation pipeline, translating machine-like IR back to the user context.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "cli.py",
+      "runs": [
+        {
+          "text": "cli.py",
+          "font": "Courier New",
+          "size": 12.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Purpose: Provides a user-facing command-line interface.",
+      "runs": [
+        {
+          "text": "Purpose: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Provides a user-facing command-line interface.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Data Structures: Utilizes argparse for flag evaluation.",
+      "runs": [
+        {
+          "text": "Data Structures: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Utilizes argparse for flag evaluation.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Core Logic: Orchestrates the entire compiler pipeline. Captures specific exceptions (LexicalError, SyntaxError_, SemanticError) to display clean error messages without raw Python tracebacks, and selectively prints data from intermediate stages (--tokens, --ast, --ir, --optimized-ir, --trace).",
+      "runs": [
+        {
+          "text": "Core Logic: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Orchestrates the entire compiler pipeline. Captures specific exceptions (LexicalError, SyntaxError_, SemanticError) to display clean error messages without raw Python tracebacks, and selectively prints data from intermediate stages (--tokens, --ast, --ir, --optimized-ir, --trace).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Interaction: The entrypoint that coordinates and executes all compiler modules.",
+      "runs": [
+        {
+          "text": "Interaction: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "The entrypoint that coordinates and executes all compiler modules.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Compiler Design Concepts Applied",
+      "runs": [
+        {
+          "text": "Compiler Design Concepts Applied",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Concept",
+          "Implemented By Module"
+        ],
+        [
+          "Lexical Analysis",
+          "lexer.py"
+        ],
+        [
+          "Syntax Analysis / Parsing",
+          "parser.py"
+        ],
+        [
+          "Abstract Syntax Tree",
+          "ast_nodes.py, parser.py"
+        ],
+        [
+          "Semantic Analysis",
+          "semantic.py"
+        ],
+        [
+          "Intermediate Code Generation",
+          "ir.py"
+        ],
+        [
+          "Code Optimization",
+          "optimizer.py"
+        ],
+        [
+          "Symbolic Execution",
+          "executor.py"
+        ],
+        [
+          "Error Handling",
+          "cli.py, lexer.py, parser.py, semantic.py"
+        ],
+        [
+          "Command-Line Interface",
+          "cli.py"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Test Cases & Results",
+      "runs": [
+        {
+          "text": "Test Cases & Results",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "Test File",
+          "Verified Behavior",
+          "Tests",
+          "Status"
+        ],
+        [
+          "test_lexer.py",
+          "Valid token generation, correct error handling for illegal characters.",
+          "2",
+          "Passed"
+        ],
+        [
+          "test_parser.py",
+          "AST node construction, syntax error generation for missing elements.",
+          "2",
+          "Passed"
+        ],
+        [
+          "test_semantic.py",
+          "Valid logical flows, split bounds checks, missing prerequisites (e.g., train before split).",
+          "3",
+          "Passed"
+        ],
+        [
+          "test_ir.py",
+          "Correct generation of flat opcodes and preserved sequential ordering from AST to IR.",
+          "1",
+          "Passed"
+        ],
+        [
+          "test_optimizer.py",
+          "Elimination of exact duplicate operations, stripping of dead code following evaluations.",
+          "3",
+          "Passed"
+        ],
+        [
+          "test_executor.py",
+          "Proper formatting and generation of the final symbolic trace.",
+          "1",
+          "Passed"
+        ],
+        [
+          "test_cli.py",
+          "Argument flag ingestion, pipeline stage visualization, gracefully catching and formatting compilation errors.",
+          "3",
+          "Passed"
+        ],
+        [
+          "test_examples.py",
+          "End-to-end execution of the 4 .pipe file examples in the repository verifying expected successes and failures.",
+          "4",
+          "Passed"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Overall Result: 19 / 19 tests passed (0.07s).",
+      "runs": [
+        {
+          "text": "Overall Result: 19 / 19 tests passed (0.07s).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Functional Demonstration",
+      "runs": [
+        {
+          "text": "Functional Demonstration",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The repository includes four .pipe files under examples/ demonstrating various scenarios. You can run them via the CLI:",
+      "runs": [
+        {
+          "text": "The repository includes four .pipe files under examples/ demonstrating various scenarios. You can run them via the CLI:",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "1. Valid Basic Pipeline:",
+      "runs": [
+        {
+          "text": "1. Valid Basic Pipeline:",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "python -m ds_pipeline_dsl.cli examples/valid_basic.pipe"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Expected Output: Prints all 5 stages (Tokens, AST, IR, Optimized IR, and Trace) concluding with the successful 6-line evaluation trace.",
+      "runs": [
+        {
+          "text": "Expected Output: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Prints all 5 stages (Tokens, AST, IR, Optimized IR, and Trace) concluding with the successful 6-line evaluation trace.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "To only view the trace:",
+      "runs": [
+        {
+          "text": "To only view the trace:",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "python -m ds_pipeline_dsl.cli examples/valid_basic.pipe --trace"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "2. Semantic Error (Train Before Split):",
+      "runs": [
+        {
+          "text": "2. Semantic Error (Train Before Split):",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "python -m ds_pipeline_dsl.cli examples/invalid_train_before_split.pipe"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Expected Output: Semantic Error at line 5: training data has not been defined... (execution halts gracefully).",
+      "runs": [
+        {
+          "text": "Expected Output: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Semantic Error at line 5: training data has not been defined... (execution halts gracefully).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "3. Lexical Error (Invalid Character):",
+      "runs": [
+        {
+          "text": "3. Lexical Error (Invalid Character):",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "python -m ds_pipeline_dsl.cli examples/invalid_lexical_error.pipe"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Expected Output: Lexical Error at line 2, col 9: unexpected character '@' (execution halts gracefully).",
+      "runs": [
+        {
+          "text": "Expected Output: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Lexical Error at line 2, col 9: unexpected character '@' (execution halts gracefully).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "4. Syntax Error (Missing Semicolon):",
+      "runs": [
+        {
+          "text": "4. Syntax Error (Missing Semicolon):",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "rows": [
+        [
+          "python -m ds_pipeline_dsl.cli examples/invalid_syntax_error.pipe"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Expected Output: Syntax Error at line 3: expected SEMI, found CLEAN ('clean') (execution halts gracefully).",
+      "runs": [
+        {
+          "text": "Expected Output: ",
+          "font": null,
+          "size": 11.0
+        },
+        {
+          "text": "Syntax Error at line 3: expected SEMI, found CLEAN ('clean') (execution halts gracefully).",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Known Limitations",
+      "runs": [
+        {
+          "text": "Known Limitations",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "The executor is purely symbolic: Execution produces human-readable trace statements rather than performing actual machine learning operations.",
+      "runs": [
+        {
+          "text": "The executor is purely symbolic: Execution produces human-readable trace statements rather than performing actual machine learning operations.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "No real datasets are loaded: The compiler references data files for validation but does not read file contents.",
+      "runs": [
+        {
+          "text": "No real datasets are loaded: The compiler references data files for validation but does not read file contents.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "No real model training or prediction: The models evaluated are placeholder simulations.",
+      "runs": [
+        {
+          "text": "No real model training or prediction: The models evaluated are placeholder simulations.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Limited Optimization: The optimizer implements solely the duplicate-collapse and unreachable-code-removal rules currently defined in optimizer.py.",
+      "runs": [
+        {
+          "text": "Limited Optimization: The optimizer implements solely the duplicate-collapse and unreachable-code-removal rules currently defined in optimizer.py.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Future Enhancements",
+      "runs": [
+        {
+          "text": "Future Enhancements",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Enhanced Semantic Analysis: Add stronger dependency, reference, and argument validation to detect more pipeline errors before execution.",
+      "runs": [
+        {
+          "text": "Enhanced Semantic Analysis: Add stronger dependency, reference, and argument validation to detect more pipeline errors before execution.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "DSL Construct Expansion: Introduce additional data-processing constructs and propagate them through the complete compiler pipeline.",
+      "runs": [
+        {
+          "text": "DSL Construct Expansion: Introduce additional data-processing constructs and propagate them through the complete compiler pipeline.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Advanced Optimization Passes: Extend the optimizer with additional safe transformations such as redundant-operation and dead-stage elimination.",
+      "runs": [
+        {
+          "text": "Advanced Optimization Passes: Extend the optimizer with additional safe transformations such as redundant-operation and dead-stage elimination.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "List Paragraph",
+      "text": "Comprehensive Testing and Performance Evaluation: Expand testing with complex and boundary cases, perform end-to-end integration testing, and evaluate compiler performance across pipelines of different sizes.",
+      "runs": [
+        {
+          "text": "Comprehensive Testing and Performance Evaluation: Expand testing with complex and boundary cases, perform end-to-end integration testing, and evaluate compiler performance across pipelines of different sizes.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Source Code Access",
+      "runs": [
+        {
+          "text": "Source Code Access",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "The complete source code for this project is available on GitHub:",
+      "runs": [
+        {
+          "text": "The complete source code for this project is available on GitHub:",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "https://github.com/Sinchana-B-Kurkuri/A-Domain-Specific-Language-and-Compiler-Front-End-for-Data-Science-Pipelines",
+      "runs": []
+    },
+    {
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Conclusion",
+      "runs": [
+        {
+          "text": "Conclusion",
+          "font": null,
+          "size": 14.0
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "Phase 2 effectively evolved the Data Science Pipeline DSL from a proof-of-concept into a robust, structured compiler frontend. By introducing an intermediate representation, an optimization pass, and extensive testing, the ds_pipeline_dsl package sets a strong foundation for future backend execution capabilities.",
+      "runs": [
+        {
+          "text": "Phase 2 effectively evolved the Data Science Pipeline DSL from a proof-of-concept into a robust, structured compiler frontend. By introducing an intermediate representation, an optimization pass, and extensive testing, the ds_pipeline_dsl package sets a strong foundation for future backend execution capabilities.",
+          "font": null,
+          "size": 11.0
+        }
+      ]
+    }
+  ]
+}

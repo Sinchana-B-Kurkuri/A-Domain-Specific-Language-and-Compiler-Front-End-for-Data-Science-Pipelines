@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Data Science Pipeline DSL</title>
+  <rect width="64" height="64" rx="16" fill="#142D4E"/>
+  <path d="M16 41V24H48V41" fill="none" stroke="#78DCD3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="16" cy="42" r="6" fill="#78DCD3"/>
+  <circle cx="32" cy="24" r="7" fill="#FFFFFF"/>
+  <circle cx="48" cy="42" r="6" fill="#78DCD3"/>
+</svg>

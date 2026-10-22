@@ -1,0 +1,44 @@
+{
+  "per_file": {
+    "tests/test_benchmark.py": {
+      "passed": 10
+    },
+    "tests/test_boundary.py": {
+      "passed": 16
+    },
+    "tests/test_cli.py": {
+      "passed": 5
+    },
+    "tests/test_dashboard.py": {
+      "passed": 44
+    },
+    "tests/test_examples.py": {
+      "passed": 37
+    },
+    "tests/test_executor.py": {
+      "passed": 2
+    },
+    "tests/test_integration.py": {
+      "passed": 15
+    },
+    "tests/test_ir.py": {
+      "passed": 2
+    },
+    "tests/test_lexer.py": {
+      "passed": 23
+    },
+    "tests/test_optimizer.py": {
+      "passed": 53
+    },
+    "tests/test_parser.py": {
+      "passed": 27
+    },
+    "tests/test_semantic.py": {
+      "passed": 33
+    }
+  },
+  "totals": {
+    "passed": 267
+  },
+  "exit_code": 0
+}

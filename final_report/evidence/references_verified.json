@@ -1,0 +1,100 @@
+[
+  {
+    "number": 1,
+    "description": "A. V. Aho, M. S. Lam, R. Sethi, and J. D. Ullman, Compilers: Principles, Techniques, and Tools, 2nd ed. Pearson.",
+    "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472/9780321486813",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 2,
+    "description": "R. Nystrom, Crafting Interpreters, chapter Parsing Expressions.",
+    "url": "https://craftinginterpreters.com/parsing-expressions.html",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 3,
+    "description": "Python Software Foundation, re - Regular expression operations, Python documentation.",
+    "url": "https://docs.python.org/3/library/re.html",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 4,
+    "description": "Python Software Foundation, dataclasses - Data Classes, Python documentation.",
+    "url": "https://docs.python.org/3/library/dataclasses.html",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 5,
+    "description": "pytest developers, pytest documentation.",
+    "url": "https://docs.pytest.org/en/stable/",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 6,
+    "description": "Streamlit, Streamlit documentation.",
+    "url": "https://docs.streamlit.io/",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 7,
+    "description": "Apache Software Foundation, Apache Airflow Architecture Overview.",
+    "url": "https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/overview.html",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 8,
+    "description": "Luigi contributors, Getting Started, Luigi documentation.",
+    "url": "https://luigi.readthedocs.io/en/stable/",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 9,
+    "description": "Kubeflow contributors, Kubeflow Pipelines Overview.",
+    "url": "https://www.kubeflow.org/docs/components/pipelines/overview/",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 10,
+    "description": "scikit-learn developers, Pipeline, scikit-learn API documentation.",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  },
+  {
+    "number": 11,
+    "description": "Compiler Design Laboratory Project Instruction Manual, supplied course document, section 24.",
+    "url": "",
+    "verified_on": "2026-10-22",
+    "source_type": "supplied document"
+  },
+  {
+    "number": 12,
+    "description": "S. B. Kurkuri, Phase 1 Problem Definition and System Design, BCSE307P, Fall Semester 2026-27. Supplied project report.",
+    "url": "",
+    "verified_on": "2026-10-22",
+    "source_type": "supplied document"
+  },
+  {
+    "number": 13,
+    "description": "S. B. Kurkuri, Phase 2 Core Implementation, BCSE307P, Fall Semester 2026-27. Supplied project report.",
+    "url": "",
+    "verified_on": "2026-10-22",
+    "source_type": "supplied document"
+  },
+  {
+    "number": 14,
+    "description": "S. B. Kurkuri, Data Science Pipeline DSL source repository and accompanying tests. Local working-tree evidence and recorded Git history.",
+    "url": "https://github.com/Sinchana-B-Kurkuri/A-Domain-Specific-Language-and-Compiler-Front-End-for-Data-Science-Pipelines",
+    "verified_on": "2026-10-22",
+    "source_type": "publisher or official documentation"
+  }
+]

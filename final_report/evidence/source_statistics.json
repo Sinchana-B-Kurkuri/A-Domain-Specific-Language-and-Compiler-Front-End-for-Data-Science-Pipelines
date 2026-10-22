@@ -1,0 +1,362 @@
+[
+  {
+    "path": "src/ds_pipeline_dsl/__init__.py",
+    "physical_lines": 4,
+    "nonblank_lines": 4
+  },
+  {
+    "path": "src/ds_pipeline_dsl/ast_nodes.py",
+    "physical_lines": 45,
+    "nonblank_lines": 37
+  },
+  {
+    "path": "src/ds_pipeline_dsl/cli.py",
+    "physical_lines": 87,
+    "nonblank_lines": 75
+  },
+  {
+    "path": "src/ds_pipeline_dsl/executor.py",
+    "physical_lines": 28,
+    "nonblank_lines": 27
+  },
+  {
+    "path": "src/ds_pipeline_dsl/ir.py",
+    "physical_lines": 31,
+    "nonblank_lines": 29
+  },
+  {
+    "path": "src/ds_pipeline_dsl/lexer.py",
+    "physical_lines": 68,
+    "nonblank_lines": 59
+  },
+  {
+    "path": "src/ds_pipeline_dsl/optimizer.py",
+    "physical_lines": 157,
+    "nonblank_lines": 136
+  },
+  {
+    "path": "src/ds_pipeline_dsl/parser.py",
+    "physical_lines": 154,
+    "nonblank_lines": 134
+  },
+  {
+    "path": "src/ds_pipeline_dsl/semantic.py",
+    "physical_lines": 177,
+    "nonblank_lines": 162
+  },
+  {
+    "path": "tests/helpers.py",
+    "physical_lines": 124,
+    "nonblank_lines": 105
+  },
+  {
+    "path": "tests/test_benchmark.py",
+    "physical_lines": 154,
+    "nonblank_lines": 123
+  },
+  {
+    "path": "tests/test_boundary.py",
+    "physical_lines": 138,
+    "nonblank_lines": 126
+  },
+  {
+    "path": "tests/test_cli.py",
+    "physical_lines": 107,
+    "nonblank_lines": 94
+  },
+  {
+    "path": "tests/test_dashboard.py",
+    "physical_lines": 341,
+    "nonblank_lines": 298
+  },
+  {
+    "path": "tests/test_examples.py",
+    "physical_lines": 169,
+    "nonblank_lines": 145
+  },
+  {
+    "path": "tests/test_executor.py",
+    "physical_lines": 51,
+    "nonblank_lines": 46
+  },
+  {
+    "path": "tests/test_integration.py",
+    "physical_lines": 232,
+    "nonblank_lines": 192
+  },
+  {
+    "path": "tests/test_ir.py",
+    "physical_lines": 63,
+    "nonblank_lines": 53
+  },
+  {
+    "path": "tests/test_lexer.py",
+    "physical_lines": 112,
+    "nonblank_lines": 96
+  },
+  {
+    "path": "tests/test_optimizer.py",
+    "physical_lines": 649,
+    "nonblank_lines": 579
+  },
+  {
+    "path": "tests/test_parser.py",
+    "physical_lines": 168,
+    "nonblank_lines": 143
+  },
+  {
+    "path": "tests/test_semantic.py",
+    "physical_lines": 439,
+    "nonblank_lines": 401
+  },
+  {
+    "path": "examples/complex_multi_model.pipe",
+    "physical_lines": 12,
+    "nonblank_lines": 12
+  },
+  {
+    "path": "examples/complex_redundant.pipe",
+    "physical_lines": 14,
+    "nonblank_lines": 14
+  },
+  {
+    "path": "examples/complex_valid_drop_chain.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/data/README.md",
+    "physical_lines": 7,
+    "nonblank_lines": 5
+  },
+  {
+    "path": "examples/examples_demo.py",
+    "physical_lines": 55,
+    "nonblank_lines": 47
+  },
+  {
+    "path": "examples/invalid_clean_after_train.pipe",
+    "physical_lines": 8,
+    "nonblank_lines": 8
+  },
+  {
+    "path": "examples/invalid_drop_after_train.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_drop_all_selected.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_drop_before_load.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_drop_twice.pipe",
+    "physical_lines": 10,
+    "nonblank_lines": 10
+  },
+  {
+    "path": "examples/invalid_duplicate_load.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_duplicate_model.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_duplicate_split.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_lexical_error.pipe",
+    "physical_lines": 8,
+    "nonblank_lines": 8
+  },
+  {
+    "path": "examples/invalid_select_dropped_column.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_split_total_over_100.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/invalid_syntax_error.pipe",
+    "physical_lines": 8,
+    "nonblank_lines": 8
+  },
+  {
+    "path": "examples/invalid_train_before_split.pipe",
+    "physical_lines": 8,
+    "nonblank_lines": 8
+  },
+  {
+    "path": "examples/optimizer_demo.pipe",
+    "physical_lines": 13,
+    "nonblank_lines": 13
+  },
+  {
+    "path": "examples/valid_basic.pipe",
+    "physical_lines": 8,
+    "nonblank_lines": 8
+  },
+  {
+    "path": "examples/valid_drop.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "examples/valid_select_then_drop.pipe",
+    "physical_lines": 9,
+    "nonblank_lines": 9
+  },
+  {
+    "path": "docs/architecture.md",
+    "physical_lines": 168,
+    "nonblank_lines": 142
+  },
+  {
+    "path": "docs/demo.md",
+    "physical_lines": 211,
+    "nonblank_lines": 177
+  },
+  {
+    "path": "docs/demo_outputs/01_valid_basic_all_stages.txt",
+    "physical_lines": 59,
+    "nonblank_lines": 59
+  },
+  {
+    "path": "docs/demo_outputs/02_valid_drop_all_stages.txt",
+    "physical_lines": 67,
+    "nonblank_lines": 67
+  },
+  {
+    "path": "docs/demo_outputs/03_lexical_error.txt",
+    "physical_lines": 2,
+    "nonblank_lines": 2
+  },
+  {
+    "path": "docs/demo_outputs/04_syntax_error.txt",
+    "physical_lines": 33,
+    "nonblank_lines": 33
+  },
+  {
+    "path": "docs/demo_outputs/05_semantic_train_before_split.txt",
+    "physical_lines": 36,
+    "nonblank_lines": 36
+  },
+  {
+    "path": "docs/demo_outputs/06_semantic_split_total_over_100.txt",
+    "physical_lines": 41,
+    "nonblank_lines": 41
+  },
+  {
+    "path": "docs/demo_outputs/07_optimizer_before_after.txt",
+    "physical_lines": 27,
+    "nonblank_lines": 27
+  },
+  {
+    "path": "docs/demo_outputs/08_complex_multi_model_trace.txt",
+    "physical_lines": 11,
+    "nonblank_lines": 11
+  },
+  {
+    "path": "docs/demo_outputs/09_pytest.txt",
+    "physical_lines": 6,
+    "nonblank_lines": 6
+  },
+  {
+    "path": "docs/demo_outputs/10_benchmark_table.txt",
+    "physical_lines": 7,
+    "nonblank_lines": 7
+  },
+  {
+    "path": "docs/grammar.md",
+    "physical_lines": 99,
+    "nonblank_lines": 81
+  },
+  {
+    "path": "docs/performance.md",
+    "physical_lines": 39,
+    "nonblank_lines": 34
+  },
+  {
+    "path": "docs/phase2_report.md",
+    "physical_lines": 164,
+    "nonblank_lines": 133
+  },
+  {
+    "path": "docs/report_and_presentation_checklist.md",
+    "physical_lines": 214,
+    "nonblank_lines": 183
+  },
+  {
+    "path": "docs/screenshots/README.md",
+    "physical_lines": 45,
+    "nonblank_lines": 33
+  },
+  {
+    "path": "docs/test_results.txt",
+    "physical_lines": 243,
+    "nonblank_lines": 239
+  },
+  {
+    "path": "benchmarks/benchmark.py",
+    "physical_lines": 470,
+    "nonblank_lines": 393
+  },
+  {
+    "path": "dashboard/app.py",
+    "physical_lines": 559,
+    "nonblank_lines": 517
+  },
+  {
+    "path": "dashboard/compiler_runner.py",
+    "physical_lines": 187,
+    "nonblank_lines": 160
+  },
+  {
+    "path": "dashboard/logo.svg",
+    "physical_lines": 8,
+    "nonblank_lines": 8
+  },
+  {
+    "path": "dashboard/performance_loader.py",
+    "physical_lines": 73,
+    "nonblank_lines": 65
+  },
+  {
+    "path": ".streamlit/config.toml",
+    "physical_lines": 13,
+    "nonblank_lines": 11
+  },
+  {
+    "path": "README.md",
+    "physical_lines": 269,
+    "nonblank_lines": 215
+  },
+  {
+    "path": "pyproject.toml",
+    "physical_lines": 10,
+    "nonblank_lines": 8
+  },
+  {
+    "path": ".gitignore",
+    "physical_lines": 10,
+    "nonblank_lines": 10
+  },
+  {
+    "path": "requirements-dashboard.txt",
+    "physical_lines": 1,
+    "nonblank_lines": 1
+  }
+]

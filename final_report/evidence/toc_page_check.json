@@ -1,0 +1,456 @@
+{
+  "entries": 90,
+  "mismatches": 0,
+  "checks": [
+    {
+      "heading": "Chapter 1 Introduction",
+      "actual_page": 1,
+      "toc_page": "1"
+    },
+    {
+      "heading": "1.1 Background and problem area",
+      "actual_page": 1,
+      "toc_page": "1"
+    },
+    {
+      "heading": "1.2 Motivation",
+      "actual_page": 1,
+      "toc_page": "1"
+    },
+    {
+      "heading": "1.3 Language and implementation overview",
+      "actual_page": 1,
+      "toc_page": "1"
+    },
+    {
+      "heading": "1.4 Report organization",
+      "actual_page": 1,
+      "toc_page": "1"
+    },
+    {
+      "heading": "Chapter 2 Problem Statement",
+      "actual_page": 2,
+      "toc_page": "2"
+    },
+    {
+      "heading": "2.1 Problem definition",
+      "actual_page": 2,
+      "toc_page": "2"
+    },
+    {
+      "heading": "2.2 Functional boundaries",
+      "actual_page": 2,
+      "toc_page": "2"
+    },
+    {
+      "heading": "2.3 Inputs outputs and acceptance conditions",
+      "actual_page": 2,
+      "toc_page": "2"
+    },
+    {
+      "heading": "Chapter 3 Objectives",
+      "actual_page": 3,
+      "toc_page": "3"
+    },
+    {
+      "heading": "3.1 Objectives carried forward from Phase 1",
+      "actual_page": 3,
+      "toc_page": "3"
+    },
+    {
+      "heading": "3.2 Scope decisions and additional outcomes",
+      "actual_page": 4,
+      "toc_page": "4"
+    },
+    {
+      "heading": "Chapter 4 Literature Survey or Background Study",
+      "actual_page": 5,
+      "toc_page": "5"
+    },
+    {
+      "heading": "4.1 Workflow orchestration and library pipelines",
+      "actual_page": 5,
+      "toc_page": "5"
+    },
+    {
+      "heading": "4.2 Compiler foundations",
+      "actual_page": 5,
+      "toc_page": "5"
+    },
+    {
+      "heading": "4.3 Gap addressed",
+      "actual_page": 6,
+      "toc_page": "6"
+    },
+    {
+      "heading": "Chapter 5 System Design",
+      "actual_page": 7,
+      "toc_page": "7"
+    },
+    {
+      "heading": "5.1 Architecture and data flow",
+      "actual_page": 7,
+      "toc_page": "7"
+    },
+    {
+      "heading": "5.2 Failure propagation",
+      "actual_page": 8,
+      "toc_page": "8"
+    },
+    {
+      "heading": "5.3 Module responsibilities",
+      "actual_page": 8,
+      "toc_page": "8"
+    },
+    {
+      "heading": "5.4 Symbol table and IR design",
+      "actual_page": 9,
+      "toc_page": "9"
+    },
+    {
+      "heading": "5.5 Interfaces and presentation design",
+      "actual_page": 10,
+      "toc_page": "10"
+    },
+    {
+      "heading": "5.6 Project directory organization",
+      "actual_page": 10,
+      "toc_page": "10"
+    },
+    {
+      "heading": "Chapter 6 Methodology",
+      "actual_page": 11,
+      "toc_page": "11"
+    },
+    {
+      "heading": "6.1 Phased development",
+      "actual_page": 11,
+      "toc_page": "11"
+    },
+    {
+      "heading": "6.2 Development history",
+      "actual_page": 11,
+      "toc_page": "11"
+    },
+    {
+      "heading": "6.3 Design decisions",
+      "actual_page": 11,
+      "toc_page": "11"
+    },
+    {
+      "heading": "6.4 Optimizer corrections and regression validation",
+      "actual_page": 12,
+      "toc_page": "12"
+    },
+    {
+      "heading": "6.5 Reconciliation of earlier descriptions",
+      "actual_page": 12,
+      "toc_page": "12"
+    },
+    {
+      "heading": "Chapter 7 Compiler Design Concepts Used",
+      "actual_page": 13,
+      "toc_page": "13"
+    },
+    {
+      "heading": "7.1 Lexical analysis",
+      "actual_page": 13,
+      "toc_page": "13"
+    },
+    {
+      "heading": "7.2 Syntax analysis",
+      "actual_page": 14,
+      "toc_page": "14"
+    },
+    {
+      "heading": "7.3 Abstract syntax tree",
+      "actual_page": 15,
+      "toc_page": "15"
+    },
+    {
+      "heading": "7.4 Symbol table and semantic analysis",
+      "actual_page": 16,
+      "toc_page": "16"
+    },
+    {
+      "heading": "7.5 Intermediate representation",
+      "actual_page": 19,
+      "toc_page": "19"
+    },
+    {
+      "heading": "7.6 Four-pass optimization",
+      "actual_page": 19,
+      "toc_page": "19"
+    },
+    {
+      "heading": "7.7 Symbolic execution",
+      "actual_page": 21,
+      "toc_page": "21"
+    },
+    {
+      "heading": "7.8 Error detection and handling",
+      "actual_page": 22,
+      "toc_page": "22"
+    },
+    {
+      "heading": "Chapter 8 Implementation",
+      "actual_page": 23,
+      "toc_page": "23"
+    },
+    {
+      "heading": "8.1 Language tools and versions",
+      "actual_page": 23,
+      "toc_page": "23"
+    },
+    {
+      "heading": "8.2 Source inventory",
+      "actual_page": 23,
+      "toc_page": "23"
+    },
+    {
+      "heading": "8.3 Core algorithms",
+      "actual_page": 24,
+      "toc_page": "24"
+    },
+    {
+      "heading": "8.4 Selected implementation excerpts",
+      "actual_page": 24,
+      "toc_page": "24"
+    },
+    {
+      "heading": "8.5 Command-line interface",
+      "actual_page": 26,
+      "toc_page": "26"
+    },
+    {
+      "heading": "8.6 Benchmark implementation",
+      "actual_page": 26,
+      "toc_page": "26"
+    },
+    {
+      "heading": "8.7 Dashboard implementation",
+      "actual_page": 26,
+      "toc_page": "26"
+    },
+    {
+      "heading": "Chapter 9 Testing and Results",
+      "actual_page": 28,
+      "toc_page": "28"
+    },
+    {
+      "heading": "9.1 Test strategy and executed results",
+      "actual_page": 28,
+      "toc_page": "28"
+    },
+    {
+      "heading": "9.2 Baseline compilation and drop integration",
+      "actual_page": 29,
+      "toc_page": "29"
+    },
+    {
+      "heading": "9.3 Representative expected and actual cases",
+      "actual_page": 30,
+      "toc_page": "30"
+    },
+    {
+      "heading": "9.4 Error demonstrations",
+      "actual_page": 30,
+      "toc_page": "30"
+    },
+    {
+      "heading": "9.5 Optimizer demonstration",
+      "actual_page": 31,
+      "toc_page": "31"
+    },
+    {
+      "heading": "9.6 Complex cases and transformation boundaries",
+      "actual_page": 32,
+      "toc_page": "32"
+    },
+    {
+      "heading": "9.7 All supplied example outcomes",
+      "actual_page": 33,
+      "toc_page": "33"
+    },
+    {
+      "heading": "9.8 Recorded performance evaluation",
+      "actual_page": 34,
+      "toc_page": "34"
+    },
+    {
+      "heading": "9.9 Performance charts and recorded observations",
+      "actual_page": 36,
+      "toc_page": "36"
+    },
+    {
+      "heading": "9.10 Limits of the evaluation",
+      "actual_page": 37,
+      "toc_page": "37"
+    },
+    {
+      "heading": "Chapter 10 Conclusion",
+      "actual_page": 38,
+      "toc_page": "38"
+    },
+    {
+      "heading": "10.1 Achievements against objectives",
+      "actual_page": 38,
+      "toc_page": "38"
+    },
+    {
+      "heading": "10.2 Limitations",
+      "actual_page": 38,
+      "toc_page": "38"
+    },
+    {
+      "heading": "10.3 Learning outcomes",
+      "actual_page": 38,
+      "toc_page": "38"
+    },
+    {
+      "heading": "Chapter 11 Future Enhancements",
+      "actual_page": 39,
+      "toc_page": "39"
+    },
+    {
+      "heading": "11.1 Language and validation extensions",
+      "actual_page": 39,
+      "toc_page": "39"
+    },
+    {
+      "heading": "11.2 Execution and optimization extensions",
+      "actual_page": 39,
+      "toc_page": "39"
+    },
+    {
+      "heading": "11.3 Evaluation extensions",
+      "actual_page": 39,
+      "toc_page": "39"
+    },
+    {
+      "heading": "References",
+      "actual_page": 40,
+      "toc_page": "40"
+    },
+    {
+      "heading": "Appendix A Final Grammar and Lexical Specification",
+      "actual_page": 41,
+      "toc_page": "41"
+    },
+    {
+      "heading": "A.1 Final EBNF",
+      "actual_page": 41,
+      "toc_page": "41"
+    },
+    {
+      "heading": "A.2 Lexical details",
+      "actual_page": 41,
+      "toc_page": "41"
+    },
+    {
+      "heading": "Appendix B Complete Diagnostic Catalogue",
+      "actual_page": 42,
+      "toc_page": "42"
+    },
+    {
+      "heading": "B.1 Lexical and syntax patterns",
+      "actual_page": 42,
+      "toc_page": "42"
+    },
+    {
+      "heading": "B.2 Semantic patterns and source locations",
+      "actual_page": 42,
+      "toc_page": "42"
+    },
+    {
+      "heading": "B.3 Executed semantic trigger specimens",
+      "actual_page": 44,
+      "toc_page": "44"
+    },
+    {
+      "heading": "B.4 Driver and dashboard boundaries",
+      "actual_page": 45,
+      "toc_page": "45"
+    },
+    {
+      "heading": "Appendix C Key Source Listings",
+      "actual_page": 46,
+      "toc_page": "46"
+    },
+    {
+      "heading": "C.1 AST data model",
+      "actual_page": 46,
+      "toc_page": "46"
+    },
+    {
+      "heading": "C.2 IR representation and lowering",
+      "actual_page": 47,
+      "toc_page": "47"
+    },
+    {
+      "heading": "C.3 Symbolic executor",
+      "actual_page": 48,
+      "toc_page": "48"
+    },
+    {
+      "heading": "C.4 Evaluation state snapshots used by the tests",
+      "actual_page": 48,
+      "toc_page": "48"
+    },
+    {
+      "heading": "Appendix D Example Programs and Sources",
+      "actual_page": 49,
+      "toc_page": "49"
+    },
+    {
+      "heading": "D.1 valid basic",
+      "actual_page": 50,
+      "toc_page": "50"
+    },
+    {
+      "heading": "D.2 valid drop",
+      "actual_page": 50,
+      "toc_page": "50"
+    },
+    {
+      "heading": "D.3 optimizer demo",
+      "actual_page": 50,
+      "toc_page": "50"
+    },
+    {
+      "heading": "D.4 complex multi model",
+      "actual_page": 51,
+      "toc_page": "51"
+    },
+    {
+      "heading": "Appendix E Reproduction and User Instructions",
+      "actual_page": 52,
+      "toc_page": "52"
+    },
+    {
+      "heading": "E.1 Compiler installation and CLI",
+      "actual_page": 52,
+      "toc_page": "52"
+    },
+    {
+      "heading": "E.2 Tests and stage inspection",
+      "actual_page": 52,
+      "toc_page": "52"
+    },
+    {
+      "heading": "E.3 Dashboard",
+      "actual_page": 52,
+      "toc_page": "52"
+    },
+    {
+      "heading": "E.4 Benchmark and report build",
+      "actual_page": 52,
+      "toc_page": "52"
+    },
+    {
+      "heading": "Appendix F Evolution Across Implementation Phases",
+      "actual_page": 54,
+      "toc_page": "54"
+    }
+  ]
+}

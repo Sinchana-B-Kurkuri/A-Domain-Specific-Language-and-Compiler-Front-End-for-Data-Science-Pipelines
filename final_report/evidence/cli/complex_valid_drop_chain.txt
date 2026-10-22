@@ -1,0 +1,68 @@
+=== TOKENS ===
+Token(type='PIPELINE', value='pipeline', line=1, col=0)
+Token(type='IDENT', value='complex_valid_drop_chain', line=1, col=9)
+Token(type='LBRACE', value='{', line=1, col=34)
+Token(type='LOAD', value='load', line=2, col=4)
+Token(type='STRING', value='"students.csv"', line=2, col=9)
+Token(type='SEMI', value=';', line=2, col=23)
+Token(type='SELECT', value='select', line=3, col=4)
+Token(type='IDENT', value='c1', line=3, col=11)
+Token(type='COMMA', value=',', line=3, col=13)
+Token(type='IDENT', value='c2', line=3, col=15)
+Token(type='COMMA', value=',', line=3, col=17)
+Token(type='IDENT', value='c3', line=3, col=19)
+Token(type='COMMA', value=',', line=3, col=21)
+Token(type='IDENT', value='c4', line=3, col=23)
+Token(type='COMMA', value=',', line=3, col=25)
+Token(type='IDENT', value='c5', line=3, col=27)
+Token(type='SEMI', value=';', line=3, col=29)
+Token(type='DROP', value='drop', line=4, col=4)
+Token(type='IDENT', value='c1', line=4, col=9)
+Token(type='SEMI', value=';', line=4, col=11)
+Token(type='SPLIT', value='split', line=5, col=4)
+Token(type='TRAIN', value='train', line=5, col=10)
+Token(type='EQUALS', value='=', line=5, col=16)
+Token(type='PERCENT', value='80%', line=5, col=18)
+Token(type='SEMI', value=';', line=5, col=21)
+Token(type='DROP', value='drop', line=6, col=4)
+Token(type='IDENT', value='c2', line=6, col=9)
+Token(type='SEMI', value=';', line=6, col=11)
+Token(type='TRAIN', value='train', line=7, col=4)
+Token(type='IDENT', value='model', line=7, col=10)
+Token(type='EQUALS', value='=', line=7, col=16)
+Token(type='IDENT', value='decision_tree', line=7, col=18)
+Token(type='SEMI', value=';', line=7, col=31)
+Token(type='EVALUATE', value='evaluate', line=8, col=4)
+Token(type='IDENT', value='model', line=8, col=13)
+Token(type='SEMI', value=';', line=8, col=18)
+Token(type='RBRACE', value='}', line=9, col=0)
+Token(type='EOF', value='', line=10, col=0)
+=== AST ===
+PipelineNode(name='complex_valid_drop_chain', statements=[LoadStmt(filename='students.csv', line=2), SelectStmt(columns=['c1', 'c2', 'c3', 'c4', 'c5'], line=3), DropStmt(columns=['c1'], line=4), SplitStmt(name='train', percent=80.0, line=5), DropStmt(columns=['c2'], line=6), TrainStmt(model_name='model', algorithm='decision_tree', line=7), EvaluateStmt(model_name='model', line=8)], line=1)
+=== IR ===
+IRInstruction(op='OP_LOAD', args={'filename': 'students.csv', 'line': 2})
+IRInstruction(op='OP_SELECT', args={'columns': ['c1', 'c2', 'c3', 'c4', 'c5'], 'line': 3})
+IRInstruction(op='OP_DROP', args={'columns': ['c1'], 'line': 4})
+IRInstruction(op='OP_SPLIT', args={'name': 'train', 'percent': 80.0, 'line': 5})
+IRInstruction(op='OP_DROP', args={'columns': ['c2'], 'line': 6})
+IRInstruction(op='OP_TRAIN', args={'model_name': 'model', 'algorithm': 'decision_tree', 'line': 7})
+IRInstruction(op='OP_EVAL', args={'model_name': 'model', 'line': 8})
+=== OPTIMIZED IR ===
+IRInstruction(op='OP_LOAD', args={'filename': 'students.csv', 'line': 2})
+IRInstruction(op='OP_SELECT', args={'columns': ['c1', 'c2', 'c3', 'c4', 'c5'], 'line': 3})
+IRInstruction(op='OP_DROP', args={'columns': ['c1'], 'line': 4})
+IRInstruction(op='OP_SPLIT', args={'name': 'train', 'percent': 80.0, 'line': 5})
+IRInstruction(op='OP_DROP', args={'columns': ['c2'], 'line': 6})
+IRInstruction(op='OP_TRAIN', args={'model_name': 'model', 'algorithm': 'decision_tree', 'line': 7})
+IRInstruction(op='OP_EVAL', args={'model_name': 'model', 'line': 8})
+=== OPTIMIZATION NOTES ===
+(no optimizations applied)
+IR instructions: 7 -> 7
+=== TRACE ===
+Loaded students.csv
+Selected columns: c1, c2, c3, c4, c5
+Dropped columns: c1
+Defined split 'train' = 80%
+Dropped columns: c2
+Trained model 'model' using decision_tree
+Evaluated model 'model' (simulated accuracy trace)

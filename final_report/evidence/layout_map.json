@@ -1,0 +1,658 @@
+{
+  "figures": [
+    {
+      "physical_page": 15,
+      "title": "Compiler architecture and representation flow",
+      "display_page": 7
+    },
+    {
+      "physical_page": 16,
+      "title": "First-error control flow",
+      "display_page": 8
+    },
+    {
+      "physical_page": 17,
+      "title": "Compiler package structure",
+      "display_page": 9
+    },
+    {
+      "physical_page": 23,
+      "title": "AST produced for the basic valid pipeline",
+      "display_page": 15
+    },
+    {
+      "physical_page": 26,
+      "title": "Symbol table evolution for the basic valid pipeline",
+      "display_page": 18
+    },
+    {
+      "physical_page": 37,
+      "title": "Distribution of executed tests by file",
+      "display_page": 29
+    },
+    {
+      "physical_page": 39,
+      "title": "Real original and optimized instruction sequences",
+      "display_page": 31
+    },
+    {
+      "physical_page": 44,
+      "title": "Recorded stage-time breakdown by program size",
+      "display_page": 36
+    },
+    {
+      "physical_page": 44,
+      "title": "Recorded microseconds per statement",
+      "display_page": 36
+    },
+    {
+      "physical_page": 45,
+      "title": "Recorded original and optimized IR sizes",
+      "display_page": 37
+    }
+  ],
+  "tables": [
+    {
+      "physical_page": 10,
+      "rows": 6,
+      "columns": 3
+    },
+    {
+      "physical_page": 12,
+      "rows": 10,
+      "columns": 4
+    },
+    {
+      "physical_page": 13,
+      "rows": 6,
+      "columns": 4
+    },
+    {
+      "physical_page": 17,
+      "rows": 9,
+      "columns": 3
+    },
+    {
+      "physical_page": 18,
+      "rows": 5,
+      "columns": 2
+    },
+    {
+      "physical_page": 19,
+      "rows": 8,
+      "columns": 2
+    },
+    {
+      "physical_page": 21,
+      "rows": 15,
+      "columns": 4
+    },
+    {
+      "physical_page": 23,
+      "rows": 9,
+      "columns": 2
+    },
+    {
+      "physical_page": 24,
+      "rows": 11,
+      "columns": 3
+    },
+    {
+      "physical_page": 26,
+      "rows": 22,
+      "columns": 3
+    },
+    {
+      "physical_page": 27,
+      "rows": 8,
+      "columns": 3
+    },
+    {
+      "physical_page": 30,
+      "rows": 8,
+      "columns": 2
+    },
+    {
+      "physical_page": 30,
+      "rows": 4,
+      "columns": 3
+    },
+    {
+      "physical_page": 31,
+      "rows": 9,
+      "columns": 2
+    },
+    {
+      "physical_page": 32,
+      "rows": 10,
+      "columns": 3
+    },
+    {
+      "physical_page": 34,
+      "rows": 7,
+      "columns": 2
+    },
+    {
+      "physical_page": 36,
+      "rows": 14,
+      "columns": 5
+    },
+    {
+      "physical_page": 38,
+      "rows": 8,
+      "columns": 3
+    },
+    {
+      "physical_page": 41,
+      "rows": 21,
+      "columns": 4
+    },
+    {
+      "physical_page": 43,
+      "rows": 5,
+      "columns": 15
+    },
+    {
+      "physical_page": 49,
+      "rows": 9,
+      "columns": 2
+    },
+    {
+      "physical_page": 50,
+      "rows": 9,
+      "columns": 2
+    },
+    {
+      "physical_page": 51,
+      "rows": 22,
+      "columns": 2
+    },
+    {
+      "physical_page": 57,
+      "rows": 21,
+      "columns": 2
+    },
+    {
+      "physical_page": 62,
+      "rows": 9,
+      "columns": 4
+    }
+  ],
+  "headings": [
+    {
+      "physical_page": 9,
+      "text": "Chapter 1 Introduction",
+      "display_page": 1
+    },
+    {
+      "physical_page": 9,
+      "text": "1.1 Background and problem area",
+      "display_page": 1
+    },
+    {
+      "physical_page": 9,
+      "text": "1.2 Motivation",
+      "display_page": 1
+    },
+    {
+      "physical_page": 9,
+      "text": "1.3 Language and implementation overview",
+      "display_page": 1
+    },
+    {
+      "physical_page": 9,
+      "text": "1.4 Report organization",
+      "display_page": 1
+    },
+    {
+      "physical_page": 10,
+      "text": "Chapter 2 Problem Statement",
+      "display_page": 2
+    },
+    {
+      "physical_page": 10,
+      "text": "2.1 Problem definition",
+      "display_page": 2
+    },
+    {
+      "physical_page": 10,
+      "text": "2.2 Functional boundaries",
+      "display_page": 2
+    },
+    {
+      "physical_page": 10,
+      "text": "2.3 Inputs outputs and acceptance conditions",
+      "display_page": 2
+    },
+    {
+      "physical_page": 11,
+      "text": "Chapter 3 Objectives",
+      "display_page": 3
+    },
+    {
+      "physical_page": 11,
+      "text": "3.1 Objectives carried forward from Phase 1",
+      "display_page": 3
+    },
+    {
+      "physical_page": 12,
+      "text": "3.2 Scope decisions and additional outcomes",
+      "display_page": 4
+    },
+    {
+      "physical_page": 13,
+      "text": "Chapter 4 Literature Survey or Background Study",
+      "display_page": 5
+    },
+    {
+      "physical_page": 13,
+      "text": "4.1 Workflow orchestration and library pipelines",
+      "display_page": 5
+    },
+    {
+      "physical_page": 13,
+      "text": "4.2 Compiler foundations",
+      "display_page": 5
+    },
+    {
+      "physical_page": 14,
+      "text": "4.3 Gap addressed",
+      "display_page": 6
+    },
+    {
+      "physical_page": 15,
+      "text": "Chapter 5 System Design",
+      "display_page": 7
+    },
+    {
+      "physical_page": 15,
+      "text": "5.1 Architecture and data flow",
+      "display_page": 7
+    },
+    {
+      "physical_page": 16,
+      "text": "5.2 Failure propagation",
+      "display_page": 8
+    },
+    {
+      "physical_page": 16,
+      "text": "5.3 Module responsibilities",
+      "display_page": 8
+    },
+    {
+      "physical_page": 17,
+      "text": "5.4 Symbol table and IR design",
+      "display_page": 9
+    },
+    {
+      "physical_page": 18,
+      "text": "5.5 Interfaces and presentation design",
+      "display_page": 10
+    },
+    {
+      "physical_page": 18,
+      "text": "5.6 Project directory organization",
+      "display_page": 10
+    },
+    {
+      "physical_page": 19,
+      "text": "Chapter 6 Methodology",
+      "display_page": 11
+    },
+    {
+      "physical_page": 19,
+      "text": "6.1 Phased development",
+      "display_page": 11
+    },
+    {
+      "physical_page": 19,
+      "text": "6.2 Development history",
+      "display_page": 11
+    },
+    {
+      "physical_page": 19,
+      "text": "6.3 Design decisions",
+      "display_page": 11
+    },
+    {
+      "physical_page": 20,
+      "text": "6.4 Optimizer corrections and regression validation",
+      "display_page": 12
+    },
+    {
+      "physical_page": 20,
+      "text": "6.5 Reconciliation of earlier descriptions",
+      "display_page": 12
+    },
+    {
+      "physical_page": 21,
+      "text": "Chapter 7 Compiler Design Concepts Used",
+      "display_page": 13
+    },
+    {
+      "physical_page": 21,
+      "text": "7.1 Lexical analysis",
+      "display_page": 13
+    },
+    {
+      "physical_page": 22,
+      "text": "7.2 Syntax analysis",
+      "display_page": 14
+    },
+    {
+      "physical_page": 23,
+      "text": "7.3 Abstract syntax tree",
+      "display_page": 15
+    },
+    {
+      "physical_page": 24,
+      "text": "7.4 Symbol table and semantic analysis",
+      "display_page": 16
+    },
+    {
+      "physical_page": 27,
+      "text": "7.5 Intermediate representation",
+      "display_page": 19
+    },
+    {
+      "physical_page": 27,
+      "text": "7.6 Four-pass optimization",
+      "display_page": 19
+    },
+    {
+      "physical_page": 27,
+      "text": "7.6.1 Removal after the last evaluation",
+      "display_page": 19
+    },
+    {
+      "physical_page": 28,
+      "text": "7.6.2 Elimination of unused model training",
+      "display_page": 20
+    },
+    {
+      "physical_page": 28,
+      "text": "7.6.3 Merging adjacent column drops",
+      "display_page": 20
+    },
+    {
+      "physical_page": 29,
+      "text": "7.6.4 Collapsing adjacent duplicates",
+      "display_page": 21
+    },
+    {
+      "physical_page": 29,
+      "text": "7.6.5 Observable behavior and safety limits",
+      "display_page": 21
+    },
+    {
+      "physical_page": 29,
+      "text": "7.7 Symbolic execution",
+      "display_page": 21
+    },
+    {
+      "physical_page": 30,
+      "text": "7.8 Error detection and handling",
+      "display_page": 22
+    },
+    {
+      "physical_page": 31,
+      "text": "Chapter 8 Implementation",
+      "display_page": 23
+    },
+    {
+      "physical_page": 31,
+      "text": "8.1 Language tools and versions",
+      "display_page": 23
+    },
+    {
+      "physical_page": 31,
+      "text": "8.2 Source inventory",
+      "display_page": 23
+    },
+    {
+      "physical_page": 32,
+      "text": "8.3 Core algorithms",
+      "display_page": 24
+    },
+    {
+      "physical_page": 32,
+      "text": "8.4 Selected implementation excerpts",
+      "display_page": 24
+    },
+    {
+      "physical_page": 34,
+      "text": "8.5 Command-line interface",
+      "display_page": 26
+    },
+    {
+      "physical_page": 34,
+      "text": "8.6 Benchmark implementation",
+      "display_page": 26
+    },
+    {
+      "physical_page": 34,
+      "text": "8.7 Dashboard implementation",
+      "display_page": 26
+    },
+    {
+      "physical_page": 36,
+      "text": "Chapter 9 Testing and Results",
+      "display_page": 28
+    },
+    {
+      "physical_page": 36,
+      "text": "9.1 Test strategy and executed results",
+      "display_page": 28
+    },
+    {
+      "physical_page": 37,
+      "text": "9.2 Baseline compilation and drop integration",
+      "display_page": 29
+    },
+    {
+      "physical_page": 38,
+      "text": "9.3 Representative expected and actual cases",
+      "display_page": 30
+    },
+    {
+      "physical_page": 38,
+      "text": "9.4 Error demonstrations",
+      "display_page": 30
+    },
+    {
+      "physical_page": 39,
+      "text": "9.5 Optimizer demonstration",
+      "display_page": 31
+    },
+    {
+      "physical_page": 40,
+      "text": "9.6 Complex cases and transformation boundaries",
+      "display_page": 32
+    },
+    {
+      "physical_page": 41,
+      "text": "9.7 All supplied example outcomes",
+      "display_page": 33
+    },
+    {
+      "physical_page": 42,
+      "text": "9.8 Recorded performance evaluation",
+      "display_page": 34
+    },
+    {
+      "physical_page": 44,
+      "text": "9.9 Performance charts and recorded observations",
+      "display_page": 36
+    },
+    {
+      "physical_page": 45,
+      "text": "9.10 Limits of the evaluation",
+      "display_page": 37
+    },
+    {
+      "physical_page": 46,
+      "text": "Chapter 10 Conclusion",
+      "display_page": 38
+    },
+    {
+      "physical_page": 46,
+      "text": "10.1 Achievements against objectives",
+      "display_page": 38
+    },
+    {
+      "physical_page": 46,
+      "text": "10.2 Limitations",
+      "display_page": 38
+    },
+    {
+      "physical_page": 46,
+      "text": "10.3 Learning outcomes",
+      "display_page": 38
+    },
+    {
+      "physical_page": 47,
+      "text": "Chapter 11 Future Enhancements",
+      "display_page": 39
+    },
+    {
+      "physical_page": 47,
+      "text": "11.1 Language and validation extensions",
+      "display_page": 39
+    },
+    {
+      "physical_page": 47,
+      "text": "11.2 Execution and optimization extensions",
+      "display_page": 39
+    },
+    {
+      "physical_page": 47,
+      "text": "11.3 Evaluation extensions",
+      "display_page": 39
+    },
+    {
+      "physical_page": 48,
+      "text": "References",
+      "display_page": 40
+    },
+    {
+      "physical_page": 49,
+      "text": "Appendix A Final Grammar and Lexical Specification",
+      "display_page": 41
+    },
+    {
+      "physical_page": 49,
+      "text": "A.1 Final EBNF",
+      "display_page": 41
+    },
+    {
+      "physical_page": 49,
+      "text": "A.2 Lexical details",
+      "display_page": 41
+    },
+    {
+      "physical_page": 50,
+      "text": "Appendix B Complete Diagnostic Catalogue",
+      "display_page": 42
+    },
+    {
+      "physical_page": 50,
+      "text": "B.1 Lexical and syntax patterns",
+      "display_page": 42
+    },
+    {
+      "physical_page": 50,
+      "text": "B.2 Semantic patterns and source locations",
+      "display_page": 42
+    },
+    {
+      "physical_page": 52,
+      "text": "B.3 Executed semantic trigger specimens",
+      "display_page": 44
+    },
+    {
+      "physical_page": 53,
+      "text": "B.4 Driver and dashboard boundaries",
+      "display_page": 45
+    },
+    {
+      "physical_page": 54,
+      "text": "Appendix C Key Source Listings",
+      "display_page": 46
+    },
+    {
+      "physical_page": 54,
+      "text": "C.1 AST data model",
+      "display_page": 46
+    },
+    {
+      "physical_page": 55,
+      "text": "C.2 IR representation and lowering",
+      "display_page": 47
+    },
+    {
+      "physical_page": 56,
+      "text": "C.3 Symbolic executor",
+      "display_page": 48
+    },
+    {
+      "physical_page": 56,
+      "text": "C.4 Evaluation state snapshots used by the tests",
+      "display_page": 48
+    },
+    {
+      "physical_page": 57,
+      "text": "Appendix D Example Programs and Sources",
+      "display_page": 49
+    },
+    {
+      "physical_page": 58,
+      "text": "D.1 valid basic",
+      "display_page": 50
+    },
+    {
+      "physical_page": 58,
+      "text": "D.2 valid drop",
+      "display_page": 50
+    },
+    {
+      "physical_page": 58,
+      "text": "D.3 optimizer demo",
+      "display_page": 50
+    },
+    {
+      "physical_page": 59,
+      "text": "D.4 complex multi model",
+      "display_page": 51
+    },
+    {
+      "physical_page": 60,
+      "text": "Appendix E Reproduction and User Instructions",
+      "display_page": 52
+    },
+    {
+      "physical_page": 60,
+      "text": "E.1 Compiler installation and CLI",
+      "display_page": 52
+    },
+    {
+      "physical_page": 60,
+      "text": "E.2 Tests and stage inspection",
+      "display_page": 52
+    },
+    {
+      "physical_page": 60,
+      "text": "E.3 Dashboard",
+      "display_page": 52
+    },
+    {
+      "physical_page": 60,
+      "text": "E.4 Benchmark and report build",
+      "display_page": 52
+    },
+    {
+      "physical_page": 62,
+      "text": "Appendix F Evolution Across Implementation Phases",
+      "display_page": 54
+    }
+  ]
+}

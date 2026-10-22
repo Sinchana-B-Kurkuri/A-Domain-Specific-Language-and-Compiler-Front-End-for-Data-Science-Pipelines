@@ -1,0 +1,8 @@
+{
+  "docs/performance.md": {
+    "baseline_sha256": "9408f4c24f967fc3dbe6b2b6acbaa4b1f29115661285ff8c6bf4287e4fae90e2",
+    "observed_sha256": "de5eeac5351b8a8880a5cb8d0c4200b35c939927b95bc95f86aa59c0c980536c",
+    "observed_mtime": 1792651000.3821545,
+    "explanation": "Changed during the task outside the report scripts. Current project file preserved; both captured versions retained. Latest snapshot used for report."
+  }
+}
