@@ -1,6 +1,6 @@
 # Five-minute project demonstration
 
-Prepare the dashboard, VS Code and the final PDF before the review. Keep the Streamlit server running and load the examples in advance. The objective is to demonstrate a compiler with observable intermediate representations and tested transformations. State the symbolic execution boundary at the start.
+Prepare the dashboard, VS Code and the Phase 3 report before the review. Keep the Streamlit server running and load the examples in advance. The objective is to demonstrate a compiler with observable intermediate representations and tested transformations. State the symbolic execution boundary at the start.
 
 ## Timed sequence
 
@@ -26,7 +26,7 @@ If questions interrupt, shorten the token/AST browsing and architecture explanat
 - [optimizer.py](../src/ds_pipeline_dsl/optimizer.py): pass order, last-evaluation boundary and duplicate comparison.
 - [tests/helpers.py](../tests/helpers.py) and [test_optimizer.py](../tests/test_optimizer.py): evaluation-state oracle and regression cases.
 
-Keep the [final PDF](Final_Report.pdf) at Chapter 7 for concepts and Chapter 9 for results. It records the academic 267-test snapshot; the current 268-test suite includes one additional CLI encoding regression. All three phase reports and review decks are indexed in the [documentation guide](README.md).
+Keep the [Phase 3 report](Phase3.docx) at Chapter 7 for concepts and Chapter 9 for results. It records the academic 267-test snapshot; the current 268-test suite includes one additional CLI encoding regression. All three phase reports and review decks are indexed in the [documentation guide](README.md).
 
 ## Useful follow-up answers
 

@@ -6,7 +6,7 @@ All final academic deliverables are kept in this folder. The final report covers
 |---|---|---|
 | Phase 1 | [Phase1.docx](Phase1.docx) | [Review 1](Review1_Compiler_Design_Pipeline_DSL.pptx) |
 | Phase 2 | [Phase2.docx](Phase2.docx) | [Review 2](Review2_Compiler_Design_Pipeline_DSL.pptx) |
-| Phase 3 and complete project | [Final_Report.docx](Final_Report.docx) · [PDF](Final_Report.pdf) | [Review 3](Review3_Compiler_Design_Pipeline_DSL.pptx) |
+| Phase 3 and complete project | [Phase3.docx](Phase3.docx) | [Review 3](Review3_Compiler_Design_Pipeline_DSL.pptx) |
 
 ## Run and explore
 

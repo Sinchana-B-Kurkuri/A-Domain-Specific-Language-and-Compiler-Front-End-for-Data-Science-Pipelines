@@ -216,7 +216,7 @@ All academic deliverables are together in [docs](docs/README.md):
 |---|---|---|
 | Phase 1 | [Phase1.docx](docs/Phase1.docx) | [Review 1](docs/Review1_Compiler_Design_Pipeline_DSL.pptx) |
 | Phase 2 | [Phase2.docx](docs/Phase2.docx) | [Review 2](docs/Review2_Compiler_Design_Pipeline_DSL.pptx) |
-| Complete project | [Word report](docs/Final_Report.docx) · [PDF report](docs/Final_Report.pdf) | [Review 3](docs/Review3_Compiler_Design_Pipeline_DSL.pptx) |
+| Phase 3 and complete project | [Phase3.docx](docs/Phase3.docx) | [Review 3](docs/Review3_Compiler_Design_Pipeline_DSL.pptx) |
 
 Historical phase reports describe their own stage and are not current API or test-count specifications. The complete report's folder references follow this consolidated structure. Temporary exports, report builders and completed planning/audit notes are excluded from the submitted project.
 

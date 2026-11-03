@@ -52,7 +52,7 @@ python benchmarks/benchmark.py
 
 The invalid example intentionally exits 1. The benchmark command overwrites `docs/performance.md`; do not run it if preserving the saved dashboard measurements. The final report's earlier benchmark snapshot is retained separately in [evidence/performance.md](evidence/performance.md).
 
-The three phase reports and three review presentations are listed in the [documentation guide](README.md). The complete report is available as [PDF](Final_Report.pdf) and [Word](Final_Report.docx). Report-generation scripts and temporary render files are not required to run the project.
+The three phase reports and three review presentations are listed in the [documentation guide](README.md). The complete report is available as [Phase3.docx](Phase3.docx). Report-generation scripts and temporary render files are not required to run the project.
 
 ## Secrets and repository hygiene
 
