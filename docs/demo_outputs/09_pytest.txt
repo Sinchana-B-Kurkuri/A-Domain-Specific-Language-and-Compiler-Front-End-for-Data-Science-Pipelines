@@ -1,4 +1,0 @@
-Verification date: 2026-10-23
-$ python -B -m pytest -v -p no:cacheprovider
-268 passed in 9.15s
-Full log: ../test_results.txt

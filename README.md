@@ -90,7 +90,7 @@ Cleaning strategies and algorithms are free identifiers, not validated library n
 
 ## Run locally
 
-Requires **Python 3.12+**. The compiler has no third-party runtime dependencies. Streamlit is optional for the UI, and pytest is optional for testing. The audit environment used Python 3.14.7, Streamlit 1.66.0 and pytest 9.1.1; other Python versions were not executed during this audit.
+Requires **Python 3.12+**. The compiler has no third-party runtime dependencies. Streamlit is optional for the UI, and pytest is optional for testing. Verification used Python 3.14.7, Streamlit 1.66.0 and pytest 9.1.1.
 
 From the repository root in PowerShell:
 
@@ -148,6 +148,8 @@ Correctness is tested against evaluation records containing model name, algorith
 
 ## Interactive dashboard
 
+**[Open the live dashboard](https://ds-pipeline-compiler.streamlit.app/)** — no local installation is needed. If the hosting service shows a sleeping-app screen, choose its wake-up action and wait for the app to start. For local use, run `python -m streamlit run dashboard/app.py` from the repository root, then open [localhost:8501](http://localhost:8501) while that command remains running.
+
 | Page | What to explore |
 |---|---|
 | Overview | Project scope, constructs, example count, saved test evidence and visible grammar |
@@ -165,28 +167,28 @@ Compilation results persist until Compile is pressed again. Source edits show a 
 python -m pytest -v
 ```
 
-**268 passed, 0 failed, 0 skipped** on 23 October 2026, including **44 dashboard tests**. The suite covers tokenization, grammar, all implemented semantic checks, IR lowering, optimizer equivalence/idempotence and sensitivity, execution, CLI, boundaries, examples, benchmark guards and Streamlit AppTest interactions. All 20 supplied `.pipe` examples were executed: seven accepted and thirteen rejected (one lexical, one syntax, eleven semantic).
+**268 passed, 0 failed, 0 skipped** on 3 November 2026, including **44 dashboard tests**. The suite covers tokenization, grammar, all implemented semantic checks, IR lowering, optimizer equivalence/idempotence and sensitivity, execution, CLI, boundaries, examples, benchmark guards and Streamlit AppTest interactions. All 20 supplied `.pipe` examples are covered: seven accepted and thirteen rejected (one lexical, one syntax, eleven semantic).
 
-The badge is a dated verified result, not a live CI indicator. Coverage was not measured. Timing varies by machine; no fixed test-duration promise is made. [Full test log](docs/test_results.txt) · [Audit results and limitations](docs/verification.md) · [Machine-readable evidence](docs/verification_results.json)
+The badge is a dated verified result, not a live CI indicator. Coverage was not measured. Timing varies by machine; no fixed test-duration promise is made. See the [full test log](docs/test_results.txt). The complete academic report retains its earlier 267-test result; the current suite includes one additional CLI encoding regression.
 
 ## Recorded performance
 
-The dashboard's saved benchmark was measured on Windows with Python 3.14.7 on **22 October 2026**. Selected columns below are copied from [the complete measurements](docs/performance.md):
+The dashboard's saved benchmark was measured on Windows with Python 3.14.7 on **23 October 2026**. Selected columns below are copied from [the complete measurements](docs/performance.md):
 
 | Actual statements | Total ms | µs/statement | Original IR | Optimized IR | Reduction |
 |---:|---:|---:|---:|---:|---:|
-| 13 | 0.098 | 7.54 | 13 | 8 | 38.5% |
-| 99 | 0.671 | 6.78 | 99 | 60 | 39.4% |
-| 999 | 6.952 | 6.96 | 999 | 600 | 39.9% |
-| 9999 | 73.560 | 7.36 | 9999 | 6000 | 40.0% |
+| 13 | 0.144 | 11.10 | 13 | 8 | 38.5% |
+| 99 | 0.941 | 9.50 | 99 | 60 | 39.4% |
+| 999 | 9.660 | 9.67 | 999 | 600 | 39.9% |
+| 9999 | 105.516 | 10.55 | 9999 | 6000 | 40.0% |
 
-`Total ms` sums the lexer, parser, semantic, IR, optimizer and optimized-executor medians; it excludes the separately measured unoptimized executor. The 0.63-second harness wall time is a different measurement. Nominal generator sizes 10/100/1000/10000 produce the actual statement counts shown above.
+`Total ms` sums the lexer, parser, semantic, IR, optimizer and optimized-executor medians; it excludes the separately measured unoptimized executor. The 0.85-second harness wall time is a different measurement. Nominal generator sizes 10/100/1000/10000 produce the actual statement counts shown above.
 
 ```powershell
 python benchmarks/benchmark.py
 ```
 
-This command prints a new report and **overwrites `docs/performance.md`**. The audit instead called the benchmark functions and stored fresh results separately in [verification_results.json](docs/verification_results.json). All four fresh rows completed successfully, and evaluation-record equivalence was checked at every size.
+This command prints a new report and **overwrites `docs/performance.md`**. The final academic report uses the earlier 22 October measurements retained in [docs/evidence/performance.md](docs/evidence/performance.md). Keeping that snapshot separate preserves the report's recorded results when later benchmarks are run.
 
 The measurements describe one synthetic template on one machine. They support approximately linear scaling for that workload, not a universal complexity proof. Repeated split-total summation and column-list operations can depend on input shape. Benchmark budget checks use projections and post-run thresholds, not preemptive timeouts. No memory profile or numerical ML result is claimed.
 
@@ -198,14 +200,25 @@ dashboard/              Streamlit UI, compiler adapter, benchmark loader and log
 tests/                  Unit, integration, equivalence and dashboard tests
 examples/               20 .pipe programs and a frontend demonstration script
 benchmarks/             Synthetic benchmark and correctness guards
-docs/                   Current technical docs, captures, evidence and phase materials
-final_report/           Final DOCX/PDF, build sources, figures and historical evidence
+docs/                   Three phase reports, three review decks and current documentation
+docs/screenshots/       Dashboard captures used by this README
+docs/demo_outputs/      Selected reproducible CLI outputs
+docs/evidence/          Historical results and diagnostic specimens cited by the final report
+.devcontainer/          Python 3.12 development container and dashboard port forwarding
 .streamlit/             Shared dashboard theme
 pyproject.toml          Package metadata and optional dependency groups
 requirements.txt        Community Cloud dependency entry point
 ```
 
-Academic reports and review decks are retained under `docs/`; the [final PDF](final_report/Final_Report.pdf) and [editable report](final_report/Final_Report.docx) remain unchanged. Historical reports describe their own phase and are not current API or test-count specifications.
+All academic deliverables are together in [docs](docs/README.md):
+
+| Phase | Report | Presentation |
+|---|---|---|
+| Phase 1 | [Phase1.docx](docs/Phase1.docx) | [Review 1](docs/Review1_Compiler_Design_Pipeline_DSL.pptx) |
+| Phase 2 | [Phase2.docx](docs/Phase2.docx) | [Review 2](docs/Review2_Compiler_Design_Pipeline_DSL.pptx) |
+| Complete project | [Word report](docs/Final_Report.docx) · [PDF report](docs/Final_Report.pdf) | [Review 3](docs/Review3_Compiler_Design_Pipeline_DSL.pptx) |
+
+Historical phase reports describe their own stage and are not current API or test-count specifications. The complete report's folder references follow this consolidated structure. Temporary exports, report builders and completed planning/audit notes are excluded from the submitted project.
 
 ## Limitations and next steps
 
@@ -213,4 +226,4 @@ Current limits include symbolic execution, one pipeline per file, first-error re
 
 Possible extensions are schema-aware validation, optional restricted vocabularies, multiple-pipeline scopes, diagnostic recovery, and a separate real execution backend. Real execution would require new runtime semantics and a fresh review of optimization safety.
 
-For navigation, start with [architecture](docs/architecture.md), [grammar](docs/grammar.md), [deployment](docs/deployment.md), [verification](docs/verification.md), and the [academic review checklist](docs/report_and_presentation_checklist.md).
+For navigation, start with [architecture](docs/architecture.md), [grammar](docs/grammar.md), [deployment](docs/deployment.md), and the [documentation index](docs/README.md).

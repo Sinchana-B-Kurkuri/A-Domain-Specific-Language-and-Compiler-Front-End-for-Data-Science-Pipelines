@@ -28,5 +28,7 @@ Thumbs.db
 .streamlit/secrets.toml
 *.pem
 *.key
-# Regenerable report page previews; preserve final DOCX/PDF, assets and evidence.
-final_report/rendered/
+# Local artifact drafts, comparison renders and Office lock files.
+output/
+tmp/
+~$*

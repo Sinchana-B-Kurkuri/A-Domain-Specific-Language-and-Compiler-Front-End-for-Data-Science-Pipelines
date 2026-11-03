@@ -38,7 +38,7 @@ The shared [Streamlit config](../.streamlit/config.toml) contains the theme and 
 
 Paths to `src`, `examples`, `docs/performance.md` and the logo are derived from `__file__`, not the caller's working directory. The dashboard inserts its sibling `src/` directory into the import path. Deployment also installs the package explicitly. No datasets, API keys, external model services, or secrets are required.
 
-The live deployment was exercised during the audit. Local changes in this polishing pass do not change the deployed app until the user commits/pushes and the deployment updates. See [verification](verification.md) for the tested cases and limits.
+The public deployment updates after changes are pushed to its configured branch. A local commit alone does not update the live dashboard. After pushing, check Overview, compile a valid example, try an invalid example, and inspect the optimizer demonstration.
 
 ## Reproducing results
 
@@ -50,9 +50,9 @@ python -m pytest -v
 python benchmarks/benchmark.py
 ```
 
-The invalid example intentionally exits 1. The benchmark command overwrites `docs/performance.md`; do not run it if preserving the saved dashboard measurements. Audit timings were recorded separately in [verification_results.json](verification_results.json).
+The invalid example intentionally exits 1. The benchmark command overwrites `docs/performance.md`; do not run it if preserving the saved dashboard measurements. The final report's earlier benchmark snapshot is retained separately in [evidence/performance.md](evidence/performance.md).
 
-The final academic report has its own [build instructions](../final_report/README.md) and report-only dependencies. It is an archival deliverable and was not rebuilt during this audit.
+The three phase reports and three review presentations are listed in the [documentation guide](README.md). The complete report is available as [PDF](Final_Report.pdf) and [Word](Final_Report.docx). Report-generation scripts and temporary render files are not required to run the project.
 
 ## Secrets and repository hygiene
 

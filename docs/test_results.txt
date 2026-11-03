@@ -1,7 +1,8 @@
-Verification date: 2026-10-23
+Verified on 3 November 2026
 Command: python -B -m pytest -v -p no:cacheprovider
 
 ============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0 -- <python>
 rootdir: <repository>
 configfile: pyproject.toml
 plugins: anyio-4.15.1
@@ -276,4 +277,4 @@ tests/test_semantic.py::test_semantic_split_before_load_error PASSED     [ 99%]
 tests/test_semantic.py::test_semantic_evaluate_before_train_error PASSED [ 99%]
 tests/test_semantic.py::test_semantic_train_before_split_explicit_error PASSED [100%]
 
-============================= 268 passed in 9.15s =============================
+============================= 268 passed in 7.93s =============================

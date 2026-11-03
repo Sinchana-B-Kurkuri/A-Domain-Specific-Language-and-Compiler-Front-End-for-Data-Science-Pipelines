@@ -1,6 +1,6 @@
 # Dashboard screenshots
 
-These PNGs are genuine browser captures, not generated mockups. Captures are taken at a 1280 × 720 browser viewport during the 23 October 2026 audit. The local audit build includes the refreshed 268-test evidence; the deployed version will reflect it after the owner pushes the changes.
+These PNGs are genuine browser captures, not generated mockups. They were captured at a 1280 × 720 browser viewport on 23 October 2026. The Overview capture includes the saved 268-test evidence. The live deployment follows the revision pushed to its configured branch.
 
 | Capture | Shows |
 |---|---|

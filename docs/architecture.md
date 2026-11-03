@@ -100,4 +100,4 @@ The executor returns formatted strings rather than reading a CSV or fitting a mo
 
 ## Performance boundaries
 
-Timing is measured by stage, with unoptimized execution recorded separately. Most stages traverse their input, but costs also depend on string/column lengths and dictionaries. In particular, the analyzer sums existing split values for every split. Neither the benchmark's approximately linear trend nor individual pass scans establish universal strict linear complexity or a memory-use guarantee. See [performance measurements](performance.md) and [verification](verification.md).
+Timing is measured by stage, with unoptimized execution recorded separately. Most stages traverse their input, but costs also depend on string/column lengths and dictionaries. In particular, the analyzer sums existing split values for every split. Neither the benchmark's approximately linear trend nor individual pass scans establish universal strict linear complexity or a memory-use guarantee. See [performance measurements](performance.md) and the [test results](test_results.txt).

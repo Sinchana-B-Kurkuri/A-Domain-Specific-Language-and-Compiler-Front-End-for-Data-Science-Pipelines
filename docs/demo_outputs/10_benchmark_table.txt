@@ -1,9 +1,0 @@
-Saved benchmark from docs/performance.md (2026-10-22); not a fresh timing run.
-| Statements | Tokens | Lexer ms | Parser ms | Semantic ms | IR ms | Optimizer ms | Exec(opt) ms | Exec(unopt) ms | Total ms | us/stmt | IR before | IR after | Reduction % | Status |
-|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|
-| 13 | 66 | 0.060 | 0.012 | 0.004 | 0.005 | 0.015 | 0.001 | 0.002 | 0.098 | 7.54 | 13 | 8 | 38.5% | ok |
-| 99 | 428 | 0.421 | 0.080 | 0.029 | 0.046 | 0.085 | 0.010 | 0.016 | 0.671 | 6.78 | 99 | 60 | 39.4% | ok |
-| 999 | 4208 | 4.428 | 0.842 | 0.315 | 0.452 | 0.818 | 0.098 | 0.163 | 6.952 | 6.96 | 999 | 600 | 39.9% | ok |
-| 9999 | 42008 | 45.302 | 8.014 | 2.955 | 5.082 | 10.714 | 1.494 | 2.519 | 73.560 | 7.36 | 9999 | 6000 | 40.0% | ok |
-
-Fresh audit timings: ../verification_results.json
